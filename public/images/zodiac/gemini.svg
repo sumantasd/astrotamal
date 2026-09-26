@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel cyan/blue watercolor shape -->
+  <path d="M40 95 C30 50, 90 30, 140 45 C175 70, 165 145, 120 165 C65 175, 35 130, 40 95 Z" fill="#B2EBF2" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Twins -->
+  <g stroke="#17202D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Left Twin Head & Shoulders -->
+    <path d="M72 80 C60 80, 56 95, 60 110 C65 125, 80 125, 84 110 C88 95, 84 80, 72 80 Z" />
+    <path d="M50 148 C55 130, 65 125, 72 125 C79 125, 89 130, 94 148" />
+    <circle cx="68" cy="98" r="2" fill="#17202D" />
+    <circle cx="78" cy="98" r="2" fill="#17202D" />
+
+    <!-- Right Twin Head & Shoulders -->
+    <path d="M128 80 C116 80, 112 95, 116 110 C121 125, 136 125, 140 110 C144 95, 140 80, 128 80 Z" />
+    <path d="M106 148 C111 130, 121 125, 128 125 C135 125, 145 130, 150 148" />
+    <circle cx="124" cy="98" r="2" fill="#17202D" />
+    <circle cx="134" cy="98" r="2" fill="#17202D" />
+
+    <!-- Halo / Star connecting them -->
+    <path d="M100 58 L100 68 M95 63 L105 63" stroke-width="1.8" />
+    <path d="M85 75 Q 100 68 115 75" stroke-dasharray="2 3" stroke-width="1.5" />
+  </g>
+</svg>

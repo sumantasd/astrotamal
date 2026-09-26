@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel mint/soft green watercolor shape -->
+  <path d="M50 95 C35 45, 90 25, 145 40 C175 65, 165 140, 125 165 C65 175, 40 135, 50 95 Z" fill="#DCEDC8" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Maiden / Virgo -->
+  <g stroke="#17202D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Maiden Profile -->
+    <path d="M90 62 C105 60, 118 72, 115 88 C112 100, 98 105, 95 118 L95 145" />
+    <path d="M90 62 C80 65, 75 75, 78 88 C82 100, 95 108, 90 120" />
+    <path d="M78 88 C70 95, 68 115, 78 135 C88 150, 100 152, 112 145" />
+
+    <!-- Stars & Wheat Strand Accent -->
+    <path d="M125 65 Q 135 85 125 110" />
+    <path d="M122 75 L130 75 M125 90 L133 90" stroke-width="1.8" />
+    <circle cx="102" cy="78" r="2" fill="#17202D" />
+
+    <!-- Celestial Star -->
+    <path d="M135 120 L135 130 M130 125 L140 125" stroke-width="1.8" />
+  </g>
+</svg>

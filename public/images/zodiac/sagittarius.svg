@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel warm coral/peach watercolor shape -->
+  <path d="M45 95 C30 45, 90 25, 145 40 C175 65, 165 140, 125 165 C65 175, 40 135, 50 95 Z" fill="#FFCCBC" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Bow & Arrow -->
+  <g stroke="#17202D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Curved Bow -->
+    <path d="M60 145 C60 90, 90 60, 145 60" />
+    <!-- Bow String -->
+    <line x1="60" y1="145" x2="145" y2="60" stroke-dasharray="3 3" stroke-width="1.8" />
+
+    <!-- Arrow -->
+    <line x1="45" y1="160" x2="155" y2="50" stroke-width="2.6" />
+    <path d="M140 48 L157 48 L157 65" fill="#17202D" />
+    <!-- Arrow Feathers -->
+    <path d="M50 155 L42 152 M55 160 L47 157 M52 163 L49 171" stroke-width="2" />
+
+    <!-- Star Accent -->
+    <path d="M125 125 L125 135 M120 130 L130 130" stroke-width="1.8" />
+    <circle cx="155" cy="50" r="2" fill="#17202D" />
+  </g>
+</svg>

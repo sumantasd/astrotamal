@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel sky-blue watercolor shape -->
+  <path d="M45 95 C30 45, 90 25, 145 40 C175 65, 165 140, 125 165 C65 175, 40 135, 50 95 Z" fill="#BBDEFB" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Water Bearer Urn & Streams -->
+  <g stroke="#17202D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Tilted Pitcher/Urn -->
+    <path d="M125 50 C110 50, 95 62, 90 75 L80 105 C75 120, 92 132, 108 125 L118 95 C122 82, 135 65, 125 50 Z" />
+    <ellipse cx="108" cy="62" rx="14" ry="7" transform="rotate(-30 108 62)" />
+    <path d="M118 80 C130 85, 142 75, 138 65" />
+
+    <!-- Flowing Water Waves -->
+    <path d="M78 100 Q 65 110 52 105 Q 40 100 30 112" />
+    <path d="M72 114 Q 58 124 45 118 Q 32 112 22 125" />
+    <path d="M68 128 Q 52 138 40 132 Q 28 126 18 140" />
+
+    <!-- Star Accent -->
+    <path d="M140 110 L140 120 M135 115 L145 115" stroke-width="1.8" />
+  </g>
+</svg>

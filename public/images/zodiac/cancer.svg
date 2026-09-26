@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel lavender watercolor shape -->
+  <path d="M45 90 C30 45, 95 25, 145 40 C175 65, 165 140, 130 165 C70 175, 40 130, 45 90 Z" fill="#D1C4E9" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Crab -->
+  <g stroke="#17202D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Shell Body -->
+    <ellipse cx="100" cy="108" rx="28" ry="20" />
+    <circle cx="90" cy="102" r="2.2" fill="#17202D" />
+    <circle cx="110" cy="102" r="2.2" fill="#17202D" />
+
+    <!-- Left Main Claw -->
+    <path d="M74 100 C60 90, 50 70, 65 55 C80 65, 78 85, 82 92" />
+    <path d="M56 68 C50 62, 60 52, 65 55" />
+
+    <!-- Right Main Claw -->
+    <path d="M126 100 C140 90, 150 70, 135 55 C120 65, 122 85, 118 92" />
+    <path d="M144 68 C150 62, 140 52, 135 55" />
+
+    <!-- Small Legs -->
+    <path d="M76 114 C62 120, 58 135, 68 140" />
+    <path d="M78 122 C66 132, 64 145, 74 150" />
+    <path d="M124 114 C138 120, 142 135, 132 140" />
+    <path d="M122 122 C134 132, 136 145, 126 150" />
+  </g>
+</svg>

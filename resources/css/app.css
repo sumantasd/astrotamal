@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-navy-950: #06090e;
+    --color-navy-900: #0b0e14;
+    --color-navy-850: #0f1420;
+    --color-navy-800: #141a29;
+    --color-navy-700: #1d2538;
+
+    /* Typography Tokens for Light Sections */
+    --color-light-primary: #17202D;
+    --color-light-secondary: #253044;
+    --color-light-body: #566171;
+    --color-light-muted: #6B7280;
+    --color-light-eyebrow: #B08A2E;
+    --color-light-link: #9A7422;
+
+    --color-gold-300: #f7e7af;
+    --color-gold-400: #e6cb65;
+    --color-gold-500: #d4af37;
+    --color-gold-600: #c5a059;
+    --color-gold-700: #997a2e;
+
+    --color-ivory-50: #fdfbf7;
+    --color-ivory-100: #f9f6f0;
+    --color-ivory-200: #f5f0e6;
+    --color-ivory-300: #efe8d8;
+  }
+
+  html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-navy-900);
+    color: #e2e8f0;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-serif-luxury {
+    font-family: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Prevent iOS automatic zoom on focus */
+  @media (max-width: 767px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+  }
+}
+
+/* Explicit Utility Classes for Text Colors */
+.text-navy-950 {
+  color: #17202D !important;
+}
+
+.text-navy-900 {
+  color: #0b0e14 !important;
+}
+
+.text-navy-850 {
+  color: #0f1420 !important;
+}
+
+.text-navy-800 {
+  color: #141a29 !important;
+}
+
+.text-navy-700 {
+  color: #1d2538 !important;
+}
+
+.text-gold-300 {
+  color: var(--color-gold-300);
+}
+
+.text-gold-400 {
+  color: var(--color-gold-400);
+}
+
+.text-gold-500 {
+  color: var(--color-gold-500);
+}
+
+.text-gold-600 {
+  color: var(--color-gold-600);
+}
+
+.text-gold-700 {
+  color: var(--color-gold-700);
+}
+
+/* Custom Background Utilities */
+.bg-navy-950 {
+  background-color: var(--color-navy-950);
+}
+
+.bg-navy-900 {
+  background-color: var(--color-navy-900);
+}
+
+.bg-navy-850 {
+  background-color: var(--color-navy-850);
+}
+
+.bg-navy-800 {
+  background-color: var(--color-navy-800);
+}
+
+.bg-navy-700 {
+  background-color: var(--color-navy-700);
+}
+
+.bg-ivory-50 {
+  background-color: var(--color-ivory-50);
+}
+
+.bg-ivory-100 {
+  background-color: var(--color-ivory-100);
+}
+
+.bg-ivory-200 {
+  background-color: var(--color-ivory-200);
+}
+
+.bg-ivory-300 {
+  background-color: var(--color-ivory-300);
+}
+
+.border-gold-500\/30 {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.border-gold-500\/20 {
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+.border-gold-500\/50 {
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* Premium Gold Gradients */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #C5A059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B38728 100%);
+}
+
+.bg-gold-gradient-hover:hover {
+  background: linear-gradient(135deg, #F3E5AB 0%, #E5C158 50%, #C5A059 100%);
+}
+
+.gold-glow {
+  box-shadow: 0 0 35px -5px rgba(212, 175, 55, 0.3);
+}
+
+.gold-glow-sm {
+  box-shadow: 0 0 15px -3px rgba(212, 175, 55, 0.25);
+}
+
+.gold-border-glow {
+  box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15), 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+/* Subtle Zodiac Halo Spin */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 90s linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0e14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252e42;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Touch Target Polish */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

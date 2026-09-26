@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel mint/cyan watercolor shape -->
+  <path d="M45 90 C30 45, 95 25, 145 40 C175 65, 165 140, 130 165 C70 175, 40 130, 45 90 Z" fill="#B2DFDB" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Scales -->
+  <g stroke="#17202D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Stand -->
+    <path d="M100 45 L100 148 M80 148 H120" />
+    <circle cx="100" cy="45" r="4" fill="#17202D" />
+
+    <!-- Balance Beam -->
+    <path d="M55 70 Q 100 62 145 70" />
+
+    <!-- Left Scale Bowl -->
+    <path d="M55 70 L40 115 H70 L55 70 Z" />
+    <path d="M35 115 Q 55 130 75 115" />
+
+    <!-- Right Scale Bowl -->
+    <path d="M145 70 L130 115 H160 L145 70 Z" />
+    <path d="M125 115 Q 145 130 165 115" />
+
+    <!-- Star Accent -->
+    <path d="M100 80 L100 90 M95 85 L105 85" stroke-width="1.8" />
+  </g>
+</svg>

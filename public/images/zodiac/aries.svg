@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel blush pink watercolor shape -->
+  <path d="M45 100 C30 50, 80 30, 130 40 C170 50, 175 110, 150 150 C120 180, 60 170, 45 100 Z" fill="#F8BBD0" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Ram -->
+  <g stroke="#17202D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Face outline -->
+    <path d="M100 85 L85 130 C85 145, 115 145, 115 130 Z" />
+    <path d="M90 120 H110" />
+    <circle cx="92" cy="102" r="2.5" fill="#17202D" />
+    <circle cx="108" cy="102" r="2.5" fill="#17202D" />
+    
+    <!-- Left Spiraled Horn -->
+    <path d="M90 85 C75 80, 60 90, 60 105 C60 120, 78 122, 85 112 C92 102, 80 92, 72 96" />
+    
+    <!-- Right Spiraled Horn -->
+    <path d="M110 85 C125 80, 140 90, 140 105 C140 120, 122 122, 115 112 C108 102, 120 92, 128 96" />
+
+    <!-- Forehead Star Accent -->
+    <path d="M100 68 L100 78 M95 73 L105 73" stroke-width="1.8" />
+    <circle cx="100" cy="73" r="1.5" fill="#17202D" />
+  </g>
+</svg>

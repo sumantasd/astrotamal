@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel sage green watercolor shape -->
+  <path d="M50 85 C35 40, 95 25, 145 45 C180 75, 160 140, 125 165 C75 180, 40 135, 50 85 Z" fill="#C8E6C9" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Bull -->
+  <g stroke="#17202D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Face outline -->
+    <path d="M78 88 L85 140 C85 150, 115 150, 115 140 L122 88 Z" />
+    <path d="M85 130 C90 138, 110 138, 115 130" />
+    <circle cx="92" cy="110" r="2.5" fill="#17202D" />
+    <circle cx="108" cy="110" r="2.5" fill="#17202D" />
+
+    <!-- Left Horn -->
+    <path d="M78 88 C60 85, 48 65, 55 45 C60 40, 68 55, 84 75" />
+
+    <!-- Right Horn -->
+    <path d="M122 88 C140 85, 152 65, 145 45 C140 40, 132 55, 116 75" />
+
+    <!-- Ears -->
+    <path d="M78 95 C62 98, 58 108, 70 110" />
+    <path d="M122 95 C138 98, 142 108, 130 110" />
+
+    <!-- Star Accent -->
+    <path d="M100 68 L100 76 M96 72 L104 72" stroke-width="1.8" />
+  </g>
+</svg>

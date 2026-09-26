@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Soft pastel sage green watercolor shape -->
+  <path d="M50 85 C35 40, 95 25, 145 45 C180 75, 160 140, 125 165 C75 180, 40 135, 50 85 Z" fill="#C8E6C9" opacity="0.65" />
+  
+  <!-- Fine dark ink line-art Sea-Goat / Capricorn -->
+  <g stroke="#17202D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Goat Head outline -->
+    <path d="M80 85 L90 135 C90 145, 110 145, 110 135 L120 85 Z" />
+    <path d="M92 125 C95 130, 105 130, 108 125" />
+    <circle cx="92" cy="105" r="2.2" fill="#17202D" />
+    <circle cx="108" cy="105" r="2.2" fill="#17202D" />
+
+    <!-- Left Curved Horn -->
+    <path d="M80 85 C65 65, 60 45, 78 40 C90 38, 85 62, 85 75" />
+
+    <!-- Right Curved Horn -->
+    <path d="M120 85 C135 65, 140 45, 122 40 C110 38, 115 62, 115 75" />
+
+    <!-- Curved Fish Tail Accent -->
+    <path d="M100 145 C100 162, 120 165, 130 152 C140 138, 130 125, 142 120" />
+
+    <!-- Star Accent -->
+    <path d="M100 68 L100 76 M96 72 L104 72" stroke-width="1.8" />
+  </g>
+</svg>
