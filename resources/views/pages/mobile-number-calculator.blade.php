@@ -6,42 +6,42 @@
 @section('content')
 
 <!-- HERO SECTION -->
-<section class="relative bg-[#0B1018] text-[#FDFBF7] py-16 sm:py-20 overflow-hidden border-b border-[rgba(212,175,55,0.25)] flex items-center min-h-[360px] max-h-[440px]">
+<section class="relative bg-[#F7F0E3] text-[#29211F] py-16 sm:py-20 overflow-hidden border-b border-[#D8C6A8] flex items-center min-h-[340px]">
     <!-- Celestial & Numerical Overlay -->
-    <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[rgba(212,175,55,0.05)] rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#C49A45_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[rgba(196,154,69,0.08)] rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center space-y-4">
         <!-- Breadcrumb -->
-        <nav class="flex justify-center items-center space-x-2 text-xs uppercase tracking-widest text-[#9A7422]">
-            <a href="{{ route('home') }}" class="hover:text-[#D4AF37] transition-colors">HOME</a>
+        <nav class="flex justify-center items-center space-x-2 text-xs uppercase tracking-widest text-[#81766D]">
+            <a href="{{ route('home') }}" class="hover:text-[#C49A45] transition-colors">HOME</a>
             <span>/</span>
-            <span class="text-[#D4AF37]">MORE</span>
+            <span class="text-[#81766D]">MORE</span>
             <span>/</span>
-            <span class="text-[#D4AF37] font-semibold">MOBILE NUMBER CALCULATOR</span>
+            <span class="text-[#C49A45] font-semibold">MOBILE NUMBER CALCULATOR</span>
         </nav>
 
         <!-- Eyebrow -->
         <div class="inline-flex items-center space-x-3">
-            <span class="h-px w-6 bg-[#D4AF37]/40"></span>
-            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">MOBILE NUMBER NUMEROLOGY</span>
-            <span class="h-px w-6 bg-[#D4AF37]/40"></span>
+            <span class="h-px w-6 bg-[#C49A45]/40"></span>
+            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">MOBILE NUMBER NUMEROLOGY</span>
+            <span class="h-px w-6 bg-[#C49A45]/40"></span>
         </div>
 
         <!-- Heading -->
-        <h1 class="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#FDFBF7]">
+        <h1 class="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#29211F]">
             Explore Your Mobile Number Through Numerology
         </h1>
 
         <!-- Supporting Text -->
-        <p class="text-xs sm:text-sm md:text-base text-[#D7DCE3] max-w-2xl mx-auto font-light leading-relaxed">
+        <p class="text-xs sm:text-sm md:text-base text-[#81766D] max-w-2xl mx-auto font-light leading-relaxed">
             Enter your mobile number to calculate its traditional numerological total and explore the associated interpretation.
         </p>
     </div>
 </section>
 
 <!-- CALCULATOR SECTION -->
-<section class="bg-[#FDFBF7] text-[#17202D] py-16 sm:py-24" 
+<section class="bg-[#FDFBF7] text-[#29211F] py-16 sm:py-24" 
          x-data="{
              mobileInput: '',
              dob: '',
@@ -121,37 +121,37 @@
 
         <!-- Header -->
         <div class="text-center max-w-2xl mx-auto space-y-2">
-            <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#B08A2E]">PHONE NUMBER ANALYSIS</span>
-            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#17202D]">Mobile Numerology Form</h2>
-            <p class="text-xs sm:text-sm text-[#596273]">Enter your mobile number to compute its digit total, compound number, and single-digit ruler.</p>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C49A45]">PHONE NUMBER ANALYSIS</span>
+            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">Mobile Numerology Form</h2>
+            <p class="text-xs sm:text-sm text-[#81766D]">Enter your mobile number to compute its digit total, compound number, and single-digit ruler.</p>
         </div>
 
         <!-- Form Card -->
-        <div class="bg-white border border-[#17202D]/15 rounded-2xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl p-6 sm:p-10 shadow-sm space-y-6">
             <form @submit.prevent="analyze()" class="space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
                     <!-- Mobile Number -->
                     <div class="sm:col-span-8">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-[#17202D] mb-2">MOBILE NUMBER <span class="text-[#B08A2E]">*</span></label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-2">MOBILE NUMBER <span class="text-[#C49A45]">*</span></label>
                         <input type="text" 
                                x-model="mobileInput" 
                                required 
                                placeholder="e.g. 98765 43210" 
-                               class="w-full bg-[#FFFFFF] border border-[#17202D]/15 rounded-lg px-4 py-3 text-xs sm:text-sm text-[#17202D] placeholder-[#8A929E] focus:outline-none focus:border-[#B08A2E] focus:ring-1 focus:ring-[#B08A2E] transition-all">
+                               class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#29211F] placeholder-[#81766D] focus:outline-none focus:border-[#C49A45] focus:ring-1 focus:ring-[#C49A45] transition-all">
                     </div>
 
                     <!-- Date of Birth (Optional) -->
                     <div class="sm:col-span-4">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-[#17202D] mb-2">DATE OF BIRTH <span class="text-slate-400 font-normal">(Optional)</span></label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-2">DATE OF BIRTH <span class="text-[#81766D] font-normal">(Optional)</span></label>
                         <input type="date" 
                                x-model="dob" 
-                               class="w-full bg-[#FFFFFF] border border-[#17202D]/15 rounded-lg px-4 py-3 text-xs sm:text-sm text-[#17202D] focus:outline-none focus:border-[#B08A2E] focus:ring-1 focus:ring-[#B08A2E] transition-all">
+                               class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#29211F] focus:outline-none focus:border-[#C49A45] focus:ring-1 focus:ring-[#C49A45] transition-all">
                     </div>
                 </div>
 
                 <!-- Primary Submit CTA -->
                 <button type="submit" 
-                        class="w-full py-4 text-xs font-bold uppercase tracking-widest text-[#0B1018] bg-[#B08A2E] rounded-lg shadow hover:bg-[#9A7422] hover:text-[#FDFBF7] transition-all flex items-center justify-center space-x-2">
+                        class="w-full py-4 text-xs font-bold uppercase tracking-widest text-[#F7F0E3] bg-[#541F1D] rounded-lg shadow hover:bg-[#351211] border border-[#D8C6A8] transition-all flex items-center justify-center space-x-2">
                     <span>ANALYSE MOBILE NUMBER</span>
                     <span>→</span>
                 </button>
@@ -166,52 +166,52 @@
              x-transition:enter-end="opacity-100 translate-y-0"
              class="space-y-8">
             
-            <div class="border-b border-[#17202D]/15 pb-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#B08A2E]">MOBILE NUMEROLOGY ANALYSIS</span>
-                <h3 class="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#17202D] mt-1" x-text="'Results for Mobile: ' + mobileInput"></h3>
+            <div class="border-b border-[#D8C6A8] pb-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#C49A45]">MOBILE NUMEROLOGY ANALYSIS</span>
+                <h3 class="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#29211F] mt-1" x-text="'Results for Mobile: ' + mobileInput"></h3>
             </div>
 
             <!-- RESULT CARDS GRID -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- CARD 1: NUMERICAL TOTAL & RULER -->
-                <div class="bg-white border border-[#17202D]/10 rounded-xl p-6 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between border-b border-[#17202D]/10 pb-3">
+                <div class="bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl p-6 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-[#D8C6A8]/60 pb-3">
                         <div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider text-[#B08A2E]">REDUCED SINGLE DIGIT</span>
-                            <span class="block text-xs text-[#596273]" x-text="'Compound Total: ' + compoundTotal"></span>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-[#C49A45]">REDUCED SINGLE DIGIT</span>
+                            <span class="block text-xs text-[#81766D]" x-text="'Compound Total: ' + compoundTotal"></span>
                         </div>
-                        <span class="text-3xl font-bold font-serif-luxury text-[#17202D]" x-text="singleDigit"></span>
+                        <span class="text-3xl font-bold font-serif-luxury text-[#29211F]" x-text="singleDigit"></span>
                     </div>
                     
                     <div class="space-y-2">
-                        <span class="block text-xs font-semibold text-[#17202D]" x-text="'Ruling Planet: ' + interpretations[singleDigit]?.planet"></span>
-                        <h4 class="font-serif-luxury text-lg font-bold text-[#B08A2E]" x-text="interpretations[singleDigit]?.theme"></h4>
-                        <p class="text-xs text-[#596273] font-normal leading-relaxed" x-text="interpretations[singleDigit]?.desc"></p>
+                        <span class="block text-xs font-semibold text-[#541F1D]" x-text="'Ruling Planet: ' + interpretations[singleDigit]?.planet"></span>
+                        <h4 class="font-serif-luxury text-lg font-bold text-[#29211F]" x-text="interpretations[singleDigit]?.theme"></h4>
+                        <p class="text-xs text-[#81766D] font-normal leading-relaxed" x-text="interpretations[singleDigit]?.desc"></p>
                     </div>
                 </div>
 
                 <!-- CARD 2: ARITHMETIC BREAKDOWN & DOB SYNERGY -->
-                <div class="bg-white border border-[#17202D]/10 rounded-xl p-6 shadow-sm space-y-4">
-                    <div class="border-b border-[#17202D]/10 pb-3">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-[#B08A2E]">CALCULATION ARITHMETIC</span>
-                        <h4 class="font-serif-luxury text-base font-bold text-[#17202D] mt-0.5">Digit Addition Steps</h4>
+                <div class="bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl p-6 shadow-sm space-y-4">
+                    <div class="border-b border-[#D8C6A8]/60 pb-3">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-[#C49A45]">CALCULATION ARITHMETIC</span>
+                        <h4 class="font-serif-luxury text-base font-bold text-[#29211F] mt-0.5">Digit Addition Steps</h4>
                     </div>
 
-                    <div class="space-y-3 text-xs text-[#17202D]">
-                        <div class="p-3 bg-[#FAF8F5] border border-[#17202D]/10 rounded-lg space-y-1">
-                            <span class="text-[10px] font-bold text-[#B08A2E] uppercase block">Step 1: Sum of Digits</span>
-                            <span class="font-mono text-xs block text-[#17202D]" x-text="arithmeticStep1"></span>
+                    <div class="space-y-3 text-xs text-[#29211F]">
+                        <div class="p-3 bg-[#FDFBF7] border border-[#D8C6A8] rounded-lg space-y-1">
+                            <span class="text-[10px] font-bold text-[#C49A45] uppercase block">Step 1: Sum of Digits</span>
+                            <span class="font-mono text-xs block text-[#29211F]" x-text="arithmeticStep1"></span>
                         </div>
 
-                        <div class="p-3 bg-[#FAF8F5] border border-[#17202D]/10 rounded-lg space-y-1">
-                            <span class="text-[10px] font-bold text-[#B08A2E] uppercase block">Step 2: Single Digit Reduction</span>
-                            <span class="font-mono text-xs block text-[#17202D]" x-text="arithmeticStep2"></span>
+                        <div class="p-3 bg-[#FDFBF7] border border-[#D8C6A8] rounded-lg space-y-1">
+                            <span class="text-[10px] font-bold text-[#C49A45] uppercase block">Step 2: Single Digit Reduction</span>
+                            <span class="font-mono text-xs block text-[#29211F]" x-text="arithmeticStep2"></span>
                         </div>
 
                         <template x-if="dobCompatibility">
-                            <div class="p-3 bg-[#0B1018] text-[#FDFBF7] rounded-lg border border-[#B08A2E]/30 space-y-1">
-                                <span class="text-[10px] font-bold text-[#D4AF37] uppercase block">Birth Chart Synergy</span>
-                                <p class="text-xs text-[#D7DCE3] leading-relaxed" x-text="dobCompatibility"></p>
+                            <div class="p-3 bg-[#351211] text-[#F7F0E3] rounded-lg border border-[#C49A45]/30 space-y-1">
+                                <span class="text-[10px] font-bold text-[#C49A45] uppercase block">Birth Chart Synergy</span>
+                                <p class="text-xs text-[#EDE3D4] leading-relaxed" x-text="dobCompatibility"></p>
                             </div>
                         </template>
                     </div>
@@ -219,8 +219,8 @@
             </div>
 
             <!-- TRADITIONAL NOTICE -->
-            <div class="p-4 bg-[#FAF8F5] border border-[#17202D]/10 rounded-lg text-xs text-[#596273] leading-relaxed">
-                <strong class="text-[#17202D] block font-semibold mb-0.5">Traditional Mobile Numerology Notice</strong>
+            <div class="p-4 bg-[#F7F0E3] border border-[#D8C6A8] rounded-lg text-xs text-[#81766D] leading-relaxed">
+                <strong class="text-[#29211F] block font-semibold mb-0.5">Traditional Mobile Numerology Notice</strong>
                 Mobile number numerology offers a traditional symbolic framework for evaluating number totals. Interpretations are intended for reflective interest and personal alignment rather than empirical assertions.
             </div>
         </div>

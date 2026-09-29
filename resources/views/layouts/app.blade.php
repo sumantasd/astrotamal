@@ -16,6 +16,9 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}">
 
+    <!-- Favicon / Brand Icon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/ganesha-logo.png') }}">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,13 +28,13 @@
 
     @stack('styles')
 </head>
-<body class="bg-navy-900 text-slate-100 antialiased selection:bg-gold-500 selection:text-navy-950 flex flex-col min-h-screen">
+<body class="bg-[#FDFBF7] text-[#29211F] antialiased selection:bg-[#541F1D] selection:text-[#F7F0E3] flex flex-col min-h-screen">
 
     <!-- Main Navigation Header -->
     <x-header />
 
     <!-- Main Content Area -->
-    <main class="flex-grow pt-[72px] sm:pt-[84px] lg:pt-[96px]">
+    <main class="flex-grow pt-[56px] sm:pt-[66px] lg:pt-[74px]">
         @yield('content')
     </main>
 
