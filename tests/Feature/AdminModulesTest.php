@@ -19,37 +19,47 @@ class AdminModulesTest extends TestCase
         ]);
 
         $routes = [
-            '/custom-admin/dashboard',
-            '/custom-admin/profile',
-            '/custom-admin/appointments',
-            '/custom-admin/payments',
-            '/custom-admin/payment-settings',
-            '/custom-admin/blocked-slots',
-            '/custom-admin/services',
-            '/custom-admin/users',
-            '/custom-admin/testimonials',
-            '/custom-admin/faqs',
-            '/custom-admin/contact-inquiries',
-            '/custom-admin/horoscopes',
-            '/custom-admin/horoscopes/create',
-            '/custom-admin/horoscopes/signs',
-            '/custom-admin/pages',
-            '/custom-admin/pages/home/edit',
-            '/custom-admin/pages/about/edit',
-            '/custom-admin/pages/services/edit',
-            '/custom-admin/settings',
-            '/custom-admin/settings/general',
-            '/custom-admin/settings/header',
-            '/custom-admin/settings/footer',
-            '/custom-admin/settings/seo',
-            '/custom-admin/media',
-            '/custom-admin/blogs',
-            '/custom-admin/blogs/create',
+            '/admin-tamal/dashboard',
+            '/admin-tamal/profile',
+            '/admin-tamal/homepage',
+            '/admin-tamal/appointments',
+            '/admin-tamal/payments',
+            '/admin-tamal/payment-settings',
+            '/admin-tamal/blocked-slots',
+            '/admin-tamal/services',
+            '/admin-tamal/users',
+            '/admin-tamal/testimonials',
+            '/admin-tamal/faqs',
+            '/admin-tamal/contact-inquiries',
+            '/admin-tamal/horoscopes',
+            '/admin-tamal/horoscopes/create',
+            '/admin-tamal/horoscopes/signs',
+            '/admin-tamal/pages',
+            '/admin-tamal/pages/home/edit',
+            '/admin-tamal/pages/about/edit',
+            '/admin-tamal/pages/services/edit',
+            '/admin-tamal/services-page',
+            '/admin-tamal/settings',
+            '/admin-tamal/settings/general',
+            '/admin-tamal/settings/header',
+            '/admin-tamal/settings/footer',
+            '/admin-tamal/settings/seo',
+            '/admin-tamal/media',
+            '/admin-tamal/blogs',
+            '/admin-tamal/blogs/create',
         ];
 
         foreach ($routes as $url) {
             $response = $this->actingAs($admin)->get($url);
-            $response->assertStatus(200);
+            if ($url === '/admin-tamal/pages/home/edit') {
+                $response->assertRedirect(route('admin.homepage.edit'));
+            } elseif ($url === '/admin-tamal/pages/about/edit') {
+                $response->assertRedirect(route('admin.about.edit'));
+            } elseif ($url === '/admin-tamal/pages/services/edit') {
+                $response->assertRedirect(route('admin.services-page.edit'));
+            } else {
+                $response->assertStatus(200);
+            }
         }
     }
 }

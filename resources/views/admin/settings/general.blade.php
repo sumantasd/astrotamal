@@ -3,56 +3,214 @@
 @section('title', 'General Website Settings')
 
 @section('content')
-<div class="max-w-3xl mx-auto space-y-6">
+<div class="max-w-5xl mx-auto space-y-6 pb-12">
 
-    <div class="flex items-center justify-between bg-[#FDFBF7] p-6 rounded-2xl border border-[#D8C6A8] shadow-xs">
+    <!-- Header Banner -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-[#FDFBF7] p-6 rounded-2xl border border-[#D8C6A8] shadow-xs gap-4">
         <div>
-            <h1 class="text-xl font-bold font-serif-luxury text-[#541F1D]">General Website Settings</h1>
-            <p class="text-xs text-[#81766D] mt-1">Configure site name, official contact numbers, WhatsApp, and office address.</p>
+            <h1 class="text-xl sm:text-2xl font-bold font-serif-luxury text-[#541F1D]">General Website Settings</h1>
+            <p class="text-xs sm:text-sm text-[#81766D] mt-1">Manage global website identity, official contact details, business information, and website behaviour.</p>
         </div>
-        <a href="{{ route('admin.settings.index') }}" class="px-4 py-2 rounded-xl text-xs font-semibold text-[#541F1D] bg-[#EDE3D4] hover:bg-[#D8C6A8]">
+        <a href="{{ route('admin.settings.index') }}" class="px-4 py-2 rounded-xl text-xs font-semibold text-[#541F1D] bg-[#EDE3D4] hover:bg-[#D8C6A8] transition-colors shrink-0">
             ← Back to Settings
         </a>
     </div>
 
-    <form method="POST" action="{{ route('admin.settings.update') }}" class="bg-[#FDFBF7] p-6 rounded-2xl border border-[#D8C6A8] shadow-xs space-y-6">
+    <!-- Status Alert -->
+    @if(session('status'))
+        <div class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm rounded-xl font-medium flex items-center gap-2">
+            <span>✅</span> {{ session('status') }}
+        </div>
+    @endif
+
+    <!-- Validation Errors -->
+    @if($errors->any())
+        <div class="p-4 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-xl space-y-1">
+            <span class="font-bold">Please correct the following errors:</span>
+            <ul class="list-disc list-inside">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('admin.settings.general.update') }}" enctype="multipart/form-data" class="space-y-6">
         @csrf
-        <input type="hidden" name="group" value="general">
 
-        <div>
-            <label class="block text-xs font-bold text-[#541F1D] mb-1">Website Name</label>
-            <input type="text" name="site_name" value="{{ App\Models\SiteSetting::get('site_name', 'Ganesha Astro Consultancy') }}" class="w-full px-3 py-2 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none">
-        </div>
-
-        <div>
-            <label class="block text-xs font-bold text-[#541F1D] mb-1">Tagline / Subtitle</label>
-            <input type="text" name="site_tagline" value="{{ App\Models\SiteSetting::get('site_tagline', 'Tamal Chakraborty — Celebrity Astrologer & Vastu Expert') }}" class="w-full px-3 py-2 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none">
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-xs font-bold text-[#541F1D] mb-1">Official Phone Number</label>
-                <input type="text" name="contact_phone" value="{{ App\Models\SiteSetting::get('contact_phone', '+91 98300 00000') }}" class="w-full px-3 py-2 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none">
+        <!-- SECTION A: WEBSITE IDENTITY -->
+        <div class="bg-[#FDFBF7] p-6 sm:p-8 rounded-2xl border border-[#D8C6A8] shadow-xs space-y-6">
+            <div class="flex items-center gap-3 border-b border-[#D8C6A8]/40 pb-4">
+                <span class="text-lg">🆔</span>
+                <h2 class="text-lg font-bold font-serif-luxury text-[#541F1D]">A. Website Identity</h2>
             </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Website / Brand Name <span class="text-rose-600">*</span></label>
+                    <input type="text" name="site_name" value="{{ old('site_name', App\Models\SiteSetting::get('site_name', 'Ganesha Astro Consultancy')) }}" required class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                    <span class="text-[10px] text-[#81766D] mt-1 block">Global site title used across headers, footers, and brand tags.</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Site Tagline / Subtitle</label>
+                    <input type="text" name="site_tagline" value="{{ old('site_tagline', App\Models\SiteSetting::get('site_tagline', 'Tamal Chakraborty — Celebrity Astrologer & Vastu Expert')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                    <span class="text-[10px] text-[#81766D] mt-1 block">Subtitle displayed in hero sections or header titles.</span>
+                </div>
+            </div>
+
             <div>
-                <label class="block text-xs font-bold text-[#541F1D] mb-1">WhatsApp Number</label>
-                <input type="text" name="whatsapp_number" value="{{ App\Models\SiteSetting::get('whatsapp_number', '+91 98300 00000') }}" class="w-full px-3 py-2 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none">
+                <label class="block text-xs font-bold text-[#541F1D] mb-1">Short Description</label>
+                <textarea name="site_description" rows="2" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">{{ old('site_description', App\Models\SiteSetting::get('site_description', 'Empowering individuals globally with ancient Vedic wisdom, accurate birth chart readings, and practical spiritual remedies for life\'s challenges.')) }}</textarea>
+                <span class="text-[10px] text-[#81766D] mt-1 block">Brief summary used in footer bio and brand section.</span>
+            </div>
+
+            <!-- Uploads: Logo & Favicon -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+                <div class="p-4 bg-[#EDE3D4]/30 border border-[#D8C6A8]/60 rounded-xl space-y-3">
+                    <label class="block text-xs font-bold text-[#541F1D]">Website Logo</label>
+                    @php $logo = App\Models\SiteSetting::get('site_logo', 'images/ganesha-logo.png'); @endphp
+                    @if($logo)
+                        <div class="flex items-center gap-3">
+                            <img src="{{ asset($logo) }}" alt="Current Logo" class="h-10 max-w-[120px] object-contain bg-[#351211] p-1.5 rounded-lg border border-[#C49A45]/40">
+                            <span class="text-[11px] text-[#81766D]">Current logo</span>
+                        </div>
+                    @endif
+                    <input type="file" name="logo_file" accept="image/jpeg,image/png,image/webp,image/svg+xml" class="block w-full text-xs text-[#81766D] file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#541F1D] file:text-[#F7F0E3]">
+                    <span class="text-[10px] text-[#81766D] block">Supported formats: JPG, PNG, WEBP, SVG (Max: 2MB).</span>
+                </div>
+
+                <div class="p-4 bg-[#EDE3D4]/30 border border-[#D8C6A8]/60 rounded-xl space-y-3">
+                    <label class="block text-xs font-bold text-[#541F1D]">Browser Favicon</label>
+                    @php $favicon = App\Models\SiteSetting::get('site_favicon', 'images/ganesha-logo.png'); @endphp
+                    @if($favicon)
+                        <div class="flex items-center gap-3">
+                            <img src="{{ asset($favicon) }}" alt="Current Favicon" class="w-8 h-8 object-contain bg-[#351211] p-1 rounded-md border border-[#C49A45]/40">
+                            <span class="text-[11px] text-[#81766D]">Current favicon</span>
+                        </div>
+                    @endif
+                    <input type="file" name="favicon_file" accept="image/jpeg,image/png,image/webp,image/x-icon" class="block w-full text-xs text-[#81766D] file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#541F1D] file:text-[#F7F0E3]">
+                    <span class="text-[10px] text-[#81766D] block">Supported formats: PNG, ICO, WEBP (Max: 1MB).</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Default Language</label>
+                    <input type="text" name="default_language" value="{{ old('default_language', App\Models\SiteSetting::get('default_language', 'en')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Timezone</label>
+                    <input type="text" name="default_timezone" value="{{ old('default_timezone', App\Models\SiteSetting::get('default_timezone', 'Asia/Kolkata')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
             </div>
         </div>
 
-        <div>
-            <label class="block text-xs font-bold text-[#541F1D] mb-1">Official Email Address</label>
-            <input type="email" name="contact_email" value="{{ App\Models\SiteSetting::get('contact_email', 'contact@astrotamal.com') }}" class="w-full px-3 py-2 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none">
+        <!-- SECTION B: BUSINESS CONTACT -->
+        <div class="bg-[#FDFBF7] p-6 sm:p-8 rounded-2xl border border-[#D8C6A8] shadow-xs space-y-6">
+            <div class="flex items-center gap-3 border-b border-[#D8C6A8]/40 pb-4">
+                <span class="text-lg">📞</span>
+                <h2 class="text-lg font-bold font-serif-luxury text-[#541F1D]">B. Business Contact Details</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Official Phone Number <span class="text-rose-600">*</span></label>
+                    <input type="text" name="contact_phone" value="{{ old('contact_phone', App\Models\SiteSetting::get('contact_phone', '8392059201')) }}" required class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                    <span class="text-[10px] text-[#81766D] mt-1 block">Renders as tel: link across header, footer & pre-footer.</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">WhatsApp Number <span class="text-rose-600">*</span></label>
+                    <input type="text" name="whatsapp_number" value="{{ old('whatsapp_number', App\Models\SiteSetting::get('whatsapp_number', '8392059201')) }}" required class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                    <span class="text-[10px] text-[#81766D] mt-1 block">Renders as WhatsApp chat link publicly.</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Official Email Address <span class="text-rose-600">*</span></label>
+                    <input type="email" name="contact_email" value="{{ old('contact_email', App\Models\SiteSetting::get('contact_email', 'ganesha4astro@gmail.com')) }}" required class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Website URL</label>
+                    <input type="url" name="website_url" value="{{ old('website_url', App\Models\SiteSetting::get('website_url', 'https://astrotamal.com')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-[#541F1D] mb-1">Office / Chamber Address <span class="text-rose-600">*</span></label>
+                <textarea name="office_address" rows="2" required class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">{{ old('office_address', App\Models\SiteSetting::get('office_address', 'Kolkata | Bongaon | Ranaghat & More')) }}</textarea>
+            </div>
         </div>
 
-        <div>
-            <label class="block text-xs font-bold text-[#541F1D] mb-1">Chamber / Office Address</label>
-            <textarea name="office_address" rows="3" class="w-full px-3 py-2 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none">{{ App\Models\SiteSetting::get('office_address', 'Kolkata, West Bengal, India') }}</textarea>
+        <!-- SECTION C: BUSINESS INFORMATION -->
+        <div class="bg-[#FDFBF7] p-6 sm:p-8 rounded-2xl border border-[#D8C6A8] shadow-xs space-y-6">
+            <div class="flex items-center gap-3 border-b border-[#D8C6A8]/40 pb-4">
+                <span class="text-lg">🏛️</span>
+                <h2 class="text-lg font-bold font-serif-luxury text-[#541F1D]">C. Business Information</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Business Name</label>
+                    <input type="text" name="business_name" value="{{ old('business_name', App\Models\SiteSetting::get('business_name', 'Ganesha Astro Consultancy')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Contact Person</label>
+                    <input type="text" name="contact_person" value="{{ old('contact_person', App\Models\SiteSetting::get('contact_person', 'Tamal Chakraborty')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-[#541F1D] mb-1">Google Maps URL</label>
+                <input type="url" name="google_maps_url" value="{{ old('google_maps_url', App\Models\SiteSetting::get('google_maps_url', '')) }}" placeholder="https://maps.google.com/..." class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                <span class="text-[10px] text-[#81766D] mt-1 block">Optional Google Maps URL for office directions.</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Business Hours</label>
+                    <input type="text" name="business_hours" value="{{ old('business_hours', App\Models\SiteSetting::get('business_hours', 'Mon - Sun: 10:00 AM - 08:00 PM')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-[#541F1D] mb-1">Consultation Availability</label>
+                    <input type="text" name="consultation_availability" value="{{ old('consultation_availability', App\Models\SiteSetting::get('consultation_availability', 'By Appointment Only (Online & Chamber)')) }}" class="w-full px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+                </div>
+            </div>
         </div>
 
-        <div class="pt-4 border-t border-[#D8C6A8]/40 flex justify-end">
-            <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-bold text-[#F7F0E3] bg-[#541F1D] hover:bg-[#351211] border border-[#C49A45]/40 shadow-md">
-                Save General Settings
+        <!-- SECTION D: WEBSITE BEHAVIOUR -->
+        <div class="bg-[#FDFBF7] p-6 sm:p-8 rounded-2xl border border-[#D8C6A8] shadow-xs space-y-6">
+            <div class="flex items-center gap-3 border-b border-[#D8C6A8]/40 pb-4">
+                <span class="text-lg">⚙️</span>
+                <h2 class="text-lg font-bold font-serif-luxury text-[#541F1D]">D. Website Behaviour</h2>
+            </div>
+
+            <div class="p-5 bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <span class="block text-sm font-bold text-[#541F1D]">Maintenance Mode</span>
+                    <p class="text-xs text-[#81766D] mt-0.5">When enabled, public visitors see a maintenance page. Administrators retain full access to `/admin-tamal`.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                    <input type="checkbox" name="maintenance_mode" value="1" {{ App\Models\SiteSetting::get('maintenance_mode', '0') == '1' ? 'checked' : '' }} class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#541F1D]"></div>
+                </label>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-[#541F1D] mb-1">Default Items Per Page (Pagination)</label>
+                <input type="number" name="default_pagination" min="1" max="100" value="{{ old('default_pagination', App\Models\SiteSetting::get('default_pagination', '12')) }}" class="w-48 px-3.5 py-2.5 text-xs bg-[#EDE3D4]/40 border border-[#D8C6A8] rounded-xl focus:outline-none focus:border-[#C49A45]">
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-4 flex justify-end">
+            <button type="submit" class="px-8 py-3.5 rounded-xl text-xs font-bold text-[#F7F0E3] bg-[#541F1D] hover:bg-[#351211] border border-[#C49A45]/40 shadow-lg transition-all transform hover:-translate-y-0.5">
+                💾 SAVE GENERAL SETTINGS
             </button>
         </div>
     </form>

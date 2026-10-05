@@ -1,16 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Astrology Services — Tamal Chakraborty')
+@section('title', $cmsPage->seo_title ?? 'Astrology Services — Tamal Chakraborty')
 
 @section('content')
 
-<!-- 1. COMPACT SERVICES HERO (Warm Cream #F7F0E3 Background) -->
-<section class="bg-[#F7F0E3] text-[#29211F] py-16 lg:py-20 relative overflow-hidden border-b border-[#D8C6A8]">
-    <!-- Subtle Zodiac / Orbital Celestial Lines Background -->
+<!-- 1. SERVICES HERO SECTION (Pure White #FFFFFF Background) -->
+@if(\App\Models\SiteSetting::get('section_services_hero_active', '1') == '1')
+<section class="bg-white text-[#29211F] pt-6 sm:pt-8 lg:pt-8 pb-10 lg:pb-14 relative overflow-hidden border-b border-[#D8C6A8]">
+    <!-- Subtle Celestial Lines Background -->
     <div class="absolute inset-0 pointer-events-none opacity-10">
         <svg class="w-full h-full text-[#C49A45]" viewBox="0 0 1200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="600" cy="225" r="380" stroke="currentColor" stroke-width="0.75" stroke-dasharray="4 6"/>
-            <circle cx="600" cy="225" r="280" stroke-currentColor" stroke-width="0.5"/>
+            <circle cx="600" cy="225" r="280" stroke="currentColor" stroke-width="0.5"/>
             <circle cx="600" cy="225" r="180" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4"/>
             <path d="M 100,225 L 1100,225" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
             <path d="M 600,0 L 600,450" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
@@ -35,18 +36,18 @@
                 <div class="inline-flex items-center space-x-2">
                     <span class="w-2 h-2 rounded-full bg-[#C49A45]"></span>
                     <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">
-                        ASTROLOGICAL GUIDANCE
+                        {{ \App\Models\SiteSetting::get('services_hero_eyebrow', 'ASTROLOGICAL GUIDANCE') }}
                     </span>
                 </div>
 
                 <!-- Heading -->
                 <h1 class="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-bold text-[#29211F] leading-tight">
-                    Guidance For The Important Questions In Life
+                    {{ \App\Models\SiteSetting::get('services_hero_heading', 'Guidance For The Important Questions In Life') }}
                 </h1>
 
                 <!-- Supporting Text -->
                 <p class="text-[#81766D] text-sm sm:text-base max-w-2xl font-normal leading-relaxed">
-                    Explore astrology-based guidance around birth charts, planetary timing, career, business, life direction and astrology learning.
+                    {{ \App\Models\SiteSetting::get('services_hero_description', 'Explore astrology-based guidance around birth charts, planetary timing, career, business, life direction and astrology learning.') }}
                 </p>
             </div>
 
@@ -69,20 +70,188 @@
         </div>
     </div>
 </section>
+@endif
 
-<!-- 2. EDITORIAL INTRODUCTION -->
+<!-- 2. SERVICES INTRO & QUICK BOOKING SECTION -->
+@php
+    $showIntroHeader = \App\Models\SiteSetting::get('section_services_intro_header_active', '1') == '1';
+    $showQuickBooking = \App\Models\SiteSetting::get('section_services_quick_booking_active', '1') == '1';
+    $showPhone = \App\Models\SiteSetting::get('services_phone_active', '1') == '1';
+    $showKundli = \App\Models\SiteSetting::get('services_kundli_active', '1') == '1';
+    $showRemedy = \App\Models\SiteSetting::get('services_remedy_active', '1') == '1';
+    $showRightCol = $showPhone || $showKundli || $showRemedy;
+    $showIntroSection = $showIntroHeader || $showQuickBooking || $showRightCol;
+@endphp
+
+@if($showIntroSection)
+<section class="bg-[#F7F0E3] text-[#29211F] pt-6 sm:pt-8 lg:pt-8 pb-10 lg:pb-14 relative overflow-hidden border-b border-[#D8C6A8]">
+    <!-- Soft Background Celestial Lines -->
+    <div class="absolute inset-0 pointer-events-none opacity-10">
+        <svg class="w-full h-full text-[#C49A45]" viewBox="0 0 1200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="600" cy="225" r="380" stroke="currentColor" stroke-width="0.75" stroke-dasharray="4 6"/>
+            <circle cx="600" cy="225" r="280" stroke="currentColor" stroke-width="0.5"/>
+            <circle cx="600" cy="225" r="180" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4"/>
+            <path d="M 100,225 L 1100,225" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+            <path d="M 600,0 L 600,450" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+        <!-- Top Eyebrow & Main Heading -->
+        @if($showIntroHeader)
+        <div class="space-y-2 max-w-3xl">
+            <span class="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#C49A45] block">
+                {{ \App\Models\SiteSetting::get('services_intro_eyebrow', 'SERVICES') }}
+            </span>
+
+            <h2 class="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-bold text-[#541F1D] leading-tight">
+                {{ \App\Models\SiteSetting::get('services_intro_heading', 'আমাদের পরিষেবা') }}
+            </h2>
+
+            <p class="text-sm sm:text-base text-[#81766D] leading-relaxed font-normal pt-1">
+                {{ \App\Models\SiteSetting::get('services_intro_description', 'সব consultation বর্তমানে audio/voice call-এ হয়। Prediction over the phone call only.') }}
+            </p>
+        </div>
+        @endif
+
+        <!-- Two Column Main Layout -->
+        @if($showQuickBooking || $showRightCol)
+        <div class="grid grid-cols-1 {{ ($showQuickBooking && $showRightCol) ? 'lg:grid-cols-2' : '' }} gap-6 lg:gap-8 items-start pt-2">
+            
+            <!-- LEFT COLUMN: QUICK BOOKING CARD -->
+            @if($showQuickBooking)
+            <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl lg:rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs">
+                <!-- Heading -->
+                <h3 class="font-serif-luxury text-xl sm:text-2xl font-bold text-[#541F1D] flex items-center gap-2">
+                    {{ \App\Models\SiteSetting::get('services_qb_heading', '⚡ QUICK BOOKING') }}
+                </h3>
+
+                <!-- Consultation Options Container -->
+                <div class="space-y-4">
+                    <!-- URGENT CONSULTATION -->
+                    @if(\App\Models\SiteSetting::get('services_urgent_active', '1') == '1')
+                    <a href="{{ route('consultation.book') }}?type=urgent" 
+                       class="block bg-[#F5EAD9] border border-[#D8C6A8] hover:border-[#C49A45] rounded-2xl p-5 shadow-xs hover:shadow transition-all group">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-[#541F1D] text-base sm:text-lg flex items-center gap-2">
+                                    <span>{{ \App\Models\SiteSetting::get('services_urgent_icon', '🚨') }}</span>
+                                    <span>{{ \App\Models\SiteSetting::get('services_urgent_title', 'Urgent Consultation') }}</span>
+                                </h4>
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#81766D] font-normal">
+                                {{ \App\Models\SiteSetting::get('services_urgent_subtitle', 'Appointment should be within 24 hours') }}
+                            </p>
+                            <div class="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#29211F] pt-1">
+                                {{ \App\Models\SiteSetting::get('services_urgent_price', '₹5,000') }}
+                            </div>
+                        </div>
+                    </a>
+                    @endif
+
+                    <!-- NORMAL CONSULTATION -->
+                    @if(\App\Models\SiteSetting::get('services_normal_active', '1') == '1')
+                    <a href="{{ route('consultation.book') }}?type=normal" 
+                       class="block bg-[#FAF4EA] border border-[#D8C6A8] hover:border-[#C49A45] rounded-2xl p-5 shadow-xs hover:shadow transition-all group">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-[#351211] text-base sm:text-lg flex items-center gap-2">
+                                    <span>{{ \App\Models\SiteSetting::get('services_normal_icon', '📅') }}</span>
+                                    <span>{{ \App\Models\SiteSetting::get('services_normal_title', 'Normal Consultation') }}</span>
+                                </h4>
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#81766D] font-normal">
+                                {{ \App\Models\SiteSetting::get('services_normal_subtitle', 'Appointment within one week') }}
+                            </p>
+                            <div class="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#351211] pt-1">
+                                {{ \App\Models\SiteSetting::get('services_normal_price', '₹3,000') }}
+                            </div>
+                        </div>
+                    </a>
+                    @endif
+                </div>
+            </div>
+            @endif
+
+            <!-- RIGHT COLUMN: PHONE & KUNDLI / REMEDY CARDS -->
+            @if($showRightCol)
+            <div class="space-y-6">
+                <!-- TOP CARD: PHONE CONSULTATION / WHATSAPP -->
+                @if($showPhone)
+                <div class="bg-[#FAF4EA] border border-[#D8C6A8] rounded-2xl lg:rounded-3xl p-6 sm:p-8 space-y-4 shadow-xs">
+                    <h3 class="font-serif-luxury text-xl sm:text-2xl font-bold text-[#541F1D] flex items-center gap-2">
+                        <span>{{ \App\Models\SiteSetting::get('services_phone_icon', '🔮') }}</span>
+                        <span>{{ \App\Models\SiteSetting::get('services_phone_heading', 'ফোনে বিচার') }}</span>
+                    </h3>
+                    
+                    <p class="text-xs sm:text-sm text-[#81766D] font-normal">
+                        {{ \App\Models\SiteSetting::get('services_phone_subtitle', 'For More Information') }}
+                    </p>
+
+                    <div>
+                        <a href="{{ \App\Models\SiteSetting::get('services_phone_btn_url', 'https://wa.me/918392059201') }}" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold text-[#F7F0E3] bg-[#351211] hover:bg-[#541F1D] shadow transition-colors">
+                            {{ \App\Models\SiteSetting::get('services_phone_btn_text', '💬 WhatsApp Us') }}
+                        </a>
+                    </div>
+                </div>
+                @endif
+
+                <!-- BOTTOM CARD: KUNDLI & REMEDY -->
+                @if($showKundli || $showRemedy)
+                <div class="bg-[#FAF4EA] border border-[#D8C6A8] rounded-2xl lg:rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs">
+                    <!-- KUNDLI BLOCK -->
+                    @if($showKundli)
+                    <div class="space-y-2">
+                        <h3 class="font-serif-luxury text-xl sm:text-2xl font-bold text-[#541F1D] flex items-center gap-2">
+                            <span>{{ \App\Models\SiteSetting::get('services_kundli_icon', '🔮') }}</span>
+                            <span>{{ \App\Models\SiteSetting::get('services_kundli_heading', 'Kundli') }}</span>
+                        </h3>
+                        <p class="text-xs sm:text-sm text-[#81766D] leading-relaxed font-normal">
+                            {{ \App\Models\SiteSetting::get('services_kundli_description', 'Kundli preparation and reading, discussed during your consultation call.') }}
+                        </p>
+                    </div>
+                    @endif
+
+                    <!-- REMEDY BLOCK -->
+                    @if($showRemedy)
+                    <div class="space-y-2 {{ $showKundli ? 'border-t border-[#D8C6A8]/50 pt-5' : '' }}">
+                        <h3 class="font-serif-luxury text-xl sm:text-2xl font-bold text-[#541F1D] flex items-center gap-2">
+                            <span>{{ \App\Models\SiteSetting::get('services_remedy_icon', '💊') }}</span>
+                            <span>{{ \App\Models\SiteSetting::get('services_remedy_heading', 'Remedy Suggestion') }}</span>
+                        </h3>
+                        <p class="text-xs sm:text-sm text-[#81766D] leading-relaxed font-normal">
+                            {{ \App\Models\SiteSetting::get('services_remedy_description', 'Remedy suggestions where applicable. Prediction over the phone call only.') }}
+                        </p>
+                    </div>
+                    @endif
+                </div>
+                @endif
+            </div>
+            @endif
+
+        </div>
+        @endif
+    </div>
+</section>
+@endif
+
+<!-- 3. EDITORIAL INTRODUCTION -->
+@if(\App\Models\SiteSetting::get('section_services_editorial_active', '1') == '1')
 <section class="bg-[#FDFBF7] text-[#29211F] py-16 sm:py-20 border-b border-[#D8C6A8]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4">
         <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45] block">
-            ASTROLOGY CONSULTATION
+            {{ \App\Models\SiteSetting::get('services_editorial_eyebrow', 'ASTROLOGY CONSULTATION') }}
         </span>
         
         <h2 class="font-serif-luxury text-2xl sm:text-4xl font-bold text-[#29211F] leading-snug">
-            Astrology With Context, Timing & Understanding
+            {{ \App\Models\SiteSetting::get('services_editorial_heading', 'Astrology With Context, Timing & Understanding') }}
         </h2>
 
         <p class="text-sm sm:text-base text-[#81766D] leading-relaxed font-normal max-w-3xl mx-auto">
-            Through birth-chart analysis, planetary transits and the study of time, explore an astrological perspective on important phases, questions and decisions in life.
+            {{ \App\Models\SiteSetting::get('services_editorial_description', 'Through birth-chart analysis, planetary transits and the study of time, explore an astrological perspective on important phases, questions and decisions in life.') }}
         </p>
 
         <div class="pt-2 flex justify-center">
@@ -90,13 +259,19 @@
         </div>
     </div>
 </section>
+@endif
 
-<!-- 3. MAIN SERVICES CATALOGUE -->
+<!-- 4. MAIN SERVICES CATALOGUE -->
+@if(\App\Models\SiteSetting::get('section_services_catalogue_active', '1') == '1')
 <section class="bg-[#FDFBF7] py-16 lg:py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div class="text-center max-w-2xl mx-auto space-y-2">
-            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">CONSULTATION SERVICES</span>
-            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">Core Astrological Consultations</h2>
+            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">
+                {{ \App\Models\SiteSetting::get('services_catalogue_eyebrow', 'CONSULTATION SERVICES') }}
+            </span>
+            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">
+                {{ \App\Models\SiteSetting::get('services_catalogue_heading', 'Core Astrological Consultations') }}
+            </h2>
         </div>
 
         <!-- 6 Service Cards -->
@@ -107,8 +282,10 @@
         </div>
     </div>
 </section>
+@endif
 
-<!-- 4. FEATURED SERVICE (Primary Burgundy #541F1D Background) -->
+<!-- 5. FEATURED SERVICE (Primary Burgundy #541F1D Background) -->
+@if(\App\Models\SiteSetting::get('section_services_featured_active', '1') == '1')
 <section class="bg-[#541F1D] text-[#F7F0E3] py-20 lg:py-28 relative overflow-hidden border-y border-[#D8C6A8]/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -116,8 +293,8 @@
             <div class="lg:col-span-5 relative">
                 <div class="relative rounded-2xl overflow-hidden border border-[#D8C6A8] shadow-xl group aspect-[4/3] bg-[#351211]">
                     <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1200&h=900&auto=format&fit=crop" 
-                         alt="Birth Chart Analysis" 
-                         class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                          alt="Birth Chart Analysis" 
+                          class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
                     
                     <div class="absolute inset-0 bg-gradient-to-t from-[#351211] via-transparent to-transparent opacity-60"></div>
                     
@@ -131,15 +308,15 @@
             <!-- Right: Detailed Information & CTAs -->
             <div class="lg:col-span-7 space-y-6">
                 <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45] block">
-                    FEATURED CONSULTATION
+                    {{ \App\Models\SiteSetting::get('services_featured_eyebrow', 'FEATURED CONSULTATION') }}
                 </span>
 
                 <h2 class="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F7F0E3] leading-tight">
-                    Birth Chart Analysis
+                    {{ \App\Models\SiteSetting::get('services_featured_heading', 'Birth Chart Analysis') }}
                 </h2>
 
                 <p class="text-[#F7F0E3]/90 text-sm sm:text-base font-normal leading-relaxed">
-                    A birth chart provides an astrological framework for understanding planetary positions and important life themes. A consultation can explore the chart alongside relevant timing and planetary movement.
+                    {{ \App\Models\SiteSetting::get('services_featured_description', 'A birth chart provides an astrological framework for understanding planetary positions and important life themes. A consultation can explore the chart alongside relevant timing and planetary movement.') }}
                 </p>
 
                 <!-- Key Exploration Points -->
@@ -195,15 +372,23 @@
         </div>
     </div>
 </section>
+@endif
 
-<!-- 5. WHAT CAN WE EXPLORE? (Soft Beige #EDE3D4 Background) -->
+<!-- 6. WHAT CAN WE EXPLORE? (Soft Beige #EDE3D4 Background) -->
+@if(\App\Models\SiteSetting::get('section_services_exploration_active', '1') == '1')
 <section class="bg-[#EDE3D4] text-[#29211F] py-20 lg:py-28 border-b border-[#D8C6A8]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <!-- Section Header -->
         <div class="text-center max-w-2xl mx-auto space-y-3">
-            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">AREAS OF EXPLORATION</span>
-            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">What Can We Explore?</h2>
-            <p class="text-xs sm:text-sm text-[#81766D] font-normal">Key topics covered during a 1-on-1 private astrology consultation.</p>
+            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">
+                {{ \App\Models\SiteSetting::get('services_exploration_eyebrow', 'AREAS OF EXPLORATION') }}
+            </span>
+            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">
+                {{ \App\Models\SiteSetting::get('services_exploration_heading', 'What Can We Explore?') }}
+            </h2>
+            <p class="text-xs sm:text-sm text-[#81766D] font-normal">
+                {{ \App\Models\SiteSetting::get('services_exploration_subtitle', 'Key topics covered during a 1-on-1 private astrology consultation.') }}
+            </p>
         </div>
 
         <!-- 5 Compact Items -->
@@ -265,14 +450,20 @@
         </div>
     </div>
 </section>
+@endif
 
-<!-- 6. CONSULTATION PROCESS -->
+<!-- 7. CONSULTATION PROCESS -->
+@if(\App\Models\SiteSetting::get('section_services_process_active', '1') == '1')
 <section class="bg-[#F7F0E3] text-[#29211F] py-20 lg:py-28 relative overflow-hidden border-b border-[#D8C6A8]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         <!-- Section Header -->
         <div class="text-center max-w-2xl mx-auto space-y-3">
-            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">HOW IT WORKS</span>
-            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">A Simple Consultation Journey</h2>
+            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">
+                {{ \App\Models\SiteSetting::get('services_process_eyebrow', 'HOW IT WORKS') }}
+            </span>
+            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">
+                {{ \App\Models\SiteSetting::get('services_process_heading', 'A Simple Consultation Journey') }}
+            </h2>
         </div>
 
         <!-- Timeline Steps Grid -->
@@ -340,15 +531,23 @@
         </div>
     </div>
 </section>
+@endif
 
-<!-- 7. FAQ — SERVICES -->
+<!-- 8. FAQ — SERVICES -->
+@if(\App\Models\SiteSetting::get('section_services_faq_active', '1') == '1')
 <section class="bg-[#FDFBF7] text-[#29211F] py-20 lg:py-28">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <!-- Section Header -->
         <div class="text-center space-y-3">
-            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">SERVICES FAQ</span>
-            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">Frequently Asked Questions</h2>
-            <p class="text-xs sm:text-sm text-[#81766D] font-normal">Common questions regarding astrological consultations and birth chart requirements.</p>
+            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A45]">
+                {{ \App\Models\SiteSetting::get('services_faq_eyebrow', 'SERVICES FAQ') }}
+            </span>
+            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">
+                {{ \App\Models\SiteSetting::get('services_faq_heading', 'Frequently Asked Questions') }}
+            </h2>
+            <p class="text-xs sm:text-sm text-[#81766D] font-normal">
+                {{ \App\Models\SiteSetting::get('services_faq_subtitle', 'Common questions regarding astrological consultations and birth chart requirements.') }}
+            </p>
         </div>
 
         <!-- FAQ Accordion Container -->
@@ -435,5 +634,6 @@
         </div>
     </div>
 </section>
+@endif
 
 @endsection

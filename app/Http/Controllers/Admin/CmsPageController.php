@@ -110,11 +110,11 @@ class CmsPageController extends Controller
         $contentData = is_string($page->content) ? json_decode($page->content, true) : ($page->content ?? []);
 
         if ($slug === 'home') {
-            return view('admin.pages.editors.home', compact('page', 'contentData'));
+            return redirect()->route('admin.homepage.edit');
         } elseif ($slug === 'about') {
-            return view('admin.pages.editors.about', compact('page', 'contentData'));
+            return redirect()->route('admin.about.edit');
         } elseif ($slug === 'services') {
-            return view('admin.pages.editors.services', compact('page', 'contentData'));
+            return redirect()->route('admin.services-page.edit');
         }
 
         return view('admin.pages.edit', compact('page', 'contentData'));

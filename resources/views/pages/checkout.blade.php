@@ -25,6 +25,8 @@
 <section class="bg-[#F7F0E3] py-10 lg:py-14">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
 
+        <div id="paymentErrorMessage" class="hidden mb-6"></div>
+
         @if(session('error'))
             <div class="mb-6 p-4 rounded-xl bg-red-900/10 border border-red-800/30 text-red-900 text-xs sm:text-sm font-medium flex items-center space-x-3">
                 <svg class="w-5 h-5 text-red-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,30 +113,26 @@
                     </div>
                 </div>
 
-                <!-- Payment Form Action -->
-                <form action="{{ route('consultation.payment.verify') }}" method="POST" id="paymentVerifyForm">
-                    @csrf
-                    <input type="hidden" name="booking_reference" value="{{ $appointment->booking_reference }}">
-                    <input type="hidden" name="payment_id" id="payment_id" value="PAY_SIM_{{ strtoupper(\Illuminate\Support\Str::random(10)) }}">
-                    <input type="hidden" name="order_id" id="order_id" value="ORD_{{ strtoupper(\Illuminate\Support\Str::random(10)) }}">
-                    <input type="hidden" name="gateway" value="Razorpay">
-                    <input type="hidden" name="signature" id="signature" value="">
+                <!-- Payment Trigger Action -->
+                <div class="space-y-4 pt-4">
+                    <button type="button" 
+                            id="payButton"
+                            onclick="initiateRazorpayPayment()"
+                            class="w-full py-4 px-6 text-sm font-bold uppercase tracking-widest text-[#F7F0E3] bg-[#541F1D] hover:bg-[#351211] rounded-full shadow-lg border border-[#D8C6A8] hover:border-[#C49A45] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="payButtonText">🔒 PROCEED TO PAYMENT ₹{{ number_format($appointment->amount, 0) }}</span>
+                        <svg id="paySpinner" class="hidden animate-spin h-4 w-4 text-[#F7F0E3]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
 
-                    <div class="space-y-4 pt-4">
-                        <button type="submit" 
-                                id="payButton"
-                                class="w-full py-4 px-6 text-sm font-bold uppercase tracking-widest text-[#F7F0E3] bg-[#541F1D] hover:bg-[#351211] rounded-full shadow-lg border border-[#D8C6A8] hover:border-[#C49A45] transition-all flex items-center justify-center space-x-2">
-                            <span>🔒 PAY ₹{{ number_format($appointment->amount, 0) }} & CONFIRM BOOKING</span>
-                        </button>
-
-                        <p class="text-center text-[11px] text-[#81766D] flex items-center justify-center space-x-1">
-                            <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                            </svg>
-                            <span>Encrypted 256-bit SSL Payment Gateway</span>
-                        </p>
-                    </div>
-                </form>
+                    <p class="text-center text-[11px] text-[#81766D] flex items-center justify-center space-x-1">
+                        <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        <span>Encrypted 256-bit SSL Razorpay Gateway</span>
+                    </p>
+                </div>
 
             </div>
 
@@ -146,6 +144,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 @if(!$isExpired && $appointment->slot_reserved_until)
     // Countdown Timer Logic
@@ -169,5 +168,139 @@
             (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
     }, 1000);
 @endif
+
+async function initiateRazorpayPayment() {
+    const payButton = document.getElementById('payButton');
+    const payButtonText = document.getElementById('payButtonText');
+    const paySpinner = document.getElementById('paySpinner');
+
+    if (!payButton) return;
+
+    payButton.disabled = true;
+    if (paySpinner) paySpinner.classList.remove('hidden');
+    if (payButtonText) payButtonText.innerText = 'Initializing Razorpay...';
+
+    const hideError = () => {
+        const errorBox = document.getElementById('paymentErrorMessage');
+        if (errorBox) errorBox.classList.add('hidden');
+    };
+
+    const showError = (msg) => {
+        const errorBox = document.getElementById('paymentErrorMessage');
+        if (errorBox) {
+            errorBox.innerHTML = `
+                <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm font-medium flex items-center space-x-3">
+                    <svg class="w-5 h-5 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>${msg}</span>
+                </div>
+            `;
+            errorBox.classList.remove('hidden');
+        }
+    };
+
+    hideError();
+
+    try {
+        // Step 1: Create Razorpay Order Server-Side
+        const response = await fetch("{{ route('consultation.payment.create-order') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                booking_reference: '{{ $appointment->booking_reference }}'
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || 'Payment gateway order creation failed. Please try again.');
+        }
+
+        // Step 2: Ensure Razorpay SDK is available
+        if (typeof Razorpay === 'undefined') {
+            throw new Error('Razorpay Payment SDK failed to load. Please check your internet connection.');
+        }
+
+        // Step 3: Launch Razorpay Checkout Modal
+        const options = {
+            key: data.key,
+            amount: data.amount,
+            currency: data.currency,
+            name: data.name,
+            description: data.description,
+            order_id: data.order_id,
+            prefill: data.prefill,
+            theme: {
+                color: "#541F1D"
+            },
+            handler: async function(razorpayResponse) {
+                if (payButtonText) payButtonText.innerText = 'Verifying Payment...';
+
+                try {
+                    // Step 4: Verify Payment Signature Server-Side
+                    const verifyResponse = await fetch("{{ route('consultation.payment.verify') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            booking_reference: '{{ $appointment->booking_reference }}',
+                            payment_id: razorpayResponse.razorpay_payment_id,
+                            order_id: razorpayResponse.razorpay_order_id,
+                            signature: razorpayResponse.razorpay_signature,
+                            gateway: 'Razorpay'
+                        })
+                    });
+
+                    const verifyData = await verifyResponse.json();
+
+                    if (verifyResponse.ok && verifyData.success) {
+                        window.location.href = verifyData.redirect_url;
+                    } else {
+                        throw new Error(verifyData.message || 'Payment verification failed. Your booking has not been confirmed.');
+                    }
+                } catch (verifyError) {
+                    payButton.disabled = false;
+                    if (paySpinner) paySpinner.classList.add('hidden');
+                    if (payButtonText) payButtonText.innerText = '🔒 PROCEED TO PAYMENT ₹{{ number_format($appointment->amount, 0) }}';
+                    showError(verifyError.message || 'Payment verification failed. Your booking has not been confirmed.');
+                }
+            },
+            modal: {
+                ondismiss: function() {
+                    payButton.disabled = false;
+                    if (paySpinner) paySpinner.classList.add('hidden');
+                    if (payButtonText) payButtonText.innerText = '🔒 PROCEED TO PAYMENT ₹{{ number_format($appointment->amount, 0) }}';
+                    showError('Payment window closed. Your slot remains reserved for 15 minutes. Click PROCEED TO PAYMENT to try again.');
+                }
+            }
+        };
+
+        const rzp = new Razorpay(options);
+
+        rzp.on('payment.failed', function (resp) {
+            payButton.disabled = false;
+            if (paySpinner) paySpinner.classList.add('hidden');
+            if (payButtonText) payButtonText.innerText = '🔒 PROCEED TO PAYMENT ₹{{ number_format($appointment->amount, 0) }}';
+            showError('Payment failed: ' + (resp.error ? resp.error.description : 'Transaction was declined by bank.'));
+        });
+
+        rzp.open();
+
+    } catch (err) {
+        payButton.disabled = false;
+        if (paySpinner) paySpinner.classList.add('hidden');
+        if (payButtonText) payButtonText.innerText = '🔒 PROCEED TO PAYMENT ₹{{ number_format($appointment->amount, 0) }}';
+        showError(err.message || 'Payment gateway could not be loaded. Please try again.');
+    }
+}
 </script>
 @endpush

@@ -38,6 +38,17 @@
             </div>
         @endif
 
+        @if($errors->any())
+            <div class="mb-8 p-5 rounded-2xl bg-red-900 border border-red-700 text-red-100 text-xs sm:text-sm font-medium space-y-1 shadow-md">
+                <strong class="block font-bold text-red-200 text-sm mb-1">Please fix the following issues:</strong>
+                <ul class="list-disc list-inside space-y-1">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('consultation.submit') }}" method="POST" id="bookingForm" class="space-y-8">
             @csrf
 
@@ -74,7 +85,7 @@
                                         </span>
                                     </div>
                                     <p class="text-xs text-[#81766D] font-normal leading-relaxed">
-                                        Appointment should be within 24 hours
+                                        Appointment within 24 hours
                                     </p>
                                     <div class="pt-2 border-t border-[#D8C6A8]/60 flex items-center justify-between">
                                         <span class="font-serif-luxury text-2xl font-bold text-[#541F1D]">₹5,000</span>
@@ -93,11 +104,11 @@
                                             <span class="font-serif-luxury text-sm font-bold uppercase tracking-wider">NORMAL</span>
                                         </div>
                                         <span class="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#541F1D] bg-[#EDE3D4] rounded-full border border-[#D8C6A8]">
-                                            WITHIN A WEEK
+                                            FLEXIBLE DATE
                                         </span>
                                     </div>
                                     <p class="text-xs text-[#81766D] font-normal leading-relaxed">
-                                        Appointment within one week
+                                        Scheduled advance appointment
                                     </p>
                                     <div class="pt-2 border-t border-[#D8C6A8]/60 flex items-center justify-between">
                                         <span class="font-serif-luxury text-2xl font-bold text-[#541F1D]">₹3,000</span>
@@ -179,9 +190,9 @@
                             <label class="block text-xs font-bold uppercase tracking-wider text-[#541F1D]">Select Preferred Date</label>
                             <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
                                 @php
-                                    $startDate = \Carbon\Carbon::now();
+                                    $startDate = \Carbon\Carbon::now('Asia/Kolkata');
                                 @endphp
-                                @for($i = 0; $i < 5; $i++)
+                                @for($i = 0; $i < 6; $i++)
                                     @php
                                         $currDate = (clone $startDate)->addDays($i);
                                         $formattedVal = $currDate->format('Y-m-d');
@@ -190,7 +201,7 @@
                                     @endphp
                                     <button type="button" 
                                             onclick="selectDate('{{ $formattedVal }}', this)" 
-                                            class="date-btn flex-1 min-w-[76px] py-2.5 px-3 rounded-xl border text-center transition-all text-xs font-medium {{ $i === 0 ? 'bg-[#EDE3D4] border-[#C49A45] text-[#541F1D] font-bold' : 'bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]' }}">
+                                            class="date-btn flex-1 min-w-[72px] py-2.5 px-2 rounded-xl border text-center transition-all text-xs font-medium {{ $i === 0 ? 'bg-[#EDE3D4] border-[#C49A45] text-[#541F1D] font-bold' : 'bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]' }}">
                                         <span class="block text-[10px] uppercase font-bold text-[#81766D]">{{ $dayName }}</span>
                                         <span class="block font-serif-luxury font-bold text-xs mt-0.5 text-[#541F1D]">{{ $dateNum }}</span>
                                     </button>
@@ -198,43 +209,13 @@
                             </div>
                         </div>
 
-                        <!-- Time Slot Selection Buttons (Vertical Arrangement) -->
+                        <!-- Time Slot Selection Buttons (Dynamic 30-Minute Generation) -->
                         <div class="space-y-2.5 pt-2">
                             <label class="block text-xs font-bold uppercase tracking-wider text-[#541F1D]">Available Time Slots</label>
                             
-                            <!-- Slot 1 (Urgent Slot) -->
-                            <button type="button" 
-                                    id="slotMorning"
-                                    onclick="selectTimeSlot('10:00 AM - 01:00 PM IST', this)" 
-                                    class="slot-btn w-full p-3.5 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold bg-[#EDE3D4] border-[#C49A45] text-[#541F1D]">
-                                <span>10:00 AM – 01:00 PM (Morning Urgent Slot)</span>
-                                <span class="slot-badge text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#541F1D] text-[#F7F0E3]">Selected</span>
-                            </button>
-
-                            <!-- Slot 2 (Normal Slot) -->
-                            <button type="button" 
-                                    id="slotAfternoon"
-                                    onclick="selectTimeSlot('02:00 PM - 05:00 PM IST', this)" 
-                                    class="slot-btn w-full p-3.5 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]">
-                                <span>02:00 PM – 05:00 PM (Afternoon)</span>
-                                <span class="slot-badge text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EDE3D4] text-[#541F1D] border border-[#D8C6A8]">Available</span>
-                            </button>
-
-                            <!-- Slot 3 (Normal Slot) -->
-                            <button type="button" 
-                                    id="slotEvening"
-                                    onclick="selectTimeSlot('06:00 PM - 09:00 PM IST', this)" 
-                                    class="slot-btn w-full p-3.5 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]">
-                                <span>06:00 PM – 09:00 PM (Evening)</span>
-                                <span class="slot-badge text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EDE3D4] text-[#541F1D] border border-[#D8C6A8]">Available</span>
-                            </button>
-
-                            <!-- Slot 4 (Unavailable - Struck through & Disabled) -->
-                            <div class="w-full p-3.5 rounded-xl border border-[#D8C6A8] bg-[#EDE3D4]/70 opacity-60 flex items-center justify-between text-xs cursor-not-allowed select-none">
-                                <span class="line-through text-[#81766D] font-medium">09:30 PM – 11:30 PM (Night)</span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#81766D] text-[#F7F0E3]">Booked</span>
+                            <div id="slotsContainer" class="space-y-2 max-h-[320px] overflow-y-auto pr-1">
+                                <div class="py-4 text-center text-xs text-[#81766D]">Loading available time slots...</div>
                             </div>
-
                         </div>
 
                     </div>
@@ -295,7 +276,7 @@
                                name="preferred_date" 
                                id="preferred_date" 
                                required 
-                               value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                               value="{{ \Carbon\Carbon::now('Asia/Kolkata')->format('Y-m-d') }}"
                                class="w-full bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl px-4 py-3 text-[#541F1D] font-bold focus:outline-none focus:border-[#C49A45]">
                     </div>
 
@@ -306,7 +287,7 @@
                                name="preferred_time" 
                                id="preferred_time" 
                                required 
-                               value="10:00 AM - 01:00 PM IST" 
+                               value="09:00 AM" 
                                readonly
                                class="w-full bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl px-4 py-3 text-[#541F1D] font-bold focus:outline-none focus:border-[#C49A45]">
                     </div>
@@ -337,9 +318,58 @@
                         <label class="block text-[11px] font-bold uppercase tracking-wider text-[#541F1D] mb-1.5">EMAIL ADDRESS</label>
                         <input type="email" 
                                name="email" 
-                               placeholder="e.g. support@astrotamal.com" 
+                               value="{{ auth()->check() ? auth()->user()->email : old('email') }}"
+                               placeholder="e.g. ganesha4astro@gmail.com" 
                                class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-[#29211F] placeholder-[#81766D]/60 focus:outline-none focus:border-[#C49A45]">
                     </div>
+
+                    <!-- OPTIONAL CUSTOMER ACCOUNT CREATION -->
+                    @guest
+                        <div class="md:col-span-2 lg:col-span-3 border-t border-[#D8C6A8] pt-4">
+                            <div class="bg-[#EDE3D4]/50 border border-[#D8C6A8] rounded-xl p-4 space-y-3">
+                                <label class="flex items-start space-x-3 cursor-pointer">
+                                    <input type="checkbox" 
+                                           id="createAccountCheckbox" 
+                                           name="create_account" 
+                                           value="1" 
+                                           onchange="toggleAccountPasswordFields()" 
+                                           class="mt-0.5 accent-[#541F1D] w-4 h-4 rounded border-[#D8C6A8]">
+                                    <div>
+                                        <span class="text-xs font-bold text-[#541F1D]">Create an account to manage my bookings</span>
+                                        <p class="text-[11px] text-[#81766D] mt-0.5">Create an account to easily view and manage your consultation bookings.</p>
+                                    </div>
+                                </label>
+
+                                <div id="accountPasswordContainer" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                                    <div>
+                                        <label class="block text-[10px] font-bold uppercase tracking-wider text-[#541F1D] mb-1">CREATE PASSWORD *</label>
+                                        <input type="password" 
+                                               name="password" 
+                                               id="inputAccountPassword" 
+                                               placeholder="Min 8 characters" 
+                                               class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-2.5 text-xs text-[#29211F]">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold uppercase tracking-wider text-[#541F1D] mb-1">CONFIRM PASSWORD *</label>
+                                        <input type="password" 
+                                               name="password_confirmation" 
+                                               id="inputAccountPasswordConfirmation" 
+                                               placeholder="Re-enter password" 
+                                               class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-2.5 text-xs text-[#29211F]">
+                                    </div>
+                                </div>
+
+                                <div class="text-[11px] text-[#81766D] pt-1">
+                                    Already have an account? <a href="{{ route('account.login') }}" class="font-bold text-[#541F1D] underline">Log in here</a>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="md:col-span-2 lg:col-span-3 bg-[#EDE3D4] border border-[#C49A45] rounded-xl p-3.5 flex items-center justify-between text-xs text-[#541F1D]">
+                            <span class="font-semibold">✓ Booking as logged-in customer: <strong>{{ auth()->user()->name }}</strong> ({{ auth()->user()->email }})</span>
+                            <a href="{{ route('account.dashboard') }}" class="text-[11px] font-bold uppercase text-[#C49A45] underline">My Account</a>
+                        </div>
+                    @endguest
 
                     <!-- 9. Mention Your Queries (Full Width Area) -->
                     <div class="md:col-span-2 lg:col-span-3">
@@ -429,7 +459,6 @@
 <script>
 const todayStr = '{{ \Carbon\Carbon::now("Asia/Kolkata")->format("Y-m-d") }}';
 const tomorrowStr = '{{ \Carbon\Carbon::now("Asia/Kolkata")->addDays(1)->format("Y-m-d") }}';
-const maxNormalStr = '{{ \Carbon\Carbon::now("Asia/Kolkata")->addDays(7)->format("Y-m-d") }}';
 
 function updateConsultationType(type) {
     const cardUrgent = document.getElementById('cardUrgent');
@@ -447,17 +476,6 @@ function updateConsultationType(type) {
         checkNormal.className = 'w-5 h-5 rounded-full bg-transparent border border-[#D8C6A8] text-transparent flex items-center justify-center text-xs font-bold';
 
         submitBtnText.innerText = 'CONFIRM & PROCEED — ₹5,000';
-        
-        if (dateInput) {
-            dateInput.min = todayStr;
-            dateInput.max = tomorrowStr;
-            if (dateInput.value < todayStr || dateInput.value > tomorrowStr) {
-                dateInput.value = todayStr;
-            }
-        }
-
-        const slotMorning = document.getElementById('slotMorning');
-        if (slotMorning) selectTimeSlot('10:00 AM - 01:00 PM IST', slotMorning);
     } else {
         cardNormal.className = 'relative block cursor-pointer rounded-2xl border-2 border-[#C49A45] bg-[#EDE3D4] p-5 transition-all shadow-sm';
         cardUrgent.className = 'relative block cursor-pointer rounded-2xl border border-[#D8C6A8] bg-[#F7F0E3] p-5 transition-all shadow-xs hover:border-[#C49A45]';
@@ -466,57 +484,134 @@ function updateConsultationType(type) {
         checkUrgent.className = 'w-5 h-5 rounded-full bg-transparent border border-[#D8C6A8] text-transparent flex items-center justify-center text-xs font-bold';
 
         submitBtnText.innerText = 'CONFIRM & PROCEED — ₹3,000';
-        
-        if (dateInput) {
-            dateInput.min = tomorrowStr;
-            dateInput.max = maxNormalStr;
-            if (dateInput.value < tomorrowStr || dateInput.value > maxNormalStr) {
-                dateInput.value = tomorrowStr;
-            }
-        }
-
-        const slotAfternoon = document.getElementById('slotAfternoon');
-        if (slotAfternoon) selectTimeSlot('02:00 PM - 05:00 PM IST', slotAfternoon);
     }
 }
 
 function selectDate(dateVal, element) {
     document.querySelectorAll('.date-btn').forEach(btn => {
-        btn.className = 'date-btn flex-1 min-w-[76px] py-2.5 px-3 rounded-xl border text-center transition-all text-xs font-medium bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]';
+        btn.className = 'date-btn flex-1 min-w-[72px] py-2.5 px-2 rounded-xl border text-center transition-all text-xs font-medium bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]';
     });
-    element.className = 'date-btn flex-1 min-w-[76px] py-2.5 px-3 rounded-xl border text-center transition-all text-xs font-bold bg-[#EDE3D4] border-[#C49A45] text-[#541F1D]';
+    element.className = 'date-btn flex-1 min-w-[72px] py-2.5 px-2 rounded-xl border text-center transition-all text-xs font-bold bg-[#EDE3D4] border-[#C49A45] text-[#541F1D]';
     document.getElementById('preferred_date').value = dateVal;
+
+    loadSlotsForDate(dateVal);
+}
+
+function loadSlotsForDate(dateVal) {
+    const container = document.getElementById('slotsContainer');
+    container.innerHTML = '<div class="py-4 text-center text-xs text-[#81766D]">Loading time slots...</div>';
+
+    fetch(`/api/available-slots?date=${dateVal}`)
+        .then(res => res.json())
+        .then(res => {
+            if (!res.success || !res.data || !res.data.slots || res.data.slots.length === 0) {
+                container.innerHTML = '<div class="py-4 text-center text-xs font-bold text-red-800">No time slots available for this date.</div>';
+                document.getElementById('preferred_time').value = '';
+                validateForm();
+                return;
+            }
+
+            container.innerHTML = '';
+            let firstAvailable = null;
+
+            res.data.slots.forEach((item, index) => {
+                if (item.available) {
+                    if (!firstAvailable) firstAvailable = item.time;
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `slot-btn w-full p-3 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold ${firstAvailable === item.time ? 'bg-[#EDE3D4] border-[#C49A45] text-[#541F1D]' : 'bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]'}`;
+                    btn.onclick = function() { selectTimeSlot(item.time, this); };
+                    
+                    const spanTime = document.createElement('span');
+                    spanTime.innerText = item.time;
+
+                    const badge = document.createElement('span');
+                    badge.className = `slot-badge text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${firstAvailable === item.time ? 'bg-[#541F1D] text-[#F7F0E3]' : 'bg-[#EDE3D4] text-[#541F1D] border border-[#D8C6A8]'}`;
+                    badge.innerText = firstAvailable === item.time ? 'Selected' : 'Available';
+
+                    btn.appendChild(spanTime);
+                    btn.appendChild(badge);
+                    container.appendChild(btn);
+                } else {
+                    const div = document.createElement('div');
+                    div.className = 'w-full p-3 rounded-xl border border-[#D8C6A8] bg-[#EDE3D4]/50 opacity-60 flex items-center justify-between text-xs cursor-not-allowed select-none';
+                    
+                    const spanTime = document.createElement('span');
+                    spanTime.className = 'line-through text-[#81766D] font-medium';
+                    spanTime.innerText = item.time;
+
+                    const badge = document.createElement('span');
+                    badge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#81766D] text-[#F7F0E3]';
+                    badge.innerText = 'Unavailable ❌';
+
+                    div.appendChild(spanTime);
+                    div.appendChild(badge);
+                    container.appendChild(div);
+                }
+            });
+
+            if (firstAvailable) {
+                document.getElementById('preferred_time').value = firstAvailable;
+            } else {
+                document.getElementById('preferred_time').value = '';
+            }
+            validateForm();
+        })
+        .catch(err => {
+            console.error('Error fetching slots:', err);
+            container.innerHTML = '<div class="py-4 text-center text-xs text-red-800">Failed to load time slots.</div>';
+        });
 }
 
 function selectTimeSlot(timeVal, element) {
     document.querySelectorAll('.slot-btn').forEach(btn => {
-        btn.className = 'slot-btn w-full p-3.5 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]';
+        btn.className = 'slot-btn w-full p-3 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold bg-[#FDFBF7] border-[#D8C6A8] text-[#29211F] hover:border-[#C49A45]';
         const badge = btn.querySelector('.slot-badge');
         if (badge) {
             badge.className = 'slot-badge text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EDE3D4] text-[#541F1D] border border-[#D8C6A8]';
             badge.innerText = 'Available';
         }
     });
-    element.className = 'slot-btn w-full p-3.5 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold bg-[#EDE3D4] border-[#C49A45] text-[#541F1D]';
+    element.className = 'slot-btn w-full p-3 rounded-xl border flex items-center justify-between transition-all text-xs font-semibold bg-[#EDE3D4] border-[#C49A45] text-[#541F1D]';
     const activeBadge = element.querySelector('.slot-badge');
     if (activeBadge) {
         activeBadge.className = 'slot-badge text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#541F1D] text-[#F7F0E3]';
         activeBadge.innerText = 'Selected';
     }
     document.getElementById('preferred_time').value = timeVal;
+    validateForm();
 }
 
 function validateForm() {
     const name = document.getElementById('inputName').value.trim();
     const phone = document.getElementById('inputPhone').value.trim();
     const birthDate = document.getElementById('inputBirthDate').value.trim();
+    const prefTime = document.getElementById('preferred_time').value.trim();
     const termsConsent = document.getElementById('termsConsent').checked;
     const submitBtn = document.getElementById('submitBtn');
 
-    if (name !== '' && phone !== '' && birthDate !== '' && termsConsent) {
+    if (name !== '' && phone !== '' && birthDate !== '' && prefTime !== '' && termsConsent) {
         submitBtn.disabled = false;
     } else {
         submitBtn.disabled = true;
+    }
+}
+
+function toggleAccountPasswordFields() {
+    const chk = document.getElementById('createAccountCheckbox');
+    const container = document.getElementById('accountPasswordContainer');
+    const pwdInput = document.getElementById('inputAccountPassword');
+    const pwdConfirmInput = document.getElementById('inputAccountPasswordConfirmation');
+    
+    if (chk && chk.checked) {
+        container.classList.remove('hidden');
+        if (pwdInput) pwdInput.required = true;
+        if (pwdConfirmInput) pwdConfirmInput.required = true;
+    } else {
+        if (container) container.classList.add('hidden');
+        if (pwdInput) { pwdInput.required = false; pwdInput.value = ''; }
+        if (pwdConfirmInput) { pwdConfirmInput.required = false; pwdConfirmInput.value = ''; }
     }
 }
 
@@ -529,6 +624,9 @@ function closeTermsModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const defaultDate = document.getElementById('preferred_date').value || todayStr;
+    loadSlotsForDate(defaultDate);
+
     const urlParams = new URLSearchParams(window.location.search);
     const type = urlParams.get('type');
     if (type === 'normal') {

@@ -40,37 +40,11 @@
     </div>
 </section>
 
-<!-- VIDEO GRID & PLAYER MODAL SECTION -->
-<section class="bg-[#FDFBF7] text-[#29211F] py-16 sm:py-24"
-         x-data="{
-             selectedCategory: 'ALL',
-             playerOpen: false,
-             activeVideo: null,
-             categories: ['ALL', 'HOROSCOPE', 'VEDIC ASTROLOGY', 'PLANETARY TRANSITS', 'GUIDANCE'],
-             videos: [
-                 { id: 'bYtG72jD2pE', title: 'Monthly Horoscope & Planetary Alignment Analysis', category: 'HOROSCOPE', duration: '14:20', date: '2026' },
-                 { id: '5gZtQkX0uW8', title: 'Vedic Astrology Principles & Chart Placement Guidance', category: 'VEDIC ASTROLOGY', duration: '18:45', date: '2026' },
-                 { id: '4vW7gW2d5X8', title: 'Planetary Transits & Major Life Shifts Analysis', category: 'PLANETARY TRANSITS', duration: '22:10', date: '2026' },
-                 { id: '9xV8wQ6m5z0', title: 'Career & Job Guidance Astrological Remedies', category: 'GUIDANCE', duration: '16:05', date: '2026' },
-                 { id: '7yR3tQ9k8W2', title: 'Understanding Zodiac Signs & House Positions', category: 'HOROSCOPE', duration: '19:30', date: '2026' },
-                 { id: '3wV5gH8j9K1', title: 'Spiritual Remedies for Planetary Dasha Cycles', category: 'VEDIC ASTROLOGY', duration: '15:50', date: '2026' }
-             ],
-             get filteredVideos() {
-                 if (this.selectedCategory === 'ALL') return this.videos;
-                 return this.videos.filter(v => v.category === this.selectedCategory);
-             },
-             openVideo(video) {
-                 this.activeVideo = video;
-                 this.playerOpen = true;
-             },
-             closeVideo() {
-                 this.playerOpen = false;
-                 this.activeVideo = null;
-             }
-         }">
+<!-- VIDEO GRID SECTION -->
+<section class="bg-[#FDFBF7] text-[#29211F] py-16 sm:py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
 
-        <!-- Channel Badge & Filters -->
+        <!-- Channel Badge Header -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-[#D8C6A8] pb-8">
             <div>
                 <a href="https://www.youtube.com/@AstrologerTamalChakraborty" 
@@ -82,101 +56,92 @@
                     </div>
                     <div>
                         <h3 class="font-serif-luxury text-xl font-bold text-[#29211F] group-hover:text-[#541F1D] transition-colors">Astrologer Tamal Chakraborty</h3>
-                        <span class="text-xs text-[#81766D]">Official YouTube Channel</span>
+                        <span class="text-xs text-[#81766D]">Official YouTube & Video Talks</span>
                     </div>
                 </a>
             </div>
 
-            <!-- Category Filters -->
-            <div class="flex flex-wrap gap-2">
-                <template x-for="cat in categories" :key="cat">
-                    <button x-on:click="selectedCategory = cat" 
-                            :class="selectedCategory === cat ? 'bg-[#541F1D] text-[#F7F0E3] border-[#C49A45]' : 'bg-[#FDFBF7] text-[#29211F] border-[#D8C6A8] hover:border-[#C49A45]'"
-                            class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border transition-all">
-                        <span x-text="cat"></span>
-                    </button>
-                </template>
+            <div>
+                <a href="https://www.youtube.com/@AstrologerTamalChakraborty" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-bold text-[#F7F0E3] bg-[#541F1D] hover:bg-[#351211] border border-[#C49A45]/40 shadow-sm transition-all">
+                    <span>Subscribe on YouTube ↗</span>
+                </a>
             </div>
         </div>
 
-        <!-- 3-Column Desktop / 2-Column Tablet / 1-Column Mobile Video Card Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <template x-for="video in filteredVideos" :key="video.id">
-                <div x-on:click="openVideo(video)" 
-                     class="group bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between">
-                    
-                    <!-- Thumbnail Container -->
-                    <div class="relative aspect-video bg-[#351211] overflow-hidden">
-                        <img :src="'https://img.youtube.com/vi/' + video.id + '/hqdefault.jpg'" 
-                             :alt="video.title" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+        @if(isset($videos) && $videos->count() > 0)
+            <!-- Responsive Video Grid (Mobile: 1 col, Tablet: 2 cols, Desktop: 3 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 items-stretch">
+                @foreach($videos as $video)
+                    <div class="flex flex-col h-full bg-[#FFFDF7] rounded-[14px] sm:rounded-[16px] border border-[#D8C6A8] shadow-[0_4px_16px_rgba(53,18,17,0.06)] overflow-hidden transition-all duration-300 hover:shadow-md hover:border-[#C49A45] group">
                         
-                        <!-- Play Overlay Button -->
-                        <div class="absolute inset-0 bg-[#351211]/40 flex items-center justify-center group-hover:bg-[#351211]/20 transition-colors">
-                            <div class="w-14 h-14 rounded-full bg-[#541F1D] text-[#F7F0E3] border border-[#D8C6A8] flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#351211] transition-all">
-                                <svg class="w-6 h-6 fill-current ml-1 text-[#C49A45]" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <!-- 1. Thumbnail Container (16:9 Aspect Ratio) -->
+                        <a href="{{ $video->video_url }}" target="_blank" rel="noopener noreferrer" class="block relative w-full aspect-[16/9] bg-[#351211] overflow-hidden shrink-0">
+                            @if($video->thumbnail)
+                                <img src="{{ asset($video->thumbnail) }}" 
+                                     alt="{{ $video->title }}" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
+                                     onerror="this.onerror=null; this.src='https://img.youtube.com/vi/bYtG72jD2pE/hqdefault.jpg';">
+                            @else
+                                <div class="w-full h-full flex items-center justify-center bg-[#351211] text-[#EDE3D4]/50 text-xs italic">
+                                    🎬 AstroTamal Video
+                                </div>
+                            @endif
+
+                            <!-- Centered Play Icon Overlay -->
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#351211]/85 text-[#F7F0E3] border border-[#C49A45]/60 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                                    <svg class="w-4 h-4 fill-current ml-0.5 text-[#C49A45]" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- 2. Text Content & Watch Video Button Inside Card Body -->
+                        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3 min-w-0">
+                            <div class="space-y-2 min-w-0">
+                                <h3 class="font-serif-luxury text-base sm:text-lg lg:text-[19px] font-bold text-[#351211] leading-snug line-clamp-3 group-hover:text-[#541F1D] transition-colors break-words">
+                                    <a href="{{ $video->video_url }}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                                        {{ $video->title }}
+                                    </a>
+                                </h3>
+
+                                @if($video->tag)
+                                    <div>
+                                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#F3E5CC] text-[#75452D] text-xs font-semibold tracking-wide max-w-full truncate">
+                                            {{ $video->tag }}
+                                        </span>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- 3. Premium Watch Video Button Aligned to Bottom (44px Touch Target) -->
+                            <div class="pt-2 mt-auto">
+                                <a href="{{ $video->video_url }}" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="flex items-center justify-between w-full min-h-[44px] px-3.5 sm:px-4 py-2.5 rounded-lg bg-[#541F1D] hover:bg-[#351211] text-[#F7F0E3] text-xs font-bold uppercase tracking-wider border border-[#C49A45]/40 shadow-xs transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] group/btn">
+                                    <span class="flex items-center space-x-1.5 min-w-0">
+                                        <svg class="w-3.5 h-3.5 text-[#C49A45] fill-current shrink-0" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <span class="truncate">WATCH VIDEO</span>
+                                    </span>
+                                    <svg class="w-4 h-4 text-[#C49A45] shrink-0 ml-1 group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </a>
                             </div>
                         </div>
 
-                        <!-- Duration Badge -->
-                        <span class="absolute bottom-3 right-3 px-2 py-0.5 text-[10px] font-bold text-[#F7F0E3] bg-[#351211]/80 rounded border border-[#D8C6A8]/40" x-text="video.duration"></span>
                     </div>
-
-                    <!-- Details Container -->
-                    <div class="p-6 space-y-3 flex-grow flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <span class="inline-block px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#541F1D] bg-[#EDE3D4] rounded border border-[#D8C6A8]/60" x-text="video.category"></span>
-                            <h4 class="font-serif-luxury text-lg font-bold text-[#29211F] group-hover:text-[#541F1D] transition-colors leading-snug" x-text="video.title"></h4>
-                        </div>
-
-                        <div class="pt-3 border-t border-[#D8C6A8]/60 flex items-center justify-between text-xs text-[#81766D]">
-                            <span>Watch Discussion</span>
-                            <span class="font-bold text-[#541F1D] group-hover:translate-x-1 transition-transform">PLAY →</span>
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </div>
-
-    </div>
-
-    <!-- EMBEDDED YOUTUBE VIDEO PLAYER MODAL -->
-    <div x-show="playerOpen" 
-         x-cloak 
-         @keydown.escape.window="closeVideo()"
-         class="fixed inset-0 z-50 flex items-center justify-center bg-[#351211]/95 backdrop-blur-md p-4">
-        
-        <!-- Close Button -->
-        <button x-on:click="closeVideo()" class="absolute top-5 right-5 text-[#F7F0E3] hover:text-[#C49A45] p-2 focus:outline-none z-50">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-
-        <!-- Player Container -->
-        <div class="w-full max-w-4xl space-y-4">
-            <div class="relative w-full aspect-video bg-black rounded-2xl overflow-hidden border border-[#D8C6A8] shadow-2xl">
-                <template x-if="playerOpen && activeVideo">
-                    <iframe class="w-full h-full" 
-                            :src="'https://www.youtube.com/embed/' + activeVideo.id + '?autoplay=1'" 
-                            title="AstroTamal Video" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </template>
+                @endforeach
             </div>
-
-            <div class="flex items-center justify-between text-[#F7F0E3]">
-                <div>
-                    <h3 class="font-serif-luxury text-xl font-bold text-[#F7F0E3]" x-text="activeVideo?.title"></h3>
-                    <span class="text-xs text-[#C49A45] font-semibold uppercase tracking-wider" x-text="activeVideo?.category"></span>
-                </div>
-                <a :href="'https://www.youtube.com/watch?v=' + activeVideo?.id" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="px-4 py-2 text-xs font-bold uppercase tracking-wider bg-red-700 text-[#F7F0E3] rounded-lg hover:bg-red-800 transition-colors">
-                    Watch on YouTube ↗
-                </a>
+        @else
+            <!-- Clean Empty State if no active videos -->
+            <div class="text-center py-16 px-4 rounded-2xl bg-[#EDE3D4]/40 border border-[#D8C6A8]/60">
+                <p class="text-base font-bold text-[#541F1D]">No video discussions published yet.</p>
+                <p class="text-xs text-[#81766D] mt-1">Check back soon for new video insights from Astrologer Tamal Chakraborty.</p>
             </div>
-        </div>
+        @endif
+
     </div>
 </section>
 

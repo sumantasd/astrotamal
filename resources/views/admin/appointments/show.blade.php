@@ -51,23 +51,42 @@
             @csrf
             @method('PUT')
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div>
                     <label for="status" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Booking Status</label>
                     <select name="status" id="status" class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs text-[#29211F]">
-                        <option value="pending" {{ $appointment->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="confirmed" {{ $appointment->status === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
-                        <option value="completed" {{ $appointment->status === 'completed' ? 'selected' : '' }}>Completed</option>
-                        <option value="cancelled" {{ $appointment->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                        <option value="Pending Payment" {{ in_array(strtolower($appointment->status), ['pending payment', 'pending']) ? 'selected' : '' }}>Pending Payment</option>
+                        <option value="Confirmed" {{ strtolower($appointment->status) === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                        <option value="Completed" {{ strtolower($appointment->status) === 'completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="Cancelled" {{ strtolower($appointment->status) === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                     </select>
                 </div>
 
                 <div>
                     <label for="payment_status" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Payment Status</label>
                     <select name="payment_status" id="payment_status" class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs text-[#29211F]">
-                        <option value="unpaid" {{ $appointment->payment_status === 'unpaid' ? 'selected' : '' }}>Unpaid</option>
-                        <option value="paid" {{ $appointment->payment_status === 'paid' ? 'selected' : '' }}>Paid</option>
-                        <option value="refunded" {{ $appointment->payment_status === 'refunded' ? 'selected' : '' }}>Refunded</option>
+                        <option value="Pending" {{ strtolower($appointment->payment_status) === 'pending' || strtolower($appointment->payment_status) === 'unpaid' ? 'selected' : '' }}>Pending</option>
+                        <option value="Paid" {{ strtolower($appointment->payment_status) === 'paid' ? 'selected' : '' }}>Paid</option>
+                        <option value="Failed" {{ strtolower($appointment->payment_status) === 'failed' ? 'selected' : '' }}>Failed</option>
+                        <option value="Refunded" {{ strtolower($appointment->payment_status) === 'refunded' ? 'selected' : '' }}>Refunded</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="preferred_date" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Reschedule Date</label>
+                    <input type="date" 
+                           name="preferred_date" 
+                           id="preferred_date" 
+                           value="{{ $appointment->preferred_date ? \Carbon\Carbon::parse($appointment->preferred_date)->format('Y-m-d') : '' }}" 
+                           class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs text-[#29211F]">
+                </div>
+
+                <div>
+                    <label for="preferred_time" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Reschedule Time Slot</label>
+                    <select name="preferred_time" id="preferred_time" class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs text-[#29211F]">
+                        <option value="10:00 AM - 01:00 PM IST" {{ $appointment->preferred_time === '10:00 AM - 01:00 PM IST' ? 'selected' : '' }}>10:00 AM - 01:00 PM IST (Morning)</option>
+                        <option value="02:00 PM - 05:00 PM IST" {{ $appointment->preferred_time === '02:00 PM - 05:00 PM IST' ? 'selected' : '' }}>02:00 PM - 05:00 PM IST (Afternoon)</option>
+                        <option value="06:00 PM - 09:00 PM IST" {{ $appointment->preferred_time === '06:00 PM - 09:00 PM IST' ? 'selected' : '' }}>06:00 PM - 09:00 PM IST (Evening)</option>
                     </select>
                 </div>
             </div>

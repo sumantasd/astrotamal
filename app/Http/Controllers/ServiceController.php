@@ -9,8 +9,9 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::orderBy('sort_order')->get();
-        return view('services.index', compact('services'));
+        $cmsPage = \App\Models\CmsPage::where('slug', 'services')->first();
+        $services = Service::where('is_active', true)->orderBy('sort_order')->get();
+        return view('services.index', compact('services', 'cmsPage'));
     }
 
     public function show($slug)
@@ -34,7 +35,11 @@ class ServiceController extends Controller
             $service = Service::where('slug', 'like', '%' . explode('-', $slug)[0] . '%')->firstOrFail();
         }
 
-        $otherServices = Service::where('id', '!=', $service->id)->orderBy('sort_order')->take(3)->get();
+        if (!$service->is_active && !auth()->check()) {
+            abort(404);
+        }
+
+        $otherServices = Service::where('id', '!=', $service->id)->where('is_active', true)->orderBy('sort_order')->take(3)->get();
 
         $viewName = 'services.' . $service->slug;
         if (view()->exists($viewName)) {

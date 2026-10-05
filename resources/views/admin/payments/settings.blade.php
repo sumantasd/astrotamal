@@ -1,15 +1,23 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Razorpay Payment Settings')
-@section('header_title', 'Razorpay Payment Settings')
-@section('header_subtitle', 'Manage Razorpay payment gateway API keys, test mode, and webhooks')
+@section('title', 'Razorpay Gateway Settings')
+@section('header_title', 'Razorpay Gateway Settings')
+@section('header_subtitle', 'Manage Razorpay API keys, test mode, and webhooks securely in database')
 
 @section('content')
 <div class="max-w-4xl space-y-8">
 
-    <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-3xl p-6 sm:p-8 shadow-xs">
-        <h2 class="font-serif-luxury text-lg font-bold text-[#541F1D] mb-1">Razorpay Configuration</h2>
-        <p class="text-xs text-[#81766D] mb-6">Manage live & test API credentials securely</p>
+    @if (session('status'))
+        <div class="p-4 bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-bold rounded-2xl">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div>
+            <h2 class="font-serif-luxury text-lg font-bold text-[#541F1D] mb-1">Razorpay Configuration</h2>
+            <p class="text-xs text-[#81766D]">Admin settings saved here are the primary source of truth. Secrets are automatically encrypted at rest in the database.</p>
+        </div>
 
         <form method="POST" action="{{ route('admin.payments.settings.update') }}" class="space-y-5">
             @csrf
@@ -18,35 +26,35 @@
                 <div>
                     <label for="is_enabled" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Gateway Enabled</label>
                     <select name="is_enabled" id="is_enabled" class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs text-[#29211F]">
-                        <option value="1" {{ old('is_enabled', $setting->is_enabled ?? true) ? 'selected' : '' }}>Enabled</option>
-                        <option value="0" {{ ! old('is_enabled', $setting->is_enabled ?? true) ? 'selected' : '' }}>Disabled</option>
+                        <option value="1" {{ old('is_enabled', $isEnabled) ? 'selected' : '' }}>Enabled</option>
+                        <option value="0" {{ ! old('is_enabled', $isEnabled) ? 'selected' : '' }}>Disabled</option>
                     </select>
                 </div>
 
                 <div>
                     <label for="is_test_mode" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Environment Mode</label>
                     <select name="is_test_mode" id="is_test_mode" class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs text-[#29211F]">
-                        <option value="1" {{ old('is_test_mode', $setting->is_test_mode ?? true) ? 'selected' : '' }}>Test Sandbox Mode</option>
-                        <option value="0" {{ ! old('is_test_mode', $setting->is_test_mode ?? true) ? 'selected' : '' }}>Live Production Mode</option>
+                        <option value="1" {{ old('is_test_mode', $isTestMode) ? 'selected' : '' }}>Test Sandbox Mode</option>
+                        <option value="0" {{ ! old('is_test_mode', $isTestMode) ? 'selected' : '' }}>Live Production Mode</option>
                     </select>
                 </div>
             </div>
 
             <div>
                 <label for="public_key" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Razorpay Key ID (Public)</label>
-                <input type="text" name="public_key" id="public_key" value="{{ old('public_key', $setting->public_key ?? '') }}" placeholder="rzp_test_..." 
+                <input type="text" name="public_key" id="public_key" value="{{ old('public_key', $keyId) }}" placeholder="rzp_test_..." 
                        class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs sm:text-sm text-[#29211F] font-mono">
             </div>
 
             <div>
-                <label for="secret_key" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Razorpay Key Secret</label>
-                <input type="password" name="secret_key" id="secret_key" value="{{ old('secret_key', $setting->secret_key ?? '') }}" placeholder="••••••••••••••••" 
+                <label for="secret_key" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Razorpay Key Secret (Encrypted at Rest)</label>
+                <input type="password" name="secret_key" id="secret_key" value="" placeholder="{{ !empty($setting->secret_key) ? '•••••••• (Encrypted in DB — leave blank to keep unchanged)' : 'Enter Razorpay Key Secret' }}" 
                        class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs sm:text-sm text-[#29211F] font-mono">
             </div>
 
             <div>
-                <label for="webhook_secret" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Webhook Secret</label>
-                <input type="password" name="webhook_secret" id="webhook_secret" value="{{ old('webhook_secret', $setting->webhook_secret ?? '') }}" placeholder="••••••••••••••••" 
+                <label for="webhook_secret" class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-1.5">Webhook Secret (Encrypted at Rest)</label>
+                <input type="password" name="webhook_secret" id="webhook_secret" value="" placeholder="{{ !empty($setting->webhook_secret) ? '•••••••• (Encrypted in DB — leave blank to keep unchanged)' : 'Enter Webhook Secret' }}" 
                        class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl px-4 py-3 text-xs sm:text-sm text-[#29211F] font-mono">
             </div>
 

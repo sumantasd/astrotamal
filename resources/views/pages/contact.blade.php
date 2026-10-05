@@ -102,14 +102,15 @@
                     </a>
 
                     <!-- CARD 03: CONTACT -->
-                    <a href="tel:8392059201" class="group block bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl p-6 shadow-sm hover:border-[#C49A45] transition-all hover:shadow-md">
+                    @php $contactPhoneSetting = \App\Models\SiteSetting::get('contact_phone', '8392059201'); @endphp
+                    <a href="tel:{{ preg_replace('/[^0-9]/', '', $contactPhoneSetting) }}" class="group block bg-[#FDFBF7] border border-[#D8C6A8] rounded-xl p-6 shadow-sm hover:border-[#C49A45] transition-all hover:shadow-md">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 rounded-lg bg-[#541F1D] text-[#F7F0E3] border border-[#D8C6A8] flex items-center justify-center flex-shrink-0 group-hover:bg-[#351211] transition-colors">
                                 <svg class="w-5 h-5 text-[#C49A45]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                             </div>
                             <div>
                                 <span class="block text-[11px] font-bold uppercase tracking-widest text-[#C49A45]">CONTACT</span>
-                                <span class="text-sm font-semibold text-[#29211F] group-hover:text-[#541F1D] transition-colors">8392059201 / 96476 80707</span>
+                                <span class="text-sm font-semibold text-[#29211F] group-hover:text-[#541F1D] transition-colors">{{ $contactPhoneSetting }}</span>
                             </div>
                         </div>
                     </a>

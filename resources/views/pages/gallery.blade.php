@@ -40,29 +40,43 @@
     </div>
 </section>
 
+@php
+    $galleryList = isset($mediaItems) && $mediaItems->count() > 0 
+        ? $mediaItems->map(function($item) {
+            $src = $item->file_path ? asset('storage/' . $item->file_path) : ($item->url ?? asset('images/tamal_hero_portrait.jpg'));
+            return [
+                'id' => $item->id,
+                'src' => $src,
+                'title' => $item->title,
+                'category' => $item->caption ?: 'Gallery',
+            ];
+        })->values()
+        : collect([
+            ['id' => 1, 'src' => asset('images/tamal_hero_portrait.jpg'), 'title' => 'Tamal Chakraborty — Professional Portrait', 'category' => 'Portrait'],
+            ['id' => 2, 'src' => asset('images/tamal_about_study.jpg'), 'title' => 'Consultation & Chart Analysis Study', 'category' => 'Sanctuary'],
+            ['id' => 3, 'src' => 'https://img.youtube.com/vi/bYtG72jD2pE/maxresdefault.jpg', 'title' => 'Planetary Transit & Astrological Discussion', 'category' => 'Talks'],
+            ['id' => 4, 'src' => 'https://img.youtube.com/vi/5gZtQkX0uW8/maxresdefault.jpg', 'title' => 'Zodiac Analysis & Vedic Guidance Video', 'category' => 'Media'],
+            ['id' => 5, 'src' => 'https://img.youtube.com/vi/4vW7gW2d5X8/maxresdefault.jpg', 'title' => 'Veda & Jyotish Discourse', 'category' => 'Talks'],
+            ['id' => 6, 'src' => 'https://img.youtube.com/vi/9xV8wQ6m5z0/maxresdefault.jpg', 'title' => 'Client Guidance & Horoscope Session', 'category' => 'Consultation'],
+        ]);
+@endphp
+
 <!-- GALLERY GRID & LIGHTBOX MODAL -->
 <section class="bg-[#FDFBF7] text-[#29211F] py-16 sm:py-24"
          x-data="{
              lightboxOpen: false,
              activeIdx: 0,
-             images: [
-                 { src: '{{ asset('images/tamal_hero_portrait.jpg') }}', title: 'Tamal Chakraborty — Professional Portrait', category: 'Portrait' },
-                 { src: '{{ asset('images/tamal_about_study.jpg') }}', title: 'Consultation & Chart Analysis Study', category: 'Sanctuary' },
-                 { src: 'https://img.youtube.com/vi/bYtG72jD2pE/maxresdefault.jpg', title: 'Planetary Transit & Astrological Discussion', category: 'Talks' },
-                 { src: 'https://img.youtube.com/vi/5gZtQkX0uW8/maxresdefault.jpg', title: 'Zodiac Analysis & Vedic Guidance Video', category: 'Media' },
-                 { src: 'https://img.youtube.com/vi/4vW7gW2d5X8/maxresdefault.jpg', title: 'Veda & Jyotish Discourse', category: 'Talks' },
-                 { src: 'https://img.youtube.com/vi/9xV8wQ6m5z0/maxresdefault.jpg', title: 'Client Guidance & Horoscope Session', category: 'Consultation' },
-                 { src: '{{ asset('images/tamal_about_study.jpg') }}', title: 'Classical Manuscript Research', category: 'Research' },
-                 { src: '{{ asset('images/tamal_hero_portrait.jpg') }}', title: 'Astrologer Tamal Chakraborty', category: 'Portrait' }
-             ],
+             images: {{ json_encode($galleryList) }},
              openLightbox(index) {
                  this.activeIdx = index;
                  this.lightboxOpen = true;
              },
              next() {
+                 if (this.images.length === 0) return;
                  this.activeIdx = (this.activeIdx + 1) % this.images.length;
              },
              prev() {
+                 if (this.images.length === 0) return;
                  this.activeIdx = (this.activeIdx - 1 + this.images.length) % this.images.length;
              }
          }">
