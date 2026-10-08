@@ -34,128 +34,270 @@ class BookingService
     }
 
     /**
-     * Get schedule configuration (opening, closing, slot duration) for a date.
+     * Get configured app timezone.
      */
+    public static function getTimezone(): string
+    {
+        return config('app.timezone', 'Asia/Kolkata');
+    }
+
+    /**
+     * Get available slots for date and type (returns array of slot arrays).
+     */
+    public static function getAvailableSlots(string $date, string $type = 'urgent'): array
+    {
+        return self::getAvailableSlotsForDate($date, $type)['slots'];
+    }
+
     public static function getScheduleConfigForDate(string $date): array
     {
-        $override = DateScheduleOverride::whereDate('override_date', $date)
-            ->where('is_active', true)
-            ->first();
+        return [
+            'opening' => '09:00 AM',
+            'closing' => '08:00 PM',
+            'duration' => 30,
+        ];
+    }
 
-        if ($override) {
+    public static function generateTimeSlots(string $start, string $end, int $duration = 30): array
+    {
+        $slots = [];
+        $current = Carbon::parse($start);
+        $endTime = Carbon::parse($end);
+        while ($current <= $endTime) {
+            $slots[] = $current->format('h:i A');
+            $current->addMinutes($duration);
+        }
+        return $slots;
+    }
+
+    /**
+     * Get minimum allowed booking date for a consultation type.
+     */
+    public static function getMinimumBookingDate(string $type): string
+    {
+        $tz = self::getTimezone();
+        $today = Carbon::now($tz)->startOfDay();
+        $type = strtolower($type);
+
+        if ($type === 'urgent') {
+            return $today->copy()->addDays(1)->format('Y-m-d');
+        }
+
+        // Normal consultation requires minimum 7 calendar days advance
+        return $today->copy()->addDays(7)->format('Y-m-d');
+    }
+
+    /**
+     * Check if a date satisfies minimum advance booking rules for type.
+     */
+    public static function isDateAllowedForType(string $date, string $type): bool
+    {
+        $minDate = self::getMinimumBookingDate($type);
+        return $date >= $minDate;
+    }
+
+    /**
+     * Normalize time slot string for consistent matching across system.
+     */
+    public static function normalizeSlot(string $slot): string
+    {
+        $slot = trim(str_replace(['–', '—'], '-', $slot));
+        $parts = explode('-', $slot);
+        if (count($parts) === 2) {
+            $start = trim($parts[0]);
+            $end = trim($parts[1]);
+            try {
+                $tStart = Carbon::parse($start)->format('g:i A');
+                $tEnd = Carbon::parse($end)->format('g:i A');
+                return $tStart . ' - ' . $tEnd;
+            } catch (\Throwable $e) {
+                return trim($start) . ' - ' . trim($end);
+            }
+        }
+        return $slot;
+    }
+
+    /**
+     * Master time slots for Urgent (3 slots) and Normal (10 slots).
+     */
+    public static function getMasterSlots(string $type): array
+    {
+        $type = strtolower($type);
+
+        if ($type === 'urgent') {
             return [
-                'opening' => $override->opening_time,
-                'closing' => $override->closing_time,
-                'duration' => (int) $override->slot_duration_minutes,
-                'is_override' => true,
-                'reason' => $override->reason,
+                '9:00 PM - 9:20 PM',
+                '9:25 PM - 9:45 PM',
+                '9:50 PM - 10:10 PM',
             ];
         }
 
         return [
-            'opening' => SiteSetting::get('booking_opening_time', '09:00 AM'),
-            'closing' => SiteSetting::get('booking_closing_time', '08:00 PM'),
-            'duration' => (int) SiteSetting::get('booking_slot_duration', 30),
-            'is_override' => false,
-            'reason' => null,
+            '4:00 PM - 4:20 PM',
+            '4:25 PM - 4:45 PM',
+            '4:50 PM - 5:10 PM',
+            '5:15 PM - 5:35 PM',
+            '5:40 PM - 6:00 PM',
+            '6:00 PM - 6:20 PM',
+            '6:25 PM - 6:45 PM',
+            '6:50 PM - 7:10 PM',
+            '8:00 PM - 8:20 PM',
+            '8:25 PM - 8:45 PM',
         ];
     }
 
     /**
-     * Generate time slots array for given opening, closing, and duration.
+     * Check if a slot is blocked by weekly recurring rules for the specified day of week.
      */
-    public static function generateTimeSlots(string $openingTime, string $closingTime, int $durationMinutes = 30): array
+    public static function isWeeklyBlocked(string $type, int $dayOfWeek, string $slot): bool
     {
-        $slots = [];
+        $type = strtolower($type);
+        $normSlot = self::normalizeSlot($slot);
 
-        try {
-            $start = Carbon::parse($openingTime);
-            $end = Carbon::parse($closingTime);
-        } catch (\Throwable $e) {
-            $start = Carbon::parse('09:00 AM');
-            $end = Carbon::parse('08:00 PM');
+        if ($type === 'urgent') {
+            // Monday (1)
+            if ($dayOfWeek === 1) {
+                return $normSlot === '9:00 PM - 9:20 PM';
+            }
+            // Tuesday (2), Wednesday (3), Thursday (4), Friday (5)
+            if (in_array($dayOfWeek, [2, 3, 4, 5])) {
+                return $normSlot === '9:50 PM - 10:10 PM';
+            }
+            // Saturday (6), Sunday (0)
+            if ($dayOfWeek === 6 || $dayOfWeek === 0) {
+                return in_array($normSlot, ['9:25 PM - 9:45 PM', '9:50 PM - 10:10 PM']);
+            }
+            return false;
         }
 
-        if ($start->gte($end)) {
-            return ['09:00 AM'];
+        if ($type === 'normal') {
+            // Monday (1): Available 5:40-6:00, 6:00-6:20, 6:25-6:45, 6:50-7:10
+            if ($dayOfWeek === 1) {
+                $allowed = [
+                    '5:40 PM - 6:00 PM',
+                    '6:00 PM - 6:20 PM',
+                    '6:25 PM - 6:45 PM',
+                    '6:50 PM - 7:10 PM',
+                ];
+                return !in_array($normSlot, $allowed);
+            }
+
+            // Tuesday (2) & Wednesday (3): ONLY 4:25-4:45 available
+            if ($dayOfWeek === 2 || $dayOfWeek === 3) {
+                return $normSlot !== '4:25 PM - 4:45 PM';
+            }
+
+            // Thursday (4) & Friday (5): 4:00-4:20 through 6:00-6:20 available
+            if ($dayOfWeek === 4 || $dayOfWeek === 5) {
+                $allowed = [
+                    '4:00 PM - 4:20 PM',
+                    '4:25 PM - 4:45 PM',
+                    '4:50 PM - 5:10 PM',
+                    '5:15 PM - 5:35 PM',
+                    '5:40 PM - 6:00 PM',
+                    '6:00 PM - 6:20 PM',
+                ];
+                return !in_array($normSlot, $allowed);
+            }
+
+            // Saturday (6) & Sunday (0): ONLY 8:00-8:20 & 8:25-8:45 available
+            if ($dayOfWeek === 6 || $dayOfWeek === 0) {
+                $allowed = [
+                    '8:00 PM - 8:20 PM',
+                    '8:25 PM - 8:45 PM',
+                ];
+                return !in_array($normSlot, $allowed);
+            }
         }
 
-        $current = $start->copy();
-        while ($current->lte($end)) {
-            $slots[] = $current->format('h:i A');
-            $current->addMinutes($durationMinutes);
-        }
-
-        return $slots;
+        return false;
     }
 
     /**
      * Check if a date and time slot is available for booking.
      */
-    public static function isSlotAvailable(string $date, string $time, ?int $excludeAppointmentId = null): bool
+    public static function isSlotAvailable(string $date, string $slot, string $type = 'urgent', ?int $excludeAppointmentId = null): bool
     {
-        // Past date/time restriction check
-        $tz = 'Asia/Kolkata';
-        $today = Carbon::now($tz)->format('Y-m-d');
-        if ($date < $today) {
+        $type = strtolower($type);
+        if (!in_array($type, ['urgent', 'normal'])) {
+            $type = 'urgent';
+        }
+
+        // 1. Advance booking requirement check
+        if (!self::isDateAllowedForType($date, $type)) {
             return false;
         }
 
-        if ($date === $today) {
-            try {
-                $slotTime = Carbon::parse($date . ' ' . $time, $tz);
-                if ($slotTime->lt(Carbon::now($tz))) {
+        // 2. Master slots check
+        $masterSlots = self::getMasterSlots($type);
+        $normSlot = self::normalizeSlot($slot);
+        $normalizedMasterSlots = array_map([self::class, 'normalizeSlot'], $masterSlots);
+
+        if (!in_array($normSlot, $normalizedMasterSlots)) {
+            return false;
+        }
+
+        // 3. Weekly recurring block rules check
+        $dayOfWeek = Carbon::parse($date, self::getTimezone())->dayOfWeek;
+        if (self::isWeeklyBlocked($type, $dayOfWeek, $normSlot)) {
+            return false;
+        }
+
+        // 4. Admin BlockedSlot check
+        $blockedSlots = BlockedSlot::all();
+
+        $targetDateStr = Carbon::parse($date, self::getTimezone())->format('Y-m-d');
+        $targetDayOfWeek = Carbon::parse($date, self::getTimezone())->dayOfWeek; // 0..6
+        $targetDayIso = Carbon::parse($date, self::getTimezone())->dayOfWeekIso; // 1..7
+        $targetDayName = strtolower(Carbon::parse($date, self::getTimezone())->format('l'));
+
+        foreach ($blockedSlots as $block) {
+            if ($block->is_active === false || $block->is_active === 0 || $block->is_active === '0') {
+                continue;
+            }
+
+            // Check consultation_type filter
+            if (!empty($block->consultation_type) && strtolower(trim($block->consultation_type)) !== $type) {
+                continue;
+            }
+
+            $isMatch = false;
+
+            // Specific date match
+            if (!empty($block->blocked_date)) {
+                $bDateStr = Carbon::parse($block->blocked_date)->format('Y-m-d');
+                if ($bDateStr === $targetDateStr) {
+                    $isMatch = true;
+                }
+            }
+
+            // Recurring day match
+            if (!empty($block->is_recurring) && isset($block->day_of_week) && trim((string)$block->day_of_week) !== '') {
+                $dow = strtolower(trim((string)$block->day_of_week));
+                if (
+                    $dow === (string)$targetDayOfWeek ||
+                    $dow === (string)$targetDayIso ||
+                    $dow === $targetDayName
+                ) {
+                    $isMatch = true;
+                }
+            }
+
+            if ($isMatch) {
+                if (empty($block->time_slot)) {
+                    // Full day block
                     return false;
                 }
-            } catch (\Throwable $e) {
-                // Ignore parse failures
+
+                $bSlot = self::normalizeSlot($block->time_slot);
+                if ($bSlot === $normSlot) {
+                    return false;
+                }
             }
         }
 
-        // 1. Check if full date or specific time slot is explicitly blocked by admin
-        $blockedQuery = BlockedSlot::where(function ($query) {
-                $query->where('is_active', true)
-                      ->orWhereNull('is_active');
-            })
-            ->where(function ($query) use ($date) {
-                $query->whereDate('blocked_date', $date)
-                      ->orWhere(function ($q) use ($date) {
-                          $dayOfWeek = Carbon::parse($date)->dayOfWeek;
-                          $dayName = Carbon::parse($date)->format('l');
-                          $q->where('is_recurring', true)
-                            ->where(function ($dw) use ($dayOfWeek, $dayName) {
-                                $dw->where('day_of_week', (string)$dayOfWeek)
-                                  ->orWhere('day_of_week', $dayName);
-                            });
-                      });
-            })->get();
-
-        foreach ($blockedQuery as $block) {
-            if (empty($block->time_slot)) {
-                // Full day block
-                return false;
-            }
-
-            // Specific time slot block comparison
-            $bSlot = trim($block->time_slot);
-            $target = trim($time);
-
-            if ($bSlot === $target) {
-                return false;
-            }
-
-            // Check range containment or partial string match (e.g. "10:00 AM - 10:30 AM" vs "10:00 AM")
-            if (str_contains($bSlot, $target) || str_contains($target, $bSlot)) {
-                return false;
-            }
-        }
-
-        // 2. Check for existing confirmed appointments or active 15-min reservations
+        // 5. Check for existing active appointments or active 15-min reservations
         $occupiedQuery = Appointment::whereDate('preferred_date', $date)
-            ->where(function ($q) use ($time) {
-                $q->where('preferred_time', $time)
-                  ->orWhere('preferred_time', 'like', "%{$time}%");
-            })
             ->where(function ($query) {
                 $query->whereIn('status', ['Confirmed', 'Completed'])
                       ->orWhere(function ($resQuery) {
@@ -168,20 +310,32 @@ class BookingService
             $occupiedQuery->where('id', '!=', $excludeAppointmentId);
         }
 
-        return !$occupiedQuery->exists();
+        $occupied = $occupiedQuery->get();
+        foreach ($occupied as $app) {
+            $appSlot = self::normalizeSlot($app->preferred_time);
+            if ($appSlot === $normSlot) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
      * Get list of generated slots for date with availability status.
      */
-    public static function getAvailableSlotsForDate(string $date, ?int $excludeAppointmentId = null): array
+    public static function getAvailableSlotsForDate(string $date, string $type = 'urgent', ?int $excludeAppointmentId = null): array
     {
-        $config = self::getScheduleConfigForDate($date);
-        $allSlots = self::generateTimeSlots($config['opening'], $config['closing'], $config['duration']);
+        $type = strtolower($type);
+        if (!in_array($type, ['urgent', 'normal'])) {
+            $type = 'urgent';
+        }
 
+        $masterSlots = self::getMasterSlots($type);
         $results = [];
-        foreach ($allSlots as $slot) {
-            $isAvailable = self::isSlotAvailable($date, $slot, $excludeAppointmentId);
+
+        foreach ($masterSlots as $slot) {
+            $isAvailable = self::isSlotAvailable($date, $slot, $type, $excludeAppointmentId);
             $results[] = [
                 'time' => $slot,
                 'available' => $isAvailable,
@@ -190,7 +344,8 @@ class BookingService
 
         return [
             'date' => $date,
-            'schedule' => $config,
+            'type' => $type,
+            'min_date' => self::getMinimumBookingDate($type),
             'slots' => $results,
         ];
     }

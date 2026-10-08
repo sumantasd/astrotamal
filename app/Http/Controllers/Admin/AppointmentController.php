@@ -97,4 +97,16 @@ class AppointmentController extends Controller
 
         return redirect()->back()->with('status', 'Appointment updated successfully.');
     }
+
+    /**
+     * Delete an appointment booking.
+     */
+    public function destroy(Appointment $appointment)
+    {
+        $ref = $appointment->booking_reference ?? ('ASTRO-' . $appointment->id);
+        
+        $appointment->delete();
+
+        return redirect()->route('admin.appointments.index')->with('status', "Booking {$ref} deleted successfully.");
+    }
 }

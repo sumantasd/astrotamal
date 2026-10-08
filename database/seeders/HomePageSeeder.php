@@ -75,7 +75,7 @@ class HomePageSeeder extends Seeder
                 ['icon' => 'book', 'title' => 'Vedic Astrology', 'description' => 'Authentic Knowledge', 'display_order' => 1, 'is_active' => true],
                 ['icon' => 'shield', 'title' => 'Personalized Guidance', 'description' => 'Solutions for Your Life', 'display_order' => 2, 'is_active' => true],
                 ['icon' => 'lock', 'title' => 'Confidential & Secure', 'description' => 'Your Privacy Is Priority', 'display_order' => 3, 'is_active' => true],
-                ['icon' => 'remedy', 'title' => 'Practical Remedies', 'description' => 'Easy & Effective', 'display_order' => 4, 'is_active' => true],
+                ['icon' => 'remedy', 'title' => 'Practical Suggestion', 'description' => '', 'display_order' => 4, 'is_active' => true],
                 ['icon' => 'globe', 'title' => 'Global Consultation', 'description' => 'Serving Worldwide', 'display_order' => 5, 'is_active' => true],
             ];
 

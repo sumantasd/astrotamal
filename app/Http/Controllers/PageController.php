@@ -86,7 +86,8 @@ class PageController extends Controller
     public function getAvailableSlots(Request $request)
     {
         $date = $request->query('date', date('Y-m-d'));
-        $data = BookingService::getAvailableSlotsForDate($date);
+        $type = strtolower($request->query('type', 'urgent'));
+        $data = BookingService::getAvailableSlotsForDate($date, $type);
 
         return response()->json([
             'success' => true,
@@ -114,7 +115,7 @@ class PageController extends Controller
             'birth_place' => 'nullable|string',
             'service_id' => 'nullable|exists:services,id',
             'consultation_type' => 'required|string|in:urgent,normal,Urgent,Normal',
-            'preferred_date' => 'required|date|after_or_equal:today',
+            'preferred_date' => 'required|date',
             'preferred_time' => 'required|string',
             'notes' => 'nullable|string|max:1000',
             'create_account' => 'nullable|boolean',
@@ -130,10 +131,17 @@ class PageController extends Controller
                 ]);
             }
 
-            $existingUser = \App\Models\User::where('email', $validated['email'])->first();
+            $existingUser = \App\Models\User::where('email', $validated['email'])
+                ->orWhere(function ($q) use ($validated) {
+                    if (!empty($validated['phone'])) {
+                        $q->where('phone', $validated['phone']);
+                    }
+                })
+                ->first();
+
             if ($existingUser) {
                 return back()->withInput()->withErrors([
-                    'email' => 'An account with this email address already exists. Please log in first or uncheck account creation.',
+                    'email' => 'An account with this email address or phone number already exists. Please log in first or uncheck account creation.',
                 ]);
             }
 
@@ -141,6 +149,10 @@ class PageController extends Controller
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],
+                'whatsapp' => $validated['whatsapp'] ?? null,
+                'birth_date' => $validated['birth_date'] ?? null,
+                'birth_time' => !empty($validated['birth_time']) && strtotime(trim($validated['birth_time'])) !== false ? date('H:i:s', strtotime(trim($validated['birth_time']))) : null,
+                'birth_place' => $validated['birth_place'] ?? null,
                 'password' => \Illuminate\Support\Facades\Hash::make($request->password),
                 'is_admin' => false,
                 'is_active' => true,
@@ -153,57 +165,46 @@ class PageController extends Controller
 
             auth()->login($user);
             $request->session()->regenerate();
+        } elseif (auth()->check()) {
+            $authUser = auth()->user();
+            $profileUpdates = [];
+            if (empty($authUser->birth_date) && !empty($validated['birth_date'])) {
+                $profileUpdates['birth_date'] = $validated['birth_date'];
+            }
+            if (empty($authUser->birth_time) && !empty($validated['birth_time'])) {
+                $profileUpdates['birth_time'] = !empty($validated['birth_time']) && strtotime(trim($validated['birth_time'])) !== false ? date('H:i:s', strtotime(trim($validated['birth_time']))) : null;
+            }
+            if (empty($authUser->birth_place) && !empty($validated['birth_place'])) {
+                $profileUpdates['birth_place'] = $validated['birth_place'];
+            }
+            if (empty($authUser->whatsapp) && !empty($validated['whatsapp'])) {
+                $profileUpdates['whatsapp'] = $validated['whatsapp'];
+            }
+            if (!empty($profileUpdates)) {
+                $authUser->update($profileUpdates);
+            }
         }
 
         $type = strtolower($validated['consultation_type']);
-        $slot = $validated['preferred_time'];
         $date = $validated['preferred_date'];
+        $slot = $validated['preferred_time'];
 
-        $tz = 'Asia/Kolkata';
-        $today = \Carbon\Carbon::now($tz)->format('Y-m-d');
-        $tomorrow = \Carbon\Carbon::now($tz)->addDays(1)->format('Y-m-d');
-
-        if ($date < $today) {
-            return back()->withInput()->withErrors([
-                'preferred_date' => 'Cannot select a past date for consultation.',
-            ]);
+        // 1. Advance booking requirement check
+        if (!BookingService::isDateAllowedForType($date, $type)) {
+            $minDate = BookingService::getMinimumBookingDate($type);
+            $formattedMinDate = \Carbon\Carbon::parse($minDate)->format('d M Y');
+            $msg = $type === 'urgent'
+                ? "Urgent consultations require at least 1 full day advance booking. Today cannot be selected. Earliest available date is {$formattedMinDate}."
+                : "Normal consultations require at least 7 calendar days advance booking. Earliest available date is {$formattedMinDate}.";
+            
+            return back()->withInput()->withErrors(['preferred_date' => $msg]);
         }
 
-        if ($type === 'urgent') {
-            if ($date > $tomorrow) {
-                return back()->withInput()->withErrors([
-                    'preferred_date' => 'Urgent consultations must be scheduled within 24 hours (today or tomorrow).',
-                ]);
-            }
-            if (str_contains($slot, '02:00 PM') || str_contains($slot, '05:00 PM')) {
-                return back()->withInput()->withErrors([
-                    'preferred_time' => 'Urgent consultations are available for morning time slots only.',
-                ]);
-            }
-        } elseif ($type === 'normal') {
-            if ($date === $today) {
-                return back()->withInput()->withErrors([
-                    'preferred_date' => 'Normal consultations must be booked at least 24 hours in advance. Please select tomorrow or a later date.',
-                ]);
-            }
-            $maxNormalDate = \Carbon\Carbon::now($tz)->addDays(30)->format('Y-m-d');
-            if ($date > $maxNormalDate) {
-                return back()->withInput()->withErrors([
-                    'preferred_date' => 'Normal consultations can only be scheduled up to 30 days in advance.',
-                ]);
-            }
-            if (str_contains($slot, '10:00 AM') || str_contains($slot, '01:00 PM')) {
-                return back()->withInput()->withErrors([
-                    'preferred_time' => 'Normal consultations are available for afternoon time slots only.',
-                ]);
-            }
-        }
-
-        // Validate slot availability server-side
-        $isAvailable = BookingService::isSlotAvailable($validated['preferred_date'], $validated['preferred_time']);
+        // 2. Validate slot availability server-side
+        $isAvailable = BookingService::isSlotAvailable($date, $slot, $type);
         if (!$isAvailable) {
             return back()->withInput()->withErrors([
-                'preferred_time' => 'The selected date and time slot is no longer available. Please select another slot.',
+                'preferred_time' => 'The selected date or time slot is unavailable for this consultation type. Please select an available slot.',
             ]);
         }
 
@@ -265,6 +266,7 @@ class PageController extends Controller
         $isAvailable = BookingService::isSlotAvailable(
             $appointment->preferred_date->format('Y-m-d'),
             $appointment->preferred_time,
+            $appointment->consultation_type,
             $appointment->id
         );
 

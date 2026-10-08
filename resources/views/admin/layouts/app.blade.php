@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-[#F7F0E3]">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-[#F3F8F5]">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@
             width: 4px;
         }
         .custom-sidebar-scroll::-webkit-scrollbar-track {
-            background: #29211F;
+            background: #06281F;
         }
         .custom-sidebar-scroll::-webkit-scrollbar-thumb {
             background: #C49A45;
@@ -75,7 +75,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#F7F0E3] text-[#29211F] font-sans-luxury antialiased selection:bg-[#541F1D] selection:text-[#F7F0E3] overflow-x-hidden">
+<body class="min-h-screen bg-[#F3F8F5] text-[#17211D] font-sans-luxury antialiased selection:bg-[#0B3D2E] selection:text-[#FFFFFF] overflow-x-hidden">
 
     <div x-data="{ 
         sidebarOpen: false, 
@@ -105,16 +105,16 @@
              style="display: none;"></div>
 
         <!-- LEFT SIDEBAR NAVIGATION (FIXED 260px DESKTOP) -->
-        <aside class="admin-sidebar fixed inset-y-0 left-0 z-50 w-[260px] bg-[#351211] text-[#F7F0E3] border-r border-[#D8C6A8]/20 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 custom-sidebar-scroll overflow-y-auto"
+        <aside class="admin-sidebar fixed inset-y-0 left-0 z-50 w-[260px] bg-[#06281F] text-[#FFFFFF] border-r border-[#145A43]/40 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 custom-sidebar-scroll overflow-y-auto"
                :class="sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full lg:translate-x-0'">
 
             <div>
                 <!-- Brand Header -->
-                <div class="p-4 text-center border-b border-[#D8C6A8]/15 bg-[#29211F]/60 relative">
+                <div class="p-4 text-center border-b border-[#145A43]/30 bg-[#0B3D2E]/80 relative">
                     <!-- Mobile Close Button -->
                     <button type="button" 
                             @click="sidebarOpen = false" 
-                            class="lg:hidden absolute top-3 right-3 text-[#EDE3D4]/70 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+                            class="lg:hidden absolute top-3 right-3 text-[#D8E6DE]/70 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
                             aria-label="Close navigation sidebar">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -127,7 +127,7 @@
                     <div class="mt-1.5 text-[10px] font-bold tracking-[0.18em] text-[#C49A45] uppercase">
                         TAMAL CHAKRABORTY
                     </div>
-                    <div class="text-[8.5px] font-medium tracking-wider text-[#EDE3D4]/60 uppercase">
+                    <div class="text-[8.5px] font-medium tracking-wider text-[#D8E6DE]/70 uppercase">
                         ASTROLOGY & VASTU EXPERT
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                                 </div>
                                 <a href="{{ route('admin.dashboard') }}" 
                                    @click="sidebarOpen = false"
-                                   class="flex items-center px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 {{ request()->routeIs('admin.dashboard*') ? 'bg-[#541F1D] text-[#F7F0E3] shadow-md border border-[#C49A45]/40 font-bold' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                   class="flex items-center px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 {{ request()->routeIs('admin.dashboard*') ? 'bg-[#06281F] text-[#F3F8F5] shadow-md border border-[#C49A45]/40 font-bold' : 'text-[#E8F1EC]/80 hover:bg-[#06281F]/50 hover:text-[#F3F8F5]' }}">
                                     <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                                     </svg>
@@ -176,7 +176,7 @@
                                     <!-- Appointments -->
                                     <a href="{{ route('admin.appointments.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.appointments*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.appointments*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
@@ -188,7 +188,7 @@
                                     <!-- Blocked Dates & Slots -->
                                     <a href="{{ route('admin.blocked-slots.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.blocked-slots*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.blocked-slots*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
                                         </svg>
@@ -200,7 +200,7 @@
                                     <!-- Booking Schedule -->
                                     <a href="{{ route('admin.schedule.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.schedule*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.schedule*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
@@ -212,7 +212,7 @@
                                     <!-- Payments & Transactions -->
                                     <a href="{{ route('admin.payments.transactions') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.payments.transactions*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.payments.transactions*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                         </svg>
@@ -224,7 +224,7 @@
                                     <!-- Payment Gateway Settings -->
                                     <a href="{{ route('admin.payments.settings') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.payments.settings*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.payments.settings*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -258,7 +258,7 @@
                                     <!-- Services Management -->
                                     <a href="{{ route('admin.services.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.services*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.services*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                                         </svg>
@@ -270,7 +270,7 @@
                                     <!-- Horoscope Management -->
                                     <a href="{{ route('admin.horoscopes.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.horoscopes.index') && !request('period_type') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.horoscopes.index') && !request('period_type') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                                         </svg>
@@ -282,7 +282,7 @@
                                     <!-- Daily Horoscope -->
                                     <a href="{{ route('admin.horoscopes.index', ['period_type' => 'daily']) }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request('period_type') == 'daily' ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request('period_type') == 'daily' ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.485-6.485l-1.414 1.414M6.929 17.071l-1.414 1.414m12.728 0l-1.414-1.414M6.929 6.929L5.515 5.515"/>
                                         </svg>
@@ -294,7 +294,7 @@
                                     <!-- Weekly / Monthly / Yearly Horoscope -->
                                     <a href="{{ route('admin.horoscopes.index', ['period_type' => 'weekly']) }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ in_array(request('period_type'), ['weekly', 'monthly', 'yearly']) ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ in_array(request('period_type'), ['weekly', 'monthly', 'yearly']) ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
@@ -306,7 +306,7 @@
                                     <!-- Zodiac Signs -->
                                     <a href="{{ route('admin.horoscopes.signs') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.horoscopes.signs*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.horoscopes.signs*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                                         </svg>
@@ -339,7 +339,7 @@
                                     <!-- Page & Section Manager -->
                                     <a href="{{ route('admin.pages.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.pages.index') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.pages.index') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
                                         </svg>
@@ -351,7 +351,7 @@
                                     <!-- Homepage Editor -->
                                     <a href="{{ route('admin.homepage.edit') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.homepage.*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.homepage.*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                                         </svg>
@@ -363,7 +363,7 @@
                                     <!-- About Page Editor -->
                                     <a href="{{ route('admin.pages.edit', 'about') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.pages.edit') && request('slug') == 'about' ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.pages.edit') && request('slug') == 'about' ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                         </svg>
@@ -375,7 +375,7 @@
                                     <!-- Services Page Editor -->
                                     <a href="{{ route('admin.services-page.edit') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.services-page.*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.services-page.*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                         </svg>
@@ -387,7 +387,7 @@
                                     <!-- Shop Management -->
                                     <a href="{{ route('admin.shop.edit') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.shop.*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.shop.*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14l1 12H4L5 11z"/>
                                         </svg>
@@ -399,7 +399,7 @@
                                     <!-- Blog Management -->
                                     <a href="{{ route('admin.blogs.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.blogs*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.blogs*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                                         </svg>
@@ -411,7 +411,7 @@
                                     <!-- Gallery & Videos -->
                                     <a href="{{ route('admin.media.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.media*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.media*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
@@ -423,7 +423,7 @@
                                     <!-- Testimonials -->
                                     <a href="{{ route('admin.testimonials.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.testimonials*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.testimonials*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                                         </svg>
@@ -435,7 +435,7 @@
                                     <!-- FAQs -->
                                     <a href="{{ route('admin.faqs.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.faqs*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.faqs*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
@@ -447,7 +447,7 @@
                                     <!-- Contact Inquiries -->
                                     <a href="{{ route('admin.inquiries.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.inquiries*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.inquiries*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                         </svg>
@@ -480,7 +480,7 @@
                                     <!-- Header & Navigation -->
                                     <a href="{{ route('admin.settings.header') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.header') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.header') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
                                         </svg>
@@ -492,7 +492,7 @@
                                     <!-- Footer Manager -->
                                     <a href="{{ route('admin.settings.footer') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.footer') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.footer') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2z"/>
                                         </svg>
@@ -504,7 +504,7 @@
                                     <!-- General Website Settings -->
                                     <a href="{{ route('admin.settings.general') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.general') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.general') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                                         </svg>
@@ -516,7 +516,7 @@
                                     <!-- SEO Settings -->
                                     <a href="{{ route('admin.settings.seo') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.seo') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.seo') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                         </svg>
@@ -549,7 +549,7 @@
                                     <!-- Admin Users -->
                                     <a href="{{ route('admin.users.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.users*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.users*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                                         </svg>
@@ -561,7 +561,7 @@
                                     <!-- My Profile & Security -->
                                     <a href="{{ route('admin.profile.edit') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.profile*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.profile*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                                         </svg>
@@ -573,7 +573,7 @@
                                     <!-- Sidebar Menu Settings -->
                                     <a href="{{ route('admin.settings.sidebar') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.sidebar*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.sidebar*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
                                         </svg>
@@ -585,7 +585,7 @@
                                     <!-- Backup & Restore -->
                                     <a href="{{ route('admin.settings.backup.index') }}" 
                                        @click="sidebarOpen = false"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.backup*') ? 'bg-[#541F1D] text-[#F7F0E3] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3]' }}">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all {{ request()->routeIs('admin.settings.backup*') ? 'bg-[#145A43] text-[#FFFFFF] font-bold border border-[#C49A45]/40 shadow-xs' : 'text-[#D8E6DE] hover:bg-[#0B3D2E] hover:text-[#FFFFFF]' }}">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
                                         </svg>
@@ -597,7 +597,7 @@
                                     <!-- View Live Website -->
                                     <a href="{{ route('home') }}" 
                                        target="_blank"
-                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium text-[#EDE3D4]/80 hover:bg-[#541F1D]/50 hover:text-[#F7F0E3] transition-all group">
+                                       class="flex items-center px-3 py-2 rounded-xl text-xs font-medium text-[#E8F1EC]/80 hover:bg-[#06281F]/50 hover:text-[#F3F8F5] transition-all group">
                                         <svg class="w-4 h-4 mr-2.5 text-[#C49A45] group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                         </svg>
@@ -624,24 +624,24 @@
             </div>
 
             <!-- Bottom Website Link Footer -->
-            <div class="p-3 border-t border-[#D8C6A8]/15 bg-[#29211F]/50 text-center">
-                <div class="text-[9.5px] font-semibold text-[#EDE3D4]/50">
+            <div class="p-3 border-t border-[#145A43]/30 bg-[#0B3D2E]/50 text-center">
+                <div class="text-[9.5px] font-semibold text-[#D8E6DE]/60">
                     ASTROTAMAL ADMIN v1.0
                 </div>
             </div>
         </aside>
 
         <!-- MAIN APPLICATION WRAPPER (EXPLICIT 260px DESKTOP OFFSET) -->
-        <main class="admin-main bg-[#F7F0E3] flex flex-col min-w-0 overflow-x-hidden">
+        <main class="admin-main bg-[#F3F8F5] flex flex-col min-w-0 overflow-x-hidden">
             
-            <!-- STICKY TOPBAR HEADER -->
-            <header class="sticky top-0 z-30 bg-[#FDFBF7] border-b border-[#D8C6A8] py-3 px-4 sm:px-6 flex items-center justify-between shadow-xs w-full">
+            <!-- STICKY TOPBAR HEADER (#C3E8D2 LIGHT GREEN) -->
+            <header class="sticky top-0 z-30 bg-[#C3E8D2] border-b border-[#BFD8C9] py-3 px-4 sm:px-6 flex items-center justify-between shadow-xs w-full">
                 
                 <!-- Left Header: Mobile Toggle & Search Bar -->
                 <div class="flex items-center space-x-3 flex-1 max-w-sm sm:max-w-md">
                     <button type="button" 
                             @click="sidebarOpen = true"
-                            class="lg:hidden p-1.5 rounded-xl text-[#541F1D] hover:bg-[#EDE3D4]/50 focus:outline-none"
+                            class="lg:hidden p-1.5 rounded-xl text-[#0B3D2E] hover:bg-[#A9D7BB]/60 focus:outline-none"
                             aria-label="Open Navigation Menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -650,14 +650,14 @@
 
                     <!-- Search Input -->
                     <div class="relative w-full">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#81766D]">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#60736B]">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                         </div>
                         <input type="text" 
                                placeholder="Search anything..." 
-                               class="w-full pl-8 pr-4 py-1.5 text-xs sm:text-sm bg-[#EDE3D4]/40 border border-[#D8C6A8]/70 rounded-full text-[#29211F] placeholder-[#81766D] focus:outline-none focus:bg-[#FDFBF7] focus:border-[#C49A45] transition-all">
+                               class="w-full pl-8 pr-4 py-1.5 text-xs sm:text-sm bg-[#FFFFFF] border border-[#BFD8C9] rounded-full text-[#17211D] placeholder-[#60736B] focus:outline-none focus:bg-[#FFFFFF] focus:border-[#0B3D2E] transition-all">
                     </div>
                 </div>
 
@@ -665,26 +665,26 @@
                 <div class="flex items-center space-x-3 sm:space-x-4">
                     
                     <!-- Notification Bell Icon -->
-                    <button type="button" class="relative p-1.5 text-[#541F1D] hover:bg-[#EDE3D4]/50 rounded-full transition-colors" title="Notifications">
+                    <button type="button" class="relative p-1.5 text-[#0B3D2E] hover:bg-[#A9D7BB]/60 rounded-full transition-colors" title="Notifications">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                         </svg>
-                        <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#C49A45] ring-2 ring-[#FDFBF7]"></span>
+                        <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#C49A45] ring-2 ring-[#C3E8D2]"></span>
                     </button>
 
                     <!-- User Profile Dropdown Menu -->
                     <div class="relative" @click.away="profileDropdown = false">
                         <button type="button" 
                                 @click="profileDropdown = !profileDropdown"
-                                class="flex items-center space-x-2.5 p-1 rounded-full hover:bg-[#EDE3D4]/50 transition-colors focus:outline-none"
+                                class="flex items-center space-x-2.5 p-1 rounded-full hover:bg-[#A9D7BB]/60 transition-colors focus:outline-none"
                                 aria-expanded="false">
-                            <div class="w-8 h-8 rounded-full bg-[#541F1D] text-[#F7F0E3] flex items-center justify-center font-bold text-xs shadow-xs border border-[#C49A45]/40">
+                            <div class="w-8 h-8 rounded-full bg-[#0B3D2E] text-[#FFFFFF] flex items-center justify-center font-bold text-xs shadow-xs border border-[#C49A45]/40">
                                 {{ strtoupper(substr(auth()->user()->name ?? 'Admin', 0, 1)) }}
                             </div>
-                            <span class="hidden sm:inline-block text-xs font-bold text-[#541F1D]">
+                            <span class="hidden sm:inline-block text-xs font-bold text-[#0B3D2E]">
                                 {{ auth()->user()->name ?? 'Admin User' }}
                             </span>
-                            <svg class="w-3.5 h-3.5 text-[#81766D] hidden sm:inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3.5 h-3.5 text-[#0B3D2E] hidden sm:inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
@@ -697,19 +697,19 @@
                              x-transition:leave="transition ease-in duration-75"
                              x-transition:leave-start="transform opacity-100 scale-100"
                              x-transition:leave-end="transform opacity-0 scale-95"
-                             class="absolute right-0 mt-2 w-48 bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl shadow-xl py-2 z-50 divide-y divide-[#D8C6A8]/40"
+                             class="absolute right-0 mt-2 w-48 bg-[#FFFFFF] border border-[#C8D8CF] rounded-2xl shadow-xl py-2 z-50 divide-y divide-[#C8D8CF]"
                              style="display: none;">
                             
                             <div class="px-4 py-2">
-                                <p class="text-xs font-bold text-[#541F1D]">{{ auth()->user()->name ?? 'Administrator' }}</p>
-                                <p class="text-[10px] text-[#81766D] truncate">{{ auth()->user()->email ?? 'admin@astrotamal.com' }}</p>
+                                <p class="text-xs font-bold text-[#0B3D2E]">{{ auth()->user()->name ?? 'Administrator' }}</p>
+                                <p class="text-[10px] text-[#60736B] truncate">{{ auth()->user()->email ?? 'admin@astrotamal.com' }}</p>
                             </div>
 
                             <div class="py-1">
-                                <a href="{{ route('admin.profile.edit') }}" class="block px-4 py-2 text-xs text-[#29211F] hover:bg-[#EDE3D4]/50 transition-colors">
+                                <a href="{{ route('admin.profile.edit') }}" class="block px-4 py-2 text-xs text-[#17211D] hover:bg-[#E8F1EC] transition-colors">
                                     My Profile & Security
                                 </a>
-                                <a href="{{ route('admin.settings.general') }}" class="block px-4 py-2 text-xs text-[#29211F] hover:bg-[#EDE3D4]/50 transition-colors">
+                                <a href="{{ route('admin.settings.general') }}" class="block px-4 py-2 text-xs text-[#17211D] hover:bg-[#E8F1EC] transition-colors">
                                     Website Settings
                                 </a>
                             </div>
@@ -729,13 +729,13 @@
             </header>
 
             <!-- BREADCRUMB & PAGE HEADER BAR -->
-            <div class="bg-[#FDFBF7]/60 border-b border-[#D8C6A8]/60 py-4 px-4 sm:px-6">
+            <div class="bg-[#E8F1EC] border-b border-[#C8D8CF] py-4 px-4 sm:px-6">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <div>
-                        <h1 class="font-serif-luxury text-xl sm:text-2xl font-bold tracking-tight text-[#541F1D]">
+                        <h1 class="font-serif-luxury text-xl sm:text-2xl font-bold tracking-tight text-[#0B3D2E]">
                             @yield('header_title', 'Dashboard')
                         </h1>
-                        <p class="text-xs text-[#81766D] font-normal mt-0.5">
+                        <p class="text-xs text-[#60736B] font-normal mt-0.5">
                             @yield('header_subtitle', 'Manage AstroTamal Consultancy operations and website content')
                         </p>
                     </div>
@@ -745,12 +745,12 @@
             </div>
 
             <!-- MAIN PAGE CONTENT CONTAINER -->
-            <div class="p-4 sm:p-6 lg:p-8 flex-1">
+            <div class="p-4 sm:p-6 lg:p-8 flex-1 bg-[#F3F8F5]">
                 @yield('content')
             </div>
 
             <!-- ADMIN FOOTER -->
-            <footer class="bg-[#FDFBF7] border-t border-[#D8C6A8] py-4 px-6 text-center text-xs text-[#81766D]">
+            <footer class="bg-[#E8F1EC] border-t border-[#C8D8CF] py-4 px-6 text-center text-xs text-[#60736B]">
                 <div>&copy; {{ date('Y') }} <strong>Ganesha Astro Consultancy</strong> (Tamal Chakraborty). All Rights Reserved.</div>
             </footer>
 

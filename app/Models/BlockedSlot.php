@@ -11,6 +11,7 @@ class BlockedSlot extends Model
         'is_recurring',
         'day_of_week',
         'time_slot',
+        'consultation_type',
         'reason',
         'is_active',
     ];

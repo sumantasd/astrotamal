@@ -1,6 +1,6 @@
 @props(['testimonial'])
 
-<div class="group bg-[#FDFBF7] border border-[#D8C6A8] hover:border-[#C49A45] rounded-xl p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+<div class="group bg-[#FFFFFF] border border-[#C8D8CF] hover:border-[#0B3D2E] rounded-xl p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
     <!-- Background Decorative Subtle Quote Mark -->
     <div class="absolute -top-3 -right-2 text-[#C49A45]/15 font-serif text-7xl select-none pointer-events-none group-hover:text-[#C49A45]/25 transition-colors">
         “
@@ -17,24 +17,24 @@
         </div>
 
         <!-- Review Text -->
-        <p class="font-serif text-sm sm:text-base text-[#29211F] leading-relaxed italic mb-6">
+        <p class="font-serif text-sm sm:text-base text-[#17211D] leading-relaxed italic mb-6">
             "{{ $testimonial->review }}"
         </p>
     </div>
 
     <!-- Client Author Area -->
-    <div class="pt-4 border-t border-[#D8C6A8]/40 mt-auto flex items-center justify-between">
+    <div class="pt-4 border-t border-[#C8D8CF]/60 mt-auto flex items-center justify-between">
         <div>
-            <h5 class="font-serif-luxury font-bold text-[#29211F] text-base leading-snug group-hover:text-[#541F1D] transition-colors">
+            <h5 class="font-serif-luxury font-bold text-[#17211D] text-base leading-snug group-hover:text-[#0B3D2E] transition-colors">
                 {{ $testimonial->client_name }}
             </h5>
-            <span class="text-[11px] text-[#81766D] font-medium block">
+            <span class="text-[11px] text-[#60736B] font-medium block">
                 {{ $testimonial->city }} @if($testimonial->service_tag) • <span class="text-[#C49A45] font-semibold">{{ $testimonial->service_tag }}</span> @endif
             </span>
         </div>
 
         <!-- Initial Avatar Circle -->
-        <div class="w-9 h-9 rounded-full bg-[#541F1D] border border-[#D8C6A8] flex items-center justify-center font-bold text-[#F7F0E3] text-xs flex-shrink-0">
+        <div class="w-9 h-9 rounded-full bg-[#0B3D2E] border border-[#C8D8CF] flex items-center justify-center font-bold text-[#FFFFFF] text-xs flex-shrink-0">
             @if(!empty($testimonial->avatar))
                 <img src="{{ asset($testimonial->avatar) }}" 
                      alt="{{ $testimonial->client_name }}" 
@@ -47,3 +47,4 @@
         </div>
     </div>
 </div>
+

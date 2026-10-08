@@ -5,24 +5,24 @@
 
 @section('content')
 
-<!-- Header Banner -->
-<section class="bg-[#F7F0E3] text-[#29211F] py-8 sm:py-10 border-b border-[#D8C6A8] relative overflow-hidden">
+<!-- Header Banner (Dark Green #06281F) -->
+<section class="bg-[#06281F] text-[#FFFFFF] py-8 sm:py-10 border-b border-[#145A43] relative overflow-hidden">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center space-y-2">
         <div class="inline-flex items-center space-x-2 text-xs font-bold tracking-[0.25em] text-[#C49A45] uppercase">
             <span class="w-2 h-2 rounded-full bg-[#C49A45] animate-pulse"></span>
             <span>SECURE PAYMENT CHECKOUT</span>
         </div>
-        <h1 class="font-serif-luxury text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#541F1D]">
+        <h1 class="font-serif-luxury text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#FFFFFF]">
             Complete Your Consultation Booking
         </h1>
-        <p class="text-[#81766D] text-xs sm:text-sm max-w-xl mx-auto font-normal">
+        <p class="text-[#E8F1EC]/90 text-xs sm:text-sm max-w-xl mx-auto font-normal">
             Your appointment slot is reserved. Please complete the payment to receive instant booking confirmation.
         </p>
     </div>
 </section>
 
-<!-- Checkout Section -->
-<section class="bg-[#F7F0E3] py-10 lg:py-14">
+<!-- Checkout Section (Very Light Green #F3F8F5) -->
+<section class="bg-[#F3F8F5] py-10 lg:py-14">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
 
         <div id="paymentErrorMessage" class="hidden mb-6"></div>
@@ -37,61 +37,61 @@
         @endif
 
         @if($isExpired)
-            <div class="p-8 bg-[#EDE3D4] border-2 border-amber-600/40 rounded-2xl text-center space-y-4 shadow-sm">
+            <div class="p-8 bg-[#FFFFFF] border-2 border-amber-600/40 rounded-2xl text-center space-y-4 shadow-sm">
                 <div class="w-12 h-12 bg-amber-100 text-amber-800 rounded-full flex items-center justify-center mx-auto text-xl font-bold">⏱️</div>
-                <h2 class="font-serif-luxury text-xl font-bold text-[#541F1D]">Slot Reservation Expired</h2>
-                <p class="text-xs text-[#81766D] max-w-md mx-auto leading-relaxed">
+                <h2 class="font-serif-luxury text-xl font-bold text-[#0B3D2E]">Slot Reservation Expired</h2>
+                <p class="text-xs text-[#60736B] max-w-md mx-auto leading-relaxed">
                     The 15-minute slot reservation for booking <strong>{{ $appointment->booking_reference }}</strong> has expired. Please select a new date & time slot.
                 </p>
-                <a href="{{ route('consultation.book') }}" class="inline-block px-6 py-3 text-xs font-bold uppercase tracking-wider text-[#F7F0E3] bg-[#541F1D] rounded-full hover:bg-[#351211] transition-all">
+                <a href="{{ route('consultation.book') }}" class="inline-block px-6 py-3 text-xs font-bold uppercase tracking-wider text-[#FFFFFF] bg-[#0B3D2E] rounded-full hover:bg-[#145A43] transition-all">
                     Return to Booking Page
                 </a>
             </div>
         @else
 
             <!-- Main Order & Summary Card -->
-            <div class="bg-[#F7F0E3] border border-[#D8C6A8] rounded-2xl p-6 sm:p-8 space-y-6 shadow-md">
+            <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-2xl p-6 sm:p-8 space-y-6 shadow-md">
 
                 <!-- Countdown Bar -->
-                <div class="bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl p-3.5 flex items-center justify-between text-xs text-[#541F1D]">
+                <div class="bg-[#E8F1EC] border border-[#C8D8CF] rounded-xl p-3.5 flex items-center justify-between text-xs text-[#0B3D2E]">
                     <div class="flex items-center space-x-2">
                         <span class="w-2 h-2 rounded-full bg-[#C49A45] animate-ping"></span>
                         <span class="font-semibold">Slot Held Exclusively For You</span>
                     </div>
-                    <div class="font-mono font-bold text-sm text-[#541F1D]" id="timerCountdown">
+                    <div class="font-mono font-bold text-sm text-[#0B3D2E]" id="timerCountdown">
                         14:59
                     </div>
                 </div>
 
                 <!-- Booking Reference & Details -->
-                <div class="border-b border-[#D8C6A8] pb-6 space-y-4">
+                <div class="border-b border-[#C8D8CF] pb-6 space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs text-[#81766D] font-bold uppercase tracking-wider">BOOKING REFERENCE</span>
-                        <span class="font-mono text-sm font-bold text-[#541F1D] bg-[#EDE3D4] px-3 py-1 rounded-lg border border-[#D8C6A8]">
+                        <span class="text-xs text-[#60736B] font-bold uppercase tracking-wider">BOOKING REFERENCE</span>
+                        <span class="font-mono text-sm font-bold text-[#0B3D2E] bg-[#E8F1EC] px-3 py-1 rounded-lg border border-[#C8D8CF]">
                             {{ $appointment->booking_reference }}
                         </span>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                        <div class="bg-[#FDFBF7] p-4 rounded-xl border border-[#D8C6A8]">
-                            <span class="block text-[10px] font-bold uppercase text-[#81766D] mb-1">CLIENT NAME</span>
-                            <span class="font-bold text-[#541F1D] text-sm">{{ $appointment->name }}</span>
-                            <span class="block text-[11px] text-[#81766D] mt-0.5">📞 {{ $appointment->phone }}</span>
+                        <div class="bg-[#F3F8F5] p-4 rounded-xl border border-[#C8D8CF]">
+                            <span class="block text-[10px] font-bold uppercase text-[#60736B] mb-1">CLIENT NAME</span>
+                            <span class="font-bold text-[#0B3D2E] text-sm">{{ $appointment->name }}</span>
+                            <span class="block text-[11px] text-[#60736B] mt-0.5">📞 {{ $appointment->phone }}</span>
                         </div>
 
-                        <div class="bg-[#FDFBF7] p-4 rounded-xl border border-[#D8C6A8]">
-                            <span class="block text-[10px] font-bold uppercase text-[#81766D] mb-1">APPOINTMENT SLOT</span>
-                            <span class="font-bold text-[#541F1D] text-sm">📅 {{ \Carbon\Carbon::parse($appointment->preferred_date)->format('D, d M Y') }}</span>
-                            <span class="block text-[11px] text-[#81766D] mt-0.5">⏰ {{ $appointment->preferred_time }}</span>
+                        <div class="bg-[#F3F8F5] p-4 rounded-xl border border-[#C8D8CF]">
+                            <span class="block text-[10px] font-bold uppercase text-[#60736B] mb-1">APPOINTMENT SLOT</span>
+                            <span class="font-bold text-[#0B3D2E] text-sm">📅 {{ \Carbon\Carbon::parse($appointment->preferred_date)->format('D, d M Y') }}</span>
+                            <span class="block text-[11px] text-[#60736B] mt-0.5">⏰ {{ $appointment->preferred_time }}</span>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between bg-[#FDFBF7] p-4 rounded-xl border border-[#D8C6A8] text-xs">
+                    <div class="flex items-center justify-between bg-[#F3F8F5] p-4 rounded-xl border border-[#C8D8CF] text-xs">
                         <div>
-                            <span class="block font-bold text-[#541F1D]">{{ $appointment->consultation_type }} Consultation</span>
-                            <span class="text-[11px] text-[#81766D]">1-on-1 Audio Call with Tamal Chakraborty</span>
+                            <span class="block font-bold text-[#0B3D2E]">{{ $appointment->consultation_type }} Consultation</span>
+                            <span class="text-[11px] text-[#60736B]">1-on-1 Audio Call with Tamal Chakraborty</span>
                         </div>
-                        <span class="px-2.5 py-1 bg-[#541F1D] text-[#F7F0E3] text-[10px] font-bold rounded-md uppercase tracking-wider">
+                        <span class="px-2.5 py-1 bg-[#0B3D2E] text-[#FFFFFF] text-[10px] font-bold rounded-md uppercase tracking-wider">
                             {{ $appointment->consultation_mode }}
                         </span>
                     </div>
@@ -99,17 +99,17 @@
 
                 <!-- Payable Amount Summary -->
                 <div class="space-y-2 pt-2">
-                    <div class="flex items-center justify-between text-xs text-[#81766D]">
+                    <div class="flex items-center justify-between text-xs text-[#60736B]">
                         <span>Consultation Fee</span>
                         <span>₹{{ number_format($appointment->amount, 2) }}</span>
                     </div>
-                    <div class="flex items-center justify-between text-xs text-[#81766D]">
+                    <div class="flex items-center justify-between text-xs text-[#60736B]">
                         <span>GST & Service Charges</span>
                         <span class="text-emerald-700 font-semibold">Included</span>
                     </div>
-                    <div class="border-t border-[#D8C6A8] pt-3 flex items-center justify-between">
-                        <span class="font-serif-luxury text-base font-bold text-[#541F1D]">TOTAL PAYABLE</span>
-                        <span class="font-serif-luxury text-3xl font-bold text-[#541F1D]">₹{{ number_format($appointment->amount, 0) }}</span>
+                    <div class="border-t border-[#C8D8CF] pt-3 flex items-center justify-between">
+                        <span class="font-serif-luxury text-base font-bold text-[#0B3D2E]">TOTAL PAYABLE</span>
+                        <span class="font-serif-luxury text-3xl font-bold text-[#0B3D2E]">₹{{ number_format($appointment->amount, 0) }}</span>
                     </div>
                 </div>
 
@@ -118,15 +118,15 @@
                     <button type="button" 
                             id="payButton"
                             onclick="initiateRazorpayPayment()"
-                            class="w-full py-4 px-6 text-sm font-bold uppercase tracking-widest text-[#F7F0E3] bg-[#541F1D] hover:bg-[#351211] rounded-full shadow-lg border border-[#D8C6A8] hover:border-[#C49A45] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                            class="w-full py-4 px-6 text-sm font-bold uppercase tracking-widest text-[#FFFFFF] bg-[#0B3D2E] hover:bg-[#145A43] rounded-full shadow-lg border border-[#0B3D2E] hover:border-[#C49A45] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
                         <span id="payButtonText">🔒 PROCEED TO PAYMENT ₹{{ number_format($appointment->amount, 0) }}</span>
-                        <svg id="paySpinner" class="hidden animate-spin h-4 w-4 text-[#F7F0E3]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg id="paySpinner" class="hidden animate-spin h-4 w-4 text-[#FFFFFF]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                     </button>
 
-                    <p class="text-center text-[11px] text-[#81766D] flex items-center justify-center space-x-1">
+                    <p class="text-center text-[11px] text-[#60736B] flex items-center justify-center space-x-1">
                         <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
@@ -237,7 +237,7 @@ async function initiateRazorpayPayment() {
             order_id: data.order_id,
             prefill: data.prefill,
             theme: {
-                color: "#541F1D"
+                color: "#0B3D2E"
             },
             handler: async function(razorpayResponse) {
                 if (payButtonText) payButtonText.innerText = 'Verifying Payment...';

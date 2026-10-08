@@ -18,6 +18,7 @@ class BlockedSlotController extends Controller
     {
         $validated = $request->validate([
             'blocked_date' => ['required', 'date'],
+            'consultation_type' => ['nullable', 'string', 'in:urgent,normal'],
             'time_slot' => ['nullable', 'string', 'max:100'],
             'reason' => ['nullable', 'string', 'max:255'],
         ]);
@@ -30,6 +31,10 @@ class BlockedSlotController extends Controller
             $validated['time_slot'] = null;
         }
 
+        if (isset($validated['consultation_type']) && trim($validated['consultation_type']) === '') {
+            $validated['consultation_type'] = null;
+        }
+
         BlockedSlot::create($validated);
 
         return redirect()->back()->with('status', 'Blocked date/time slot created successfully.');
@@ -39,6 +44,7 @@ class BlockedSlotController extends Controller
     {
         $validated = $request->validate([
             'blocked_date' => ['required', 'date'],
+            'consultation_type' => ['nullable', 'string', 'in:urgent,normal'],
             'time_slot' => ['nullable', 'string', 'max:100'],
             'reason' => ['nullable', 'string', 'max:255'],
             'is_active' => ['nullable', 'boolean'],
@@ -46,6 +52,10 @@ class BlockedSlotController extends Controller
 
         if (isset($validated['time_slot']) && trim($validated['time_slot']) === '') {
             $validated['time_slot'] = null;
+        }
+
+        if (isset($validated['consultation_type']) && trim($validated['consultation_type']) === '') {
+            $validated['consultation_type'] = null;
         }
 
         $validated['is_active'] = $request->has('is_active') ? $request->boolean('is_active') : true;

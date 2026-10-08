@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <title>Welcome to Ganesha Astro Consultancy</title>
 </head>
-<body style="margin: 0; padding: 0; background-color: #F7F0E3; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #29211F;">
+<body style="margin: 0; padding: 0; background-color: #FBF8F1; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #17211D;">
 
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #F7F0E3; padding: 20px 0;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #FBF8F1; padding: 20px 0;">
         <tr>
             <td align="center">
-                <table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; width: 100%; background-color: #351211; border-radius: 16px; border: 1px solid #C49A45; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; width: 100%; background-color: #06281F; border-radius: 16px; border: 1px solid #C49A45; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
                     
                     <!-- Header -->
                     <tr>
-                        <td style="padding: 28px 30px; text-align: center; border-bottom: 1px solid #C49A45; background-color: #541F1D;">
+                        <td style="padding: 28px 30px; text-align: center; border-bottom: 1px solid #C49A45; background-color: #0B3D2E;">
                             <span style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; color: #C49A45; display: block; margin-bottom: 6px;">GANESHA ASTRO CONSULTANCY</span>
                             <h1 style="font-size: 24px; margin: 0; color: #F7F0E3; font-weight: bold;">Welcome to Your Account</h1>
-                            <p style="font-size: 13px; color: #D8C6A8; margin: 6px 0 0 0;">Vedic Astrologer Tamal Chakraborty</p>
+                            <p style="font-size: 13px; color: #D8CDBD; margin: 6px 0 0 0;">Vedic Astrologer Tamal Chakraborty</p>
                         </td>
                     </tr>
 
@@ -28,9 +28,9 @@
                             <p>You can log in anytime to view your booking history, track upcoming consultations, and manage your account details.</p>
 
                             <!-- Account Action Box -->
-                            <div style="background-color: #EDE3D4; border-radius: 12px; border: 1px solid #D8C6A8; padding: 20px; margin: 24px 0; text-align: center; color: #541F1D;">
+                            <div style="background-color: #F7F0E3; border-radius: 12px; border: 1px solid #D8CDBD; padding: 20px; margin: 24px 0; text-align: center; color: #0B3D2E;">
                                 <p style="margin: 0 0 14px 0; font-size: 14px; font-weight: bold;">Access Your Account Dashboard</p>
-                                <a href="{{ url('/account') }}" style="display: inline-block; background-color: #541F1D; color: #F7F0E3; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #C49A45;">Go to My Account (/account)</a>
+                                <a href="{{ url('/account') }}" style="display: inline-block; background-color: #0B3D2E; color: #FFFFFF; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #0B3D2E;">Go to My Account (/account)</a>
                             </div>
 
                             <p style="margin-bottom: 0;">If you have any questions or need guidance, our desk team is always ready to assist you.</p>
@@ -39,11 +39,11 @@
 
                     <!-- Footer -->
                     <tr>
-                        <td style="padding: 24px 30px; background-color: #29211F; border-top: 1px solid #C49A45; text-align: center; color: #D8C6A8; font-size: 12px; line-height: 1.6;">
+                        <td style="padding: 24px 30px; background-color: #06281F; border-top: 1px solid #C49A45; text-align: center; color: #D8CDBD; font-size: 12px; line-height: 1.6;">
                             <strong style="color: #C49A45; display: block; margin-bottom: 4px;">GANESHA ASTRO CONSULTANCY</strong>
                             <span>Phone / WhatsApp: <a href="tel:8392059201" style="color: #F7F0E3; text-decoration: underline;">8392059201</a></span> &bull; 
                             <span>Email: <a href="mailto:ganesha4astro@gmail.com" style="color: #F7F0E3; text-decoration: underline;">ganesha4astro@gmail.com</a></span>
-                            <div style="margin-top: 12px; font-size: 11px; color: #81766D;">
+                            <div style="margin-top: 12px; font-size: 11px; color: #66736D;">
                                 &copy; {{ date('Y') }} Ganesha Astro Consultancy — Tamal Chakraborty. All rights reserved.
                             </div>
                         </td>

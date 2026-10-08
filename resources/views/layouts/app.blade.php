@@ -76,7 +76,7 @@
 
     @stack('styles')
 </head>
-<body class="bg-[#FDFBF7] text-[#29211F] antialiased selection:bg-[#541F1D] selection:text-[#F7F0E3] flex flex-col min-h-screen">
+<body class="bg-[#F3F8F5] text-[#17211D] antialiased selection:bg-[#0B3D2E] selection:text-[#FFFFFF] flex flex-col min-h-screen">
 
     <!-- Main Navigation Header -->
     <x-header />

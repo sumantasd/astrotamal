@@ -52,10 +52,10 @@ class HeaderSettingsController extends Controller
             'header_logo_width' => SiteSetting::get('header_logo_width', '240'),
             'header_logo_height' => SiteSetting::get('header_logo_height', '48'),
             'header_logo_link' => SiteSetting::get('header_logo_link', 'home'),
-            'header_bg_color' => SiteSetting::get('header_bg_color', '#F7F0E3'),
-            'header_text_color' => SiteSetting::get('header_text_color', '#29211F'),
-            'header_active_color' => SiteSetting::get('header_active_color', '#541F1D'),
-            'header_border_color' => SiteSetting::get('header_border_color', '#D8C6A8'),
+            'header_bg_color' => SiteSetting::get('header_bg_color', '#C3E8D2'),
+            'header_text_color' => SiteSetting::get('header_text_color', '#0B3D2E'),
+            'header_active_color' => SiteSetting::get('header_active_color', '#0B3D2E'),
+            'header_border_color' => SiteSetting::get('header_border_color', '#BFD8C9'),
             'header_height' => SiteSetting::get('header_height', '74px'),
             'header_sticky' => SiteSetting::get('header_sticky', '1'),
             'header_shadow' => SiteSetting::get('header_shadow', '1'),
@@ -74,8 +74,8 @@ class HeaderSettingsController extends Controller
             'mobile_logo_height' => SiteSetting::get('mobile_logo_height', '36'),
             'mobile_hamburger_enabled' => SiteSetting::get('mobile_hamburger_enabled', '1'),
             'mobile_menu_bg' => SiteSetting::get('mobile_menu_bg', '#F7F0E3'),
-            'mobile_menu_text_color' => SiteSetting::get('mobile_menu_text_color', '#29211F'),
-            'mobile_menu_active_color' => SiteSetting::get('mobile_menu_active_color', '#541F1D'),
+            'mobile_menu_text_color' => SiteSetting::get('mobile_menu_text_color', '#17211D'),
+            'mobile_menu_active_color' => SiteSetting::get('mobile_menu_active_color', '#0B3D2E'),
             'mobile_account_visible' => SiteSetting::get('mobile_account_visible', '1'),
             'mobile_booking_visible' => SiteSetting::get('mobile_booking_visible', '1'),
         ];
@@ -149,7 +149,9 @@ class HeaderSettingsController extends Controller
         }
 
         foreach ($checkboxes as $cbKey) {
-            SiteSetting::set($cbKey, $request->has($cbKey) ? '1' : '0', 'header');
+            if ($request->has($cbKey)) {
+                SiteSetting::set($cbKey, $request->input($cbKey) == '1' ? '1' : '0', 'header');
+            }
         }
 
         return redirect()->back()->with('status', 'Header & Navigation configuration updated successfully.');
@@ -233,10 +235,10 @@ class HeaderSettingsController extends Controller
             'header_logo_width' => '240',
             'header_logo_height' => '48',
             'header_logo_link' => 'home',
-            'header_bg_color' => '#F7F0E3',
-            'header_text_color' => '#29211F',
-            'header_active_color' => '#541F1D',
-            'header_border_color' => '#D8C6A8',
+            'header_bg_color' => '#C3E8D2',
+            'header_text_color' => '#0B3D2E',
+            'header_active_color' => '#0B3D2E',
+            'header_border_color' => '#BFD8C9',
             'header_height' => '74px',
             'header_sticky' => '1',
             'header_shadow' => '1',
@@ -252,9 +254,9 @@ class HeaderSettingsController extends Controller
             'mobile_logo_width' => '170',
             'mobile_logo_height' => '36',
             'mobile_hamburger_enabled' => '1',
-            'mobile_menu_bg' => '#F7F0E3',
-            'mobile_menu_text_color' => '#29211F',
-            'mobile_menu_active_color' => '#541F1D',
+            'mobile_menu_bg' => '#C3E8D2',
+            'mobile_menu_text_color' => '#0B3D2E',
+            'mobile_menu_active_color' => '#0B3D2E',
             'mobile_account_visible' => '1',
             'mobile_booking_visible' => '1',
         ];

@@ -6,7 +6,7 @@
 <div class="space-y-6 w-full min-w-0 max-w-full">
 
     <!-- 1. DYNAMIC WELCOME BANNER (COMPACT, 120-160px DESKTOP HEIGHT) -->
-    <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-3xl p-5 sm:p-6 shadow-xs relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full min-w-0">
+    <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-3xl p-5 sm:p-6 shadow-xs relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full min-w-0">
         
         <!-- Background Decorative Mandala Motif (Constrained inside card, No Overflow) -->
         <div class="absolute -right-4 -top-4 opacity-10 pointer-events-none">
@@ -19,19 +19,19 @@
         </div>
 
         <div class="relative z-10 max-w-xl min-w-0">
-            <h1 class="font-serif-luxury text-xl sm:text-2xl font-bold text-[#541F1D] leading-tight truncate">
+            <h1 class="font-serif-luxury text-xl sm:text-2xl font-bold text-[#0B3D2E] leading-tight truncate">
                 Welcome Back, {{ Auth::user()->name ?? 'Admin' }}!
             </h1>
-            <p class="text-xs text-[#81766D] mt-1 font-medium leading-relaxed">
+            <p class="text-xs text-[#60736B] mt-1 font-medium leading-relaxed">
                 Here's what's happening with your AstroTamal platform today.
             </p>
         </div>
 
         <div class="relative z-10 shrink-0 w-full sm:w-auto">
-            <div class="font-serif-luxury italic text-[#541F1D] bg-[#EDE3D4]/40 border-l-4 border-[#C49A45] px-4 py-2.5 rounded-r-2xl text-xs shadow-xs">
+            <div class="font-serif-luxury italic text-[#0B3D2E] bg-[#E8F1EC]/60 border-l-4 border-[#C49A45] px-4 py-2.5 rounded-r-2xl text-xs shadow-xs">
                 <span class="text-lg text-[#C49A45] font-bold mr-1">“</span>
-                <span class="font-semibold text-[#541F1D]">Guiding Lives with Ancient Wisdom</span>
-                <span class="text-[10px] text-[#81766D] not-italic font-sans-luxury font-medium block">and Modern Solutions</span>
+                <span class="font-semibold text-[#0B3D2E]">Guiding Lives with Ancient Wisdom</span>
+                <span class="text-[10px] text-[#60736B] not-italic font-sans-luxury font-medium block">and Modern Solutions</span>
             </div>
         </div>
 
@@ -41,20 +41,20 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 w-full min-w-0">
         
         <!-- Card 1: Total Appointments -->
-        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
+        <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
             <div class="space-y-0.5 min-w-0">
-                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#81766D] truncate">
+                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#60736B] truncate">
                     Total Appointments
                 </div>
-                <div class="text-2xl font-serif-luxury font-bold text-[#29211F] truncate">
+                <div class="text-2xl font-serif-luxury font-bold text-[#0B3D2E] truncate">
                     {{ number_format($stats['total_appointments'] ?? 0) }}
                 </div>
-                <div class="text-[10.5px] font-medium text-[#81766D] flex items-center space-x-1 truncate">
+                <div class="text-[10.5px] font-medium text-[#60736B] flex items-center space-x-1 truncate">
                     <span class="text-emerald-700 font-bold">↑ +12%</span>
                     <span>This Month</span>
                 </div>
             </div>
-            <div class="w-11 h-11 rounded-full bg-[#541F1D] text-[#F7F0E3] flex items-center justify-center shrink-0 shadow-sm ml-2">
+            <div class="w-11 h-11 rounded-full bg-[#0B3D2E] text-[#FFFFFF] flex items-center justify-center shrink-0 shadow-sm ml-2">
                 <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
@@ -62,20 +62,20 @@
         </div>
 
         <!-- Card 2: Pending Appointments -->
-        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
+        <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
             <div class="space-y-0.5 min-w-0">
-                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#81766D] truncate">
+                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#60736B] truncate">
                     Pending Appointments
                 </div>
-                <div class="text-2xl font-serif-luxury font-bold text-[#29211F] truncate">
+                <div class="text-2xl font-serif-luxury font-bold text-[#0B3D2E] truncate">
                     {{ number_format($stats['pending_appointments'] ?? 0) }}
                 </div>
-                <div class="text-[10.5px] font-medium text-[#81766D] flex items-center space-x-1 truncate">
+                <div class="text-[10.5px] font-medium text-[#60736B] flex items-center space-x-1 truncate">
                     <span class="text-amber-700 font-bold">↑ +6%</span>
                     <span>Needs Attention</span>
                 </div>
             </div>
-            <div class="w-11 h-11 rounded-full bg-[#C49A45] text-[#F7F0E3] flex items-center justify-center shrink-0 shadow-sm ml-2">
+            <div class="w-11 h-11 rounded-full bg-[#C49A45] text-[#FFFFFF] flex items-center justify-center shrink-0 shadow-sm ml-2">
                 <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
@@ -83,20 +83,20 @@
         </div>
 
         <!-- Card 3: Confirmed Appointments -->
-        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
+        <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
             <div class="space-y-0.5 min-w-0">
-                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#81766D] truncate">
+                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#60736B] truncate">
                     Confirmed Appointments
                 </div>
-                <div class="text-2xl font-serif-luxury font-bold text-[#29211F] truncate">
+                <div class="text-2xl font-serif-luxury font-bold text-[#0B3D2E] truncate">
                     {{ number_format($stats['confirmed_appointments'] ?? 0) }}
                 </div>
-                <div class="text-[10.5px] font-medium text-[#81766D] flex items-center space-x-1 truncate">
+                <div class="text-[10.5px] font-medium text-[#60736B] flex items-center space-x-1 truncate">
                     <span class="text-emerald-700 font-bold">↑ +18%</span>
                     <span>This Month</span>
                 </div>
             </div>
-            <div class="w-11 h-11 rounded-full bg-emerald-800 text-[#F7F0E3] flex items-center justify-center shrink-0 shadow-sm ml-2">
+            <div class="w-11 h-11 rounded-full bg-[#145A43] text-[#FFFFFF] flex items-center justify-center shrink-0 shadow-sm ml-2">
                 <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
@@ -104,20 +104,20 @@
         </div>
 
         <!-- Card 4: Total Revenue -->
-        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
+        <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-2xl p-4 shadow-xs flex items-center justify-between hover:border-[#C49A45]/60 transition-colors min-w-0">
             <div class="space-y-0.5 min-w-0">
-                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#81766D] truncate">
+                <div class="text-[10.5px] font-bold uppercase tracking-wider text-[#60736B] truncate">
                     Total Revenue
                 </div>
-                <div class="text-2xl font-serif-luxury font-bold text-[#541F1D] truncate">
+                <div class="text-2xl font-serif-luxury font-bold text-[#0B3D2E] truncate">
                     ₹{{ number_format($stats['total_revenue'] ?? 0, 0) }}
                 </div>
-                <div class="text-[10.5px] font-medium text-[#81766D] flex items-center space-x-1 truncate">
+                <div class="text-[10.5px] font-medium text-[#60736B] flex items-center space-x-1 truncate">
                     <span class="text-emerald-700 font-bold">↑ +24%</span>
                     <span>This Month</span>
                 </div>
             </div>
-            <div class="w-11 h-11 rounded-full bg-[#351211] text-[#F7F0E3] font-serif-luxury text-lg font-bold flex items-center justify-center shrink-0 shadow-sm ml-2">
+            <div class="w-11 h-11 rounded-full bg-[#06281F] text-[#FFFFFF] font-serif-luxury text-lg font-bold flex items-center justify-center shrink-0 shadow-sm ml-2">
                 ₹
             </div>
         </div>
@@ -128,21 +128,21 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 w-full min-w-0">
         
         <!-- Left: Appointment Overview Chart (2 Columns Wide on Desktop) -->
-        <div class="lg:col-span-2 bg-[#FDFBF7] border border-[#D8C6A8] rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-[#D8C6A8]/40">
+        <div class="lg:col-span-2 bg-[#FFFFFF] border border-[#C8D8CF] rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-[#C8D8CF]">
                 <div>
-                    <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#541F1D]">Appointment Overview</h2>
-                    <p class="text-[11px] text-[#81766D]">Booking statistics for the last 30 days</p>
+                    <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#0B3D2E]">Appointment Overview</h2>
+                    <p class="text-[11px] text-[#60736B]">Booking statistics for the last 30 days</p>
                 </div>
                 
                 <div class="flex items-center space-x-4 text-xs font-semibold">
                     <div class="flex items-center space-x-1.5">
-                        <span class="w-2.5 h-2.5 rounded-full bg-[#541F1D] inline-block"></span>
-                        <span class="text-[#29211F]">Appointments</span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#0B3D2E] inline-block"></span>
+                        <span class="text-[#17211D]">Appointments</span>
                     </div>
                     <div class="flex items-center space-x-1.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-[#C49A45] inline-block"></span>
-                        <span class="text-[#29211F]">Revenue</span>
+                        <span class="text-[#17211D]">Revenue</span>
                     </div>
                 </div>
             </div>
@@ -154,11 +154,11 @@
         </div>
 
         <!-- Right: Popular Services (1 Column Wide on Desktop) -->
-        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
+        <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
             <div>
-                <div class="flex items-center justify-between pb-3.5 border-b border-[#D8C6A8]/40">
-                    <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#541F1D]">Popular Services</h2>
-                    <a href="{{ route('admin.services.index') }}" class="text-xs font-bold text-[#541F1D] hover:text-[#C49A45] flex items-center transition-colors">
+                <div class="flex items-center justify-between pb-3.5 border-b border-[#C8D8CF]">
+                    <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#0B3D2E]">Popular Services</h2>
+                    <a href="{{ route('admin.services.index') }}" class="text-xs font-bold text-[#0B3D2E] hover:text-[#C49A45] flex items-center transition-colors">
                         View All →
                     </a>
                 </div>
@@ -168,25 +168,25 @@
                         <div class="space-y-1">
                             <div class="flex items-center justify-between text-xs font-semibold">
                                 <div class="flex items-center space-x-2.5 min-w-0">
-                                    <span class="w-5.5 h-5.5 rounded-full bg-[#351211] text-[#F7F0E3] font-bold text-[10px] flex items-center justify-center shrink-0">
+                                    <span class="w-5.5 h-5.5 rounded-full bg-[#0B3D2E] text-[#FFFFFF] font-bold text-[10px] flex items-center justify-center shrink-0">
                                         {{ $index + 1 }}
                                     </span>
                                     <div class="min-w-0 truncate">
-                                        <div class="font-bold text-[#29211F] truncate">{{ $srv->title }}</div>
-                                        <div class="text-[10px] text-[#81766D] font-normal truncate">{{ $srv->appointments_count }} bookings</div>
+                                        <div class="font-bold text-[#17211D] truncate">{{ $srv->title }}</div>
+                                        <div class="text-[10px] text-[#60736B] font-normal truncate">{{ $srv->appointments_count }} bookings</div>
                                     </div>
                                 </div>
-                                <span class="text-[#541F1D] font-bold ml-2 shrink-0">{{ $srv->percentage ?? 0 }}%</span>
+                                <span class="text-[#0B3D2E] font-bold ml-2 shrink-0">{{ $srv->percentage ?? 0 }}%</span>
                             </div>
                             
                             <!-- Proportional Progress Bar -->
-                            <div class="w-full bg-[#EDE3D4] h-1.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-[#541F1D] to-[#C49A45] h-1.5 rounded-full transition-all duration-500" 
+                            <div class="w-full bg-[#E8F1EC] h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-gradient-to-r from-[#0B3D2E] to-[#C49A45] h-1.5 rounded-full transition-all duration-500" 
                                      style="width: {{ max(8, $srv->percentage ?? 0) }}%"></div>
                             </div>
                         </div>
                     @empty
-                        <div class="py-10 text-center text-xs text-[#81766D]">
+                        <div class="py-10 text-center text-xs text-[#60736B]">
                             No service bookings found yet.
                         </div>
                     @endforelse
@@ -200,60 +200,60 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 w-full min-w-0">
         
         <!-- Left: Recent Appointments Table (2 Columns Wide on Desktop) -->
-        <div class="lg:col-span-2 bg-[#FDFBF7] border border-[#D8C6A8] rounded-3xl p-5 sm:p-6 shadow-xs min-w-0 overflow-hidden">
-            <div class="flex items-center justify-between pb-3.5 border-b border-[#D8C6A8]/40 mb-3.5">
+        <div class="lg:col-span-2 bg-[#FFFFFF] border border-[#C8D8CF] rounded-3xl p-5 sm:p-6 shadow-xs min-w-0 overflow-hidden">
+            <div class="flex items-center justify-between pb-3.5 border-b border-[#C8D8CF] mb-3.5">
                 <div>
-                    <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#541F1D]">Recent Appointments</h2>
-                    <p class="text-[11px] text-[#81766D]">Latest consultation requests received from clients</p>
+                    <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#0B3D2E]">Recent Appointments</h2>
+                    <p class="text-[11px] text-[#60736B]">Latest consultation requests received from clients</p>
                 </div>
-                <a href="{{ route('admin.appointments.index') }}" class="text-xs font-bold text-[#541F1D] hover:text-[#C49A45] flex items-center transition-colors">
+                <a href="{{ route('admin.appointments.index') }}" class="text-xs font-bold text-[#0B3D2E] hover:text-[#C49A45] flex items-center transition-colors">
                     View All →
                 </a>
             </div>
 
             @if ($recentBookings->isEmpty())
-                <div class="py-10 text-center text-xs text-[#81766D]">
+                <div class="py-10 text-center text-xs text-[#60736B]">
                     No appointments recorded yet.
                 </div>
             @else
                 <div class="overflow-x-auto w-full">
                     <table class="w-full text-left border-collapse min-w-[500px]">
                         <thead>
-                            <tr class="border-b border-[#D8C6A8]/60 text-[10.5px] font-bold uppercase tracking-wider text-[#81766D]">
-                                <th class="pb-2.5 px-2">#</th>
-                                <th class="pb-2.5 px-2.5">Client Name</th>
-                                <th class="pb-2.5 px-2.5">Service</th>
-                                <th class="pb-2.5 px-2.5">Date & Time</th>
-                                <th class="pb-2.5 px-2.5">Status</th>
-                                <th class="pb-2.5 px-2.5">Payment</th>
-                                <th class="pb-2.5 px-2 text-center">Action</th>
+                            <tr class="border-b border-[#C8D8CF] bg-[#E8F1EC] text-[10.5px] font-bold uppercase tracking-wider text-[#0B3D2E]">
+                                <th class="py-2.5 px-3">#</th>
+                                <th class="py-2.5 px-3">Client Name</th>
+                                <th class="py-2.5 px-3">Service</th>
+                                <th class="py-2.5 px-3">Date & Time</th>
+                                <th class="py-2.5 px-3">Status</th>
+                                <th class="py-2.5 px-3">Payment</th>
+                                <th class="py-2.5 px-3 text-center">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-[#D8C6A8]/30 text-xs text-[#29211F]">
+                        <tbody class="divide-y divide-[#C8D8CF]/60 text-xs text-[#17211D]">
                             @foreach ($recentBookings as $idx => $booking)
-                                <tr class="hover:bg-[#EDE3D4]/30 transition-colors">
-                                    <td class="py-3 px-2 font-bold text-[#81766D]">
+                                <tr class="hover:bg-[#F3F8F5] transition-colors">
+                                    <td class="py-3 px-3 font-bold text-[#60736B]">
                                         {{ $idx + 1 }}
                                     </td>
-                                    <td class="py-3 px-2.5">
+                                    <td class="py-3 px-3">
                                         <div class="flex items-center space-x-2">
-                                            <div class="w-6.5 h-6.5 rounded-full bg-[#C49A45]/30 text-[#541F1D] font-bold text-[10px] flex items-center justify-center shrink-0 border border-[#C49A45]/50">
+                                            <div class="w-6.5 h-6.5 rounded-full bg-[#E8F1EC] text-[#0B3D2E] font-bold text-[10px] flex items-center justify-center shrink-0 border border-[#C8D8CF]">
                                                 {{ strtoupper(substr($booking->name, 0, 1)) }}
                                             </div>
                                             <div class="min-w-0">
-                                                <div class="font-bold text-[#29211F] truncate">{{ $booking->name }}</div>
-                                                <div class="text-[10px] text-[#81766D] truncate">{{ $booking->email }}</div>
+                                                <div class="font-bold text-[#17211D] truncate">{{ $booking->name }}</div>
+                                                <div class="text-[10px] text-[#60736B] truncate">{{ $booking->email }}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-2.5 font-medium text-[#541F1D]">
+                                    <td class="py-3 px-3 font-medium text-[#0B3D2E]">
                                         {{ $booking->service->title ?? 'Consultation' }}
                                     </td>
-                                    <td class="py-3 px-2.5 whitespace-nowrap">
+                                    <td class="py-3 px-3 whitespace-nowrap">
                                         <div class="font-semibold">{{ $booking->preferred_date ? \Carbon\Carbon::parse($booking->preferred_date)->format('d M Y') : '—' }}</div>
-                                        <div class="text-[10px] text-[#81766D]">{{ $booking->preferred_time }}</div>
+                                        <div class="text-[10px] text-[#60736B]">{{ $booking->preferred_time }}</div>
                                     </td>
-                                    <td class="py-3 px-2.5 whitespace-nowrap">
+                                    <td class="py-3 px-3 whitespace-nowrap">
                                         @if (in_array(strtolower($booking->status), ['confirmed', 'completed']))
                                             <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9.5px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">
                                                 Confirmed
@@ -268,7 +268,7 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="py-3 px-2.5 whitespace-nowrap">
+                                    <td class="py-3 px-3 whitespace-nowrap">
                                         @if (in_array(strtolower($booking->payment_status), ['paid', 'success']))
                                             <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9.5px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
                                                 Paid
@@ -279,9 +279,9 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="py-3 px-2 text-center">
+                                    <td class="py-3 px-3 text-center">
                                         <a href="{{ route('admin.appointments.show', $booking) }}" 
-                                           class="p-1 inline-flex items-center justify-center text-[#541F1D] hover:bg-[#C49A45]/20 rounded-lg transition-colors" 
+                                           class="p-1 inline-flex items-center justify-center text-[#0B3D2E] hover:bg-[#E8F1EC] rounded-lg transition-colors" 
                                            title="View Details">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -298,24 +298,24 @@
         </div>
 
         <!-- Right: Upcoming Appointments Timeline (1 Column Wide on Desktop) -->
-        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-3xl p-5 sm:p-6 shadow-xs min-w-0 overflow-hidden">
-            <div class="flex items-center justify-between pb-3.5 border-b border-[#D8C6A8]/40 mb-3.5">
-                <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#541F1D]">Upcoming Appointments</h2>
-                <a href="{{ route('admin.appointments.index') }}" class="text-xs font-bold text-[#541F1D] hover:text-[#C49A45] flex items-center transition-colors">
+        <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-3xl p-5 sm:p-6 shadow-xs min-w-0 overflow-hidden">
+            <div class="flex items-center justify-between pb-3.5 border-b border-[#C8D8CF] mb-3.5">
+                <h2 class="font-serif-luxury text-base sm:text-lg font-bold text-[#0B3D2E]">Upcoming Appointments</h2>
+                <a href="{{ route('admin.appointments.index') }}" class="text-xs font-bold text-[#0B3D2E] hover:text-[#C49A45] flex items-center transition-colors">
                     View All →
                 </a>
             </div>
 
             <div class="space-y-3 relative">
                 @forelse ($upcomingAppointments as $up)
-                    <div class="flex items-start justify-between p-2.5 rounded-2xl bg-[#EDE3D4]/30 border border-[#D8C6A8]/40 hover:border-[#C49A45]/60 transition-colors">
+                    <div class="flex items-start justify-between p-2.5 rounded-2xl bg-[#E8F1EC]/60 border border-[#C8D8CF] hover:border-[#C49A45]/60 transition-colors">
                         <div class="flex items-start space-x-2.5 min-w-0">
                             <!-- Time Badge -->
                             <div class="text-center shrink-0">
-                                <div class="text-[10.5px] font-bold text-[#541F1D]">
+                                <div class="text-[10.5px] font-bold text-[#0B3D2E]">
                                     {{ $up->preferred_time ? explode(' ', $up->preferred_time)[0] : '10:00' }}
                                 </div>
-                                <div class="text-[8.5px] text-[#81766D] uppercase font-bold">
+                                <div class="text-[8.5px] text-[#60736B] uppercase font-bold">
                                     {{ $up->preferred_date ? \Carbon\Carbon::parse($up->preferred_date)->format('d M') : 'Today' }}
                                 </div>
                             </div>
@@ -323,8 +323,8 @@
                             <div class="w-1.5 h-1.5 rounded-full bg-[#C49A45] mt-1.5 shrink-0"></div>
 
                             <div class="min-w-0">
-                                <div class="text-xs font-bold text-[#29211F] truncate">{{ $up->name }}</div>
-                                <div class="text-[10px] text-[#81766D] font-medium truncate">{{ $up->service->title ?? 'Consultation' }}</div>
+                                <div class="text-xs font-bold text-[#17211D] truncate">{{ $up->name }}</div>
+                                <div class="text-[10px] text-[#60736B] font-medium truncate">{{ $up->service->title ?? 'Consultation' }}</div>
                             </div>
                         </div>
 
@@ -341,7 +341,7 @@
                         </div>
                     </div>
                 @empty
-                    <div class="py-10 text-center text-xs text-[#81766D]">
+                    <div class="py-10 text-center text-xs text-[#60736B]">
                         No upcoming consultations scheduled.
                     </div>
                 @endforelse
@@ -361,8 +361,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = canvas.getContext('2d');
     
     const gradientAppointments = ctx.createLinearGradient(0, 0, 0, 200);
-    gradientAppointments.addColorStop(0, 'rgba(84, 31, 29, 0.25)');
-    gradientAppointments.addColorStop(1, 'rgba(84, 31, 29, 0.0)');
+    gradientAppointments.addColorStop(0, 'rgba(11, 61, 46, 0.25)');
+    gradientAppointments.addColorStop(1, 'rgba(11, 61, 46, 0.0)');
 
     const gradientRevenue = ctx.createLinearGradient(0, 0, 0, 200);
     gradientRevenue.addColorStop(0, 'rgba(196, 154, 69, 0.25)');
@@ -376,14 +376,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                     label: 'Appointments',
                     data: {!! json_encode($chartData['appointments'] ?? []) !!},
-                    borderColor: '#541F1D',
+                    borderColor: '#0B3D2E',
                     backgroundColor: gradientAppointments,
                     borderWidth: 2.5,
                     fill: true,
                     tension: 0.35,
                     pointRadius: 3,
                     pointHoverRadius: 6,
-                    pointBackgroundColor: '#541F1D'
+                    pointBackgroundColor: '#0B3D2E'
                 },
                 {
                     label: 'Revenue (₹)',
@@ -410,9 +410,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 tooltip: {
                     mode: 'index',
                     intersect: false,
-                    backgroundColor: '#351211',
-                    titleColor: '#F7F0E3',
-                    bodyColor: '#EDE3D4',
+                    backgroundColor: '#06281F',
+                    titleColor: '#FFFFFF',
+                    bodyColor: '#E8F1EC',
                     borderColor: '#C49A45',
                     borderWidth: 1,
                     padding: 8,
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         display: false
                     },
                     ticks: {
-                        color: '#81766D',
+                        color: '#60736B',
                         font: {
                             size: 9.5,
                             family: 'Plus Jakarta Sans'
@@ -435,10 +435,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 y: {
                     grid: {
-                        color: 'rgba(216, 198, 168, 0.3)'
+                        color: 'rgba(200, 216, 207, 0.4)'
                     },
                     ticks: {
-                        color: '#81766D',
+                        color: '#60736B',
                         font: {
                             size: 9.5,
                             family: 'Plus Jakarta Sans'

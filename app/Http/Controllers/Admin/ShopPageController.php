@@ -36,12 +36,9 @@ class ShopPageController extends Controller
         ]);
 
         $settings = [
-            'shop_hero_visible' => $request->boolean('shop_hero_visible') ? '1' : '0',
             'shop_hero_eyebrow' => $request->input('shop_hero_eyebrow', '🛍 SHOP'),
-            'shop_hero_title' => $request->input('shop_hero_title', 'দোকান'),
+            'shop_hero_title' => $request->input('shop_hero_title', 'SHOP'),
             'shop_hero_description' => $request->input('shop_hero_description', 'Products are being added. For any product enquiry please call or WhatsApp us.'),
-            'shop_grid_visible' => $request->boolean('shop_grid_visible') ? '1' : '0',
-            'shop_cta_visible' => $request->boolean('shop_cta_visible') ? '1' : '0',
             'shop_cta_eyebrow' => $request->input('shop_cta_eyebrow', 'PERSONALIZED RECOMMENDATION'),
             'shop_cta_title' => $request->input('shop_cta_title', 'Need Guidance on Gemstones or Remedies?'),
             'shop_cta_description' => $request->input('shop_cta_description', 'Gemstones and Yantras work best when prescribed strictly according to your horoscope\'s planetary periods (Dasha) and planetary strength.'),
@@ -49,6 +46,12 @@ class ShopPageController extends Controller
             'shop_cta_button_url' => $request->input('shop_cta_button_url', '/book-consultation'),
             'shop_cta_link_type' => $request->input('shop_cta_link_type', 'internal'),
         ];
+
+        foreach (['shop_hero_visible', 'shop_grid_visible', 'shop_cta_visible'] as $toggleKey) {
+            if ($request->has($toggleKey)) {
+                $settings[$toggleKey] = $request->boolean($toggleKey) ? '1' : '0';
+            }
+        }
 
         foreach ($settings as $key => $value) {
             SiteSetting::set($key, $value, 'shop');

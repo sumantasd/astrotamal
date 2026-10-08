@@ -116,7 +116,9 @@ class FooterSettingsController extends Controller
         }
 
         foreach ($checkboxes as $cbKey) {
-            SiteSetting::set($cbKey, $request->has($cbKey) ? '1' : '0', 'footer');
+            if ($request->has($cbKey)) {
+                SiteSetting::set($cbKey, $request->input($cbKey) == '1' ? '1' : '0', 'footer');
+            }
         }
 
         return redirect()->back()->with('status', 'Footer settings and contact details updated successfully.');

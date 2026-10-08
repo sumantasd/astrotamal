@@ -17,7 +17,7 @@
     @endif
 
     @if($title)
-        <h2 class="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#29211F] leading-tight">
+        <h2 class="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#17211D] leading-tight">
             {!! $title !!}
             @if($highlight)
                 <span class="text-[#C49A45] italic">{!! $highlight !!}</span>
@@ -26,8 +26,9 @@
     @endif
 
     @if($subtext)
-        <p class="text-sm sm:text-base text-[#81766D] leading-relaxed font-normal pt-1">
+        <p class="text-sm sm:text-base text-[#66736D] leading-relaxed font-normal pt-1">
             {{ $subtext }}
         </p>
     @endif
 </div>
+

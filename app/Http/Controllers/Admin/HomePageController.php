@@ -78,7 +78,9 @@ class HomePageController extends Controller
         // Toggle defaults
         $toggles = ['section_hero_active', 'section_features_active', 'section_quick_booking_active', 'section_videos_active', 'section_pre_footer_active'];
         foreach ($toggles as $toggle) {
-            SiteSetting::set($toggle, $request->has($toggle) ? '1' : '0', 'homepage');
+            if ($request->has($toggle)) {
+                SiteSetting::set($toggle, $request->input($toggle) == '1' ? '1' : '0', 'homepage');
+            }
         }
 
         // Image uploads

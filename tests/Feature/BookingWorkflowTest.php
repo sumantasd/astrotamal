@@ -28,7 +28,7 @@ class BookingWorkflowTest extends TestCase
             'birth_place' => 'Kolkata',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -51,8 +51,8 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543211',
             'birth_date' => '1992-08-20',
             'consultation_type' => 'normal',
-            'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '02:00 PM - 05:00 PM IST',
+            'preferred_date' => Carbon::now('Asia/Kolkata')->addDays(7)->format('Y-m-d'),
+            'preferred_time' => '4:25 PM - 4:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -69,7 +69,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1995-05-15',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response->assertSessionHasErrors('terms_consent');
@@ -82,7 +82,7 @@ class BookingWorkflowTest extends TestCase
         $tomorrow = Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d');
         BlockedSlot::create([
             'blocked_date' => $tomorrow,
-            'time_slot' => '10:00 AM - 01:00 PM IST',
+            'time_slot' => '9:25 PM - 9:45 PM',
             'reason' => 'Holiday',
             'is_active' => true,
         ]);
@@ -93,7 +93,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1995-05-15',
             'consultation_type' => 'urgent',
             'preferred_date' => $tomorrow,
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -110,7 +110,7 @@ class BookingWorkflowTest extends TestCase
         BlockedSlot::create([
             'is_recurring' => true,
             'day_of_week' => (string)$dayOfWeek,
-            'time_slot' => '10:00 AM - 01:00 PM IST',
+            'time_slot' => '9:25 PM - 9:45 PM',
             'reason' => 'Weekly Off',
             'is_active' => true,
         ]);
@@ -121,7 +121,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1995-05-15',
             'consultation_type' => 'urgent',
             'preferred_date' => $targetDate->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -137,7 +137,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response = $this->get(route('consultation.checkout', ['reference' => $appointment->booking_reference]));
@@ -156,7 +156,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response = $this->postJson(route('consultation.payment.create-order'), [
@@ -189,7 +189,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response = $this->postJson(route('consultation.payment.verify'), [
@@ -215,7 +215,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response = $this->post(route('consultation.payment.verify'), [
@@ -246,7 +246,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         // First Verification
@@ -295,7 +295,7 @@ class BookingWorkflowTest extends TestCase
             'birth_time' => '11:18 PM',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -314,7 +314,7 @@ class BookingWorkflowTest extends TestCase
             'birth_time' => 'invalid-time-value',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -331,7 +331,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1990-01-01',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '02:00 PM - 05:00 PM IST',
+            'preferred_time' => '4:25 PM - 4:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -347,8 +347,8 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543219',
             'birth_date' => '1990-01-01',
             'consultation_type' => 'normal',
-            'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_date' => Carbon::now('Asia/Kolkata')->addDays(7)->format('Y-m-d'),
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -365,7 +365,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => $tomorrow,
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response = $this->post(route('consultation.submit'), [
@@ -374,7 +374,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1990-01-01',
             'consultation_type' => 'urgent',
             'preferred_date' => $tomorrow,
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -383,7 +383,7 @@ class BookingWorkflowTest extends TestCase
     }
 
     /** @test */
-    public function test_urgent_booking_can_select_today_when_slot_available()
+    public function test_urgent_booking_cannot_select_today()
     {
         $today = Carbon::now('Asia/Kolkata')->format('Y-m-d');
         $response = $this->post(route('consultation.submit'), [
@@ -392,13 +392,12 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1990-01-01',
             'consultation_type' => 'urgent',
             'preferred_date' => $today,
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
-        $appointment = Appointment::first();
-        $this->assertNotNull($appointment);
-        $this->assertEquals($today, $appointment->preferred_date->format('Y-m-d'));
+        $response->assertSessionHasErrors('preferred_date');
+        $this->assertEquals(0, Appointment::count());
     }
 
     /** @test */
@@ -429,7 +428,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1990-01-01',
             'consultation_type' => 'urgent',
             'preferred_date' => $yesterday,
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
         ]);
 
@@ -445,7 +444,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response = $this->get(route('consultation.receipt.pdf', ['reference' => $appointment->booking_reference]));
@@ -461,7 +460,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         BookingService::confirmPaymentAndBooking($appointment, 'pay_pdf_test_999', 'Razorpay', 'ord_pdf_test_999');
@@ -481,7 +480,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1992-05-15',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'terms_consent' => '1',
             'create_account' => '1',
             'password' => 'secret1234',
@@ -516,7 +515,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $newDate = Carbon::tomorrow('Asia/Kolkata')->addDays(1)->format('Y-m-d');
@@ -555,7 +554,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         $response = $this->actingAs($admin)->put(route('admin.appointments.update', $appointment), [
@@ -581,7 +580,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         BookingService::markPaymentFailed($appointment, 'Razorpay', 'order_failed_123', 'Bank decline');
@@ -608,7 +607,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9876543210',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         // Travel 20 minutes into the future to expire slot reservation
@@ -652,7 +651,7 @@ class BookingWorkflowTest extends TestCase
             'consultation_mode' => 'Audio',
             'amount' => 3000.00,
             'preferred_date' => '2026-10-06',
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'status' => 'Confirmed',
             'payment_status' => 'Paid',
         ]);
@@ -667,7 +666,7 @@ class BookingWorkflowTest extends TestCase
             'consultation_mode' => 'Audio',
             'amount' => 5000.00,
             'preferred_date' => '2026-10-05',
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'status' => 'Confirmed',
             'payment_status' => 'Paid',
         ]);
@@ -682,7 +681,7 @@ class BookingWorkflowTest extends TestCase
             'consultation_mode' => 'Audio',
             'amount' => 3000.00,
             'preferred_date' => '2026-10-05',
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'status' => 'Cancelled',
             'payment_status' => 'Paid',
         ]);
@@ -697,7 +696,7 @@ class BookingWorkflowTest extends TestCase
             'consultation_mode' => 'Audio',
             'amount' => 5000.00,
             'preferred_date' => '2026-10-05',
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
             'status' => 'Expired',
             'payment_status' => 'Expired',
         ]);
@@ -754,7 +753,7 @@ class BookingWorkflowTest extends TestCase
             'phone' => '9999977777',
             'consultation_type' => 'urgent',
             'preferred_date' => Carbon::tomorrow('Asia/Kolkata')->format('Y-m-d'),
-            'preferred_time' => '10:00 AM - 01:00 PM IST',
+            'preferred_time' => '9:25 PM - 9:45 PM',
         ]);
 
         // Confirm twice

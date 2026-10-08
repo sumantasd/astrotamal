@@ -50,32 +50,24 @@ class ServicesPageCmsTest extends TestCase
 
         $response = $this->get('/services');
         $response->assertDontSee('⚡ QUICK BOOKING');
-        $response->assertSee('ফোনে বিচার');
+        $response->assertSee('জোটক বিচার');
 
-        // 3. Turn Kundli OFF
-        SiteSetting::set('services_kundli_active', '0', 'services');
-
-        $response = $this->get('/services');
-        $response->assertDontSee('Kundli preparation and reading, discussed during your consultation call.');
-        $response->assertSee('Remedy Suggestion');
-
-        // 4. Turn Remedy OFF
-        SiteSetting::set('services_remedy_active', '0', 'services');
+        // 3. Turn Numerology OFF
+        SiteSetting::set('services_numerology_active', '0', 'services');
 
         $response = $this->get('/services');
-        $response->assertDontSee('Remedy Suggestion');
+        $response->assertDontSee('Numerology Calculation');
 
-        // 5. Restore sections ON
+        // 4. Restore sections ON
         SiteSetting::set('section_services_hero_active', '1', 'services');
         SiteSetting::set('section_services_quick_booking_active', '1', 'services');
-        SiteSetting::set('services_kundli_active', '1', 'services');
-        SiteSetting::set('services_remedy_active', '1', 'services');
+        SiteSetting::set('services_numerology_active', '1', 'services');
 
         $restoredResponse = $this->get('/services');
         $restoredResponse->assertSee('Guidance For The Important Questions In Life');
         $restoredResponse->assertSee('⚡ QUICK BOOKING');
-        $restoredResponse->assertSee('Kundli');
-        $restoredResponse->assertSee('Remedy Suggestion');
+        $restoredResponse->assertSee('জোটক বিচার');
+        $restoredResponse->assertSee('Numerology Calculation');
     }
 
     public function test_admin_can_access_services_page_cms_editor(): void

@@ -51,9 +51,9 @@
 
 @if($footerEnabled)
 <!-- ==========================================
-     SITE FOOTER (Deep Burgundy #351211 Theme)
+     SITE FOOTER (Darkest Green #06281F Theme)
      ========================================== -->
-<footer class="pt-16 pb-8 relative overflow-hidden text-[#F7F0E3]" style="background-color: #351211 !important; color: #F7F0E3 !important;">
+<footer class="pt-16 pb-8 relative overflow-hidden text-[#DDE8E2]" style="background-color: #06281F !important; color: #DDE8E2 !important;">
     
     <!-- Subtle Background Zodiac Radial Glow -->
     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#C49A45]/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -67,10 +67,10 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-14 border-b border-[#D8C6A8]/20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-14 border-b border-[#D8CDBD]/20">
             
-            <!-- Col 1: Brand Info & Social -->
-            @if($col1Enabled)
+            {{-- Col 1: Brand Info & Social --}}
+            @if($col1Enabled || $footerLogoVisible)
                 <div class="space-y-4">
                     @if($footerLogoVisible)
                         <a href="{{ route('home') }}" class="group flex items-center transition-opacity hover:opacity-95">
@@ -80,12 +80,14 @@
                                  class="h-12 sm:h-14 lg:h-16 w-auto object-contain brightness-105" />
                         </a>
                     @endif
-                    <p class="text-xs text-[#F7F0E3]/90 leading-relaxed">
-                        {{ $footerDescription }}
-                    </p>
+                    @if($col1Enabled)
+                        <p class="text-xs text-[#DDE8E2] leading-relaxed">
+                            {{ $footerDescription }}
+                        </p>
+                    @endif
                     
                     <!-- Dynamic Social Media Icons -->
-                    @if($socialLinks->isNotEmpty())
+                    @if($col1Enabled && $socialLinks->isNotEmpty())
                         <div class="flex items-center space-x-3 pt-2">
                             @foreach ($socialLinks as $s)
                                 @php
@@ -95,7 +97,7 @@
                                    target="_blank" 
                                    rel="noopener noreferrer"
                                    title="{{ $s->platform }}"
-                                   class="w-9 h-9 rounded-full bg-[#541F1D] border border-[#D8C6A8]/30 flex items-center justify-center text-[#F7F0E3] hover:text-[#C49A45] hover:border-[#C49A45] transition-all">
+                                   class="w-9 h-9 rounded-full bg-[#0B3D2E] border border-[#D8CDBD]/30 flex items-center justify-center text-[#F7F0E3] hover:text-[#C49A45] hover:border-[#C49A45] transition-all">
                                     <span class="sr-only">{{ $s->platform }}</span>
                                     @if(str_contains($pName, 'facebook'))
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
@@ -119,10 +121,10 @@
                 </div>
             @endif
 
-            <!-- Col 2: Quick Navigation -->
+            {{-- Col 2: Quick Navigation --}}
             @if($col2Enabled)
                 <div>
-                    <h4 class="font-serif-luxury text-lg font-semibold text-[#C49A45] tracking-wide border-b border-[#D8C6A8]/25 pb-2 mb-4 inline-block">{{ $col2Title }}</h4>
+                    <h4 class="font-serif-luxury text-lg font-semibold text-[#C49A45] tracking-wide border-b border-[#D8CDBD]/25 pb-2 mb-4 inline-block">{{ $col2Title }}</h4>
                     <ul class="space-y-2.5 text-xs text-[#F7F0E3]">
                         @foreach ($navItems as $item)
                             <li>
@@ -137,10 +139,10 @@
                 </div>
             @endif
 
-            <!-- Col 3: Our Guidance -->
+            {{-- Col 3: Our Guidance --}}
             @if($col3Enabled)
                 <div>
-                    <h4 class="font-serif-luxury text-lg font-semibold text-[#C49A45] tracking-wide border-b border-[#D8C6A8]/25 pb-2 mb-4 inline-block">{{ $col3Title }}</h4>
+                    <h4 class="font-serif-luxury text-lg font-semibold text-[#C49A45] tracking-wide border-b border-[#D8CDBD]/25 pb-2 mb-4 inline-block">{{ $col3Title }}</h4>
                     <ul class="space-y-2.5 text-xs text-[#F7F0E3]">
                         @foreach ($guidanceItems as $g)
                             <li>
@@ -155,10 +157,10 @@
                 </div>
             @endif
 
-            <!-- Col 4: Consultation Office / Contact Info -->
+            {{-- Col 4: Consultation Office / Contact Info --}}
             @if($col4Enabled)
                 <div class="space-y-3">
-                    <h4 class="font-serif-luxury text-lg font-semibold text-[#C49A45] tracking-wide border-b border-[#D8C6A8]/25 pb-2 mb-4 inline-block">{{ $col4Title }}</h4>
+                    <h4 class="font-serif-luxury text-lg font-semibold text-[#C49A45] tracking-wide border-b border-[#D8CDBD]/25 pb-2 mb-4 inline-block">{{ $col4Title }}</h4>
                     <div class="text-xs space-y-3 text-[#F7F0E3]">
                         <!-- Address -->
                         @if(!empty($contactAddress))
@@ -202,7 +204,7 @@
         </div>
 
         <!-- Copyright & Legal -->
-        <div class="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#D8C6A8]/80 space-y-4 md:space-y-0">
+        <div class="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#DDE8E2]/80 space-y-4 md:space-y-0">
             @if($copyrightEnabled)
                 <div>
                     {{ $copyrightText }}

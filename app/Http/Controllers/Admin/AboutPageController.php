@@ -133,11 +133,12 @@ class AboutPageController extends Controller
         ]);
 
         // Save toggles
-        SiteSetting::set('section_about_hero_active', $request->has('section_about_hero_active') ? '1' : '0', 'about');
-        SiteSetting::set('section_about_approach_active', $request->has('section_about_approach_active') ? '1' : '0', 'about');
-        SiteSetting::set('section_about_philosophy_active', $request->has('section_about_philosophy_active') ? '1' : '0', 'about');
-        SiteSetting::set('section_about_guidance_active', $request->has('section_about_guidance_active') ? '1' : '0', 'about');
-        SiteSetting::set('section_about_methodology_active', $request->has('section_about_methodology_active') ? '1' : '0', 'about');
+        $toggles = ['section_about_hero_active', 'section_about_approach_active', 'section_about_philosophy_active', 'section_about_guidance_active', 'section_about_methodology_active'];
+        foreach ($toggles as $toggle) {
+            if ($request->has($toggle)) {
+                SiteSetting::set($toggle, $request->input($toggle) == '1' ? '1' : '0', 'about');
+            }
+        }
 
         // Text settings
         $textFields = [

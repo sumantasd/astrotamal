@@ -2,40 +2,56 @@
 
 @layer base {
   :root {
-    /* Brand Palette - Astrotamal Premium Redesign */
-    --color-burgundy-primary: #541F1D;
-    --color-burgundy-deep: #351211;
+    /* Brand Palette - Global Green Theme */
+    --color-primary: #0B3D2E;
+    --color-primary-hover: #145A43;
+    --color-primary-dark: #06281F;
+    --color-secondary: #145A43;
+    --color-forest: #083528;
+    --color-green-soft: #E8F1EC;
+    --color-green-light: #F3F8F5;
+    --color-gold: #C49A45;
+    --color-gold-light: #D8B86A;
+    --color-cream: #F7F0E3;
+    --color-text: #17211D;
+    --color-muted: #60736B;
+    --color-border: #C8D8CF;
+    --color-white: #FFFFFF;
+
+    /* Backward compatibility tokens */
+    --color-burgundy-primary: #0B3D2E;
+    --color-burgundy-deep: #06281F;
     --color-cream-warm: #F7F0E3;
-    --color-cream-soft: #EDE3D4;
-    --color-cream-light: #FDFBF7;
+    --color-cream-soft: #E8F1EC;
+    --color-cream-light: #F3F8F5;
     --color-gold-metallic: #C49A45;
-    --color-gold-border: #D8C6A8;
-    --color-text-primary: #29211F;
-    --color-text-secondary: #81766D;
+    --color-gold-border: #C8D8CF;
+    --color-text-primary: #17211D;
+    --color-text-secondary: #60736B;
 
     /* Tailwind Compatibility Tokens */
-    --color-gold-300: #D8C6A8;
+    --color-gold-300: #C8D8CF;
     --color-gold-400: #C49A45;
     --color-gold-500: #C49A45;
     --color-gold-600: #C49A45;
-    --color-gold-700: #541F1D;
+    --color-gold-700: #0B3D2E;
 
-    --color-ivory-50: #FDFBF7;
-    --color-ivory-100: #F7F0E3;
-    --color-ivory-200: #EDE3D4;
-    --color-ivory-300: #D8C6A8;
+    --color-ivory-50: #F3F8F5;
+    --color-ivory-100: #E8F1EC;
+    --color-ivory-200: #F7F0E3;
+    --color-ivory-300: #C8D8CF;
   }
 
   html {
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
-    background-color: #FDFBF7;
-    color: #29211F;
+    background-color: #F3F8F5;
+    color: #17211D;
   }
 
   body {
-    background-color: #FDFBF7;
-    color: #29211F;
+    background-color: #F3F8F5;
+    color: #17211D;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     width: 100%;
@@ -62,12 +78,12 @@
 }
 
 /* Custom Brand Utilities */
-.bg-burgundy-primary {
-  background-color: #541F1D !important;
+.bg-burgundy-primary, .bg-deep-green {
+  background-color: #0B3D2E !important;
 }
 
-.bg-burgundy-deep {
-  background-color: #351211 !important;
+.bg-burgundy-deep, .bg-dark-green {
+  background-color: #06281F !important;
 }
 
 .bg-cream-warm {
@@ -75,23 +91,23 @@
 }
 
 .bg-cream-soft {
-  background-color: #EDE3D4 !important;
+  background-color: #F7F0E3 !important;
 }
 
 .bg-cream-light {
-  background-color: #FDFBF7 !important;
+  background-color: #FBF8F1 !important;
 }
 
 .bg-gold-metallic {
   background-color: #C49A45 !important;
 }
 
-.text-burgundy-primary {
-  color: #541F1D !important;
+.text-burgundy-primary, .text-deep-green {
+  color: #0B3D2E !important;
 }
 
-.text-burgundy-deep {
-  color: #351211 !important;
+.text-burgundy-deep, .text-dark-green {
+  color: #06281F !important;
 }
 
 .text-cream-warm {
@@ -99,7 +115,7 @@
 }
 
 .text-cream-light {
-  color: #FDFBF7 !important;
+  color: #FBF8F1 !important;
 }
 
 .text-gold-metallic {
@@ -107,50 +123,55 @@
 }
 
 .text-brand-primary {
-  color: #29211F !important;
+  color: #17211D !important;
 }
 
 .text-brand-secondary {
-  color: #81766D !important;
+  color: #66736D !important;
 }
 
 .border-gold-soft {
-  border-color: #D8C6A8 !important;
+  border-color: #D8CDBD !important;
 }
 
 .border-burgundy-primary {
-  border-color: #541F1D !important;
+  border-color: #0B3D2E !important;
 }
 
 /* Buttons */
-.btn-burgundy-primary {
-  background-color: #541F1D !important;
-  color: #F7F0E3 !important;
-  border: 1px solid #D8C6A8;
+.btn-burgundy-primary, .btn-deep-green {
+  background-color: #0B3D2E !important;
+  color: #FFFFFF !important;
+  border: 1px solid #0B3D2E;
   border-radius: 0.5rem;
   font-weight: 700;
   transition: all 0.2s ease-in-out;
 }
 
-.btn-burgundy-primary:hover {
-  background-color: #351211 !important;
-  border-color: #C49A45 !important;
-  color: #FDFBF7 !important;
+.btn-burgundy-primary:hover, .btn-deep-green:hover {
+  background-color: #145A43 !important;
+  border-color: #145A43 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-burgundy-primary:active, .btn-deep-green:active {
+  background-color: #06281F !important;
+  border-color: #06281F !important;
 }
 
 .btn-secondary-light {
   background-color: #F7F0E3 !important;
-  color: #541F1D !important;
-  border: 1px solid #D8C6A8 !important;
+  color: #0B3D2E !important;
+  border: 1px solid #D8CDBD !important;
   border-radius: 0.5rem;
   font-weight: 700;
   transition: all 0.2s ease-in-out;
 }
 
 .btn-secondary-light:hover {
-  background-color: #EDE3D4 !important;
-  border-color: #C49A45 !important;
-  color: #351211 !important;
+  background-color: #0B3D2E !important;
+  border-color: #0B3D2E !important;
+  color: #FFFFFF !important;
 }
 
 /* Gold Gradient & Text Effects */
@@ -159,7 +180,7 @@
 }
 
 .bg-gold-gradient {
-  background-color: #541F1D;
+  background-color: #0B3D2E;
   color: #F7F0E3;
 }
 
@@ -177,11 +198,13 @@ input[type="email"],
 input[type="tel"],
 input[type="date"],
 input[type="time"],
+input[type="number"],
+input[type="password"],
 select,
 textarea {
-  background-color: #FDFBF7;
-  color: #29211F;
-  border: 1px solid #D8C6A8;
+  background-color: #FFFFFF;
+  color: #17211D;
+  border: 1px solid #D8CDBD;
 }
 
 input[type="text"]:focus,
@@ -189,25 +212,13 @@ input[type="email"]:focus,
 input[type="tel"]:focus,
 input[type="date"]:focus,
 input[type="time"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #C49A45;
-  box-shadow: 0 0 0 2px rgba(196, 154, 69, 0.2);
-}
-
-/* Zodiac Halo Animation */
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 90s linear infinite;
+  border-color: #0B3D2E;
+  box-shadow: 0 0 0 2px rgba(11, 61, 46, 0.2);
 }
 
 /* Custom Scrollbar */
@@ -220,7 +231,7 @@ textarea:focus {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D8C6A8;
+  background: #D8CDBD;
   border-radius: 4px;
 }
 

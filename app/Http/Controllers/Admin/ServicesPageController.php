@@ -134,7 +134,9 @@ class ServicesPageController extends Controller
         ];
 
         foreach ($toggles as $toggle) {
-            SiteSetting::set($toggle, $request->has($toggle) ? '1' : '0', 'services');
+            if ($request->has($toggle)) {
+                SiteSetting::set($toggle, $request->input($toggle) == '1' ? '1' : '0', 'services');
+            }
         }
 
         // Save text settings

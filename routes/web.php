@@ -111,6 +111,7 @@ Route::prefix('admin-tamal')->name('admin.')->group(function () {
         Route::get('/appointments', [CustomAdminAppointmentController::class, 'index'])->name('appointments.index');
         Route::get('/appointments/{appointment}', [CustomAdminAppointmentController::class, 'show'])->name('appointments.show');
         Route::put('/appointments/{appointment}', [CustomAdminAppointmentController::class, 'update'])->name('appointments.update');
+        Route::delete('/appointments/{appointment}', [CustomAdminAppointmentController::class, 'destroy'])->name('appointments.destroy');
 
         // Payments
         Route::get('/payments', [CustomAdminPaymentController::class, 'transactions'])->name('payments.transactions');

@@ -5,20 +5,20 @@
 
 @section('content')
 
-<!-- HERO SECTION -->
-<section class="relative bg-[#F7F0E3] text-[#29211F] py-16 sm:py-20 overflow-hidden border-b border-[#D8C6A8] flex items-center min-h-[340px]">
+<!-- HERO SECTION (Light Green #F3F8F5) -->
+<section class="relative bg-[#F3F8F5] text-[#17211D] py-16 sm:py-20 overflow-hidden border-b border-[#C8D8CF] flex items-center min-h-[340px]">
     <!-- Celestial & Numerical Overlay -->
     <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#C49A45_1px,transparent_1px)] [background-size:24px_24px]"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[rgba(196,154,69,0.08)] rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#C49A45]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center space-y-4">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center space-y-4 z-10">
         <!-- Breadcrumb -->
-        <nav class="flex justify-center items-center space-x-2 text-xs uppercase tracking-widest text-[#81766D]">
-            <a href="{{ route('home') }}" class="hover:text-[#C49A45] transition-colors">HOME</a>
+        <nav class="flex justify-center items-center space-x-2 text-xs uppercase tracking-widest text-[#C49A45]">
+            <a href="{{ route('home') }}" class="hover:text-[#0B3D2E] transition-colors">HOME</a>
             <span>/</span>
-            <span class="text-[#81766D]">MORE</span>
+            <span>MORE</span>
             <span>/</span>
-            <span class="text-[#C49A45] font-semibold">NUMEROLOGY CALCULATOR</span>
+            <span class="text-[#0B3D2E] font-semibold">NUMEROLOGY CALCULATOR</span>
         </nav>
 
         <!-- Eyebrow -->
@@ -29,19 +29,19 @@
         </div>
 
         <!-- Heading -->
-        <h1 class="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#29211F]">
+        <h1 class="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#0B3D2E]">
             Discover the Numbers Behind Your Birth
         </h1>
 
         <!-- Supporting Text -->
-        <p class="text-xs sm:text-sm md:text-base text-[#81766D] max-w-2xl mx-auto font-light leading-relaxed">
+        <p class="text-xs sm:text-sm md:text-base text-[#60736B] max-w-2xl mx-auto font-light leading-relaxed">
             Explore traditional numerological calculations using your name and date of birth.
         </p>
     </div>
 </section>
 
-<!-- CALCULATOR SECTION -->
-<section class="bg-[#FDFBF7] text-[#29211F] py-16 sm:py-24" 
+<!-- CALCULATOR SECTION (Very Light Green #F3F8F5) -->
+<section class="bg-[#F3F8F5] text-[#17211D] py-16 sm:py-24" 
          x-data="{
              fullName: '',
              dob: '',
@@ -111,45 +111,45 @@
         <!-- Header -->
         <div class="text-center max-w-2xl mx-auto space-y-2">
             <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C49A45]">CALCULATE YOUR VIBRATIONS</span>
-            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#29211F]">Numerology Form</h2>
-            <p class="text-xs sm:text-sm text-[#81766D]">Enter your details below to compute your Mulank, Bhagyank, and Name Number.</p>
+            <h2 class="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#0B3D2E]">Numerology Form</h2>
+            <p class="text-xs sm:text-sm text-[#60736B]">Enter your details below to compute your Mulank, Bhagyank, and Name Number.</p>
         </div>
 
         <!-- Form Card -->
-        <div class="bg-[#FDFBF7] border border-[#D8C6A8] rounded-2xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="bg-[#FFFFFF] border border-[#C8D8CF] rounded-2xl p-6 sm:p-10 shadow-sm space-y-6">
             <form @submit.prevent="calculate()" class="space-y-6">
                 <!-- Full Name -->
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-2">FULL NAME <span class="text-[#C49A45]">*</span></label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#17211D] mb-2">FULL NAME <span class="text-[#C49A45]">*</span></label>
                     <input type="text" 
                            x-model="fullName" 
                            required 
                            placeholder="Enter your full name as used in official documents" 
-                           class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#29211F] placeholder-[#81766D] focus:outline-none focus:border-[#C49A45] focus:ring-1 focus:ring-[#C49A45] transition-all">
+                           class="w-full bg-[#FFFFFF] border border-[#C8D8CF] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#17211D] placeholder-[#60736B]/60 focus:outline-none focus:border-[#145A43] focus:ring-1 focus:ring-[#145A43] transition-all">
                 </div>
 
                 <!-- Date of Birth & Email -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-2">DATE OF BIRTH <span class="text-[#C49A45]">*</span></label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#17211D] mb-2">DATE OF BIRTH <span class="text-[#C49A45]">*</span></label>
                         <input type="date" 
                                x-model="dob" 
                                required 
-                               class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#29211F] focus:outline-none focus:border-[#C49A45] focus:ring-1 focus:ring-[#C49A45] transition-all">
+                               class="w-full bg-[#FFFFFF] border border-[#C8D8CF] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#17211D] focus:outline-none focus:border-[#145A43] focus:ring-1 focus:ring-[#145A43] transition-all">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-[#29211F] mb-2">EMAIL ADDRESS <span class="text-[#81766D] font-normal">(Optional)</span></label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#17211D] mb-2">EMAIL ADDRESS <span class="text-[#60736B] font-normal">(Optional)</span></label>
                         <input type="email" 
                                x-model="email" 
                                placeholder="name@example.com" 
-                               class="w-full bg-[#FDFBF7] border border-[#D8C6A8] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#29211F] placeholder-[#81766D] focus:outline-none focus:border-[#C49A45] focus:ring-1 focus:ring-[#C49A45] transition-all">
+                               class="w-full bg-[#FFFFFF] border border-[#C8D8CF] rounded-lg px-4 py-3 text-xs sm:text-sm text-[#17211D] placeholder-[#60736B]/60 focus:outline-none focus:border-[#145A43] focus:ring-1 focus:ring-[#145A43] transition-all">
                     </div>
                 </div>
 
                 <!-- Primary Submit CTA -->
                 <button type="submit" 
-                        class="w-full py-4 text-xs font-bold uppercase tracking-widest text-[#F7F0E3] bg-[#541F1D] rounded-lg shadow hover:bg-[#351211] border border-[#D8C6A8] transition-all flex items-center justify-center space-x-2">
+                        class="w-full py-4 text-xs font-bold uppercase tracking-widest text-[#FFFFFF] bg-[#0B3D2E] rounded-lg shadow hover:bg-[#145A43] border border-[#0B3D2E] hover:border-[#C49A45] transition-all flex items-center justify-center space-x-2">
                     <span>CALCULATE NUMEROLOGY</span>
                     <span>→</span>
                 </button>
@@ -164,69 +164,69 @@
              x-transition:enter-end="opacity-100 translate-y-0"
              class="space-y-8">
             
-            <div class="border-b border-[#D8C6A8] pb-4">
+            <div class="border-b border-[#C8D8CF] pb-4">
                 <span class="text-xs font-bold uppercase tracking-widest text-[#C49A45]">NUMEROLOGY BREAKDOWN</span>
-                <h3 class="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#29211F] mt-1" x-text="'Calculation Results for ' + fullName"></h3>
+                <h3 class="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#0B3D2E] mt-1" x-text="'Calculation Results for ' + fullName"></h3>
             </div>
 
             <!-- 3 RESULT CARDS -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- 01. MULANK CARD -->
-                <div class="bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl p-6 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between border-b border-[#D8C6A8]/60 pb-3">
+                <div class="bg-[#E8F1EC] border border-[#C8D8CF] rounded-xl p-6 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-[#C8D8CF]/60 pb-3">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-[#C49A45]">MULANK (BIRTH NUMBER)</span>
-                        <span class="text-2xl font-bold font-serif-luxury text-[#29211F]" x-text="mulank"></span>
+                        <span class="text-2xl font-bold font-serif-luxury text-[#0B3D2E]" x-text="mulank"></span>
                     </div>
                     <div class="space-y-2">
-                        <span class="block text-xs font-semibold text-[#541F1D]" x-text="interpretations[mulank]?.planet"></span>
-                        <h4 class="font-serif-luxury text-base font-bold text-[#29211F]" x-text="interpretations[mulank]?.title"></h4>
-                        <p class="text-xs text-[#81766D] font-normal leading-relaxed" x-text="interpretations[mulank]?.desc"></p>
+                        <span class="block text-xs font-semibold text-[#0B3D2E]" x-text="interpretations[mulank]?.planet"></span>
+                        <h4 class="font-serif-luxury text-base font-bold text-[#0B3D2E]" x-text="interpretations[mulank]?.title"></h4>
+                        <p class="text-xs text-[#60736B] font-normal leading-relaxed" x-text="interpretations[mulank]?.desc"></p>
                     </div>
                 </div>
 
                 <!-- 02. BHAGYANK CARD -->
-                <div class="bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl p-6 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between border-b border-[#D8C6A8]/60 pb-3">
+                <div class="bg-[#E8F1EC] border border-[#C8D8CF] rounded-xl p-6 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-[#C8D8CF]/60 pb-3">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-[#C49A45]">BHAGYANK (LIFE PATH)</span>
-                        <span class="text-2xl font-bold font-serif-luxury text-[#29211F]" x-text="bhagyank"></span>
+                        <span class="text-2xl font-bold font-serif-luxury text-[#0B3D2E]" x-text="bhagyank"></span>
                     </div>
                     <div class="space-y-2">
-                        <span class="block text-xs font-semibold text-[#541F1D]" x-text="interpretations[bhagyank]?.planet"></span>
-                        <h4 class="font-serif-luxury text-base font-bold text-[#29211F]" x-text="interpretations[bhagyank]?.title"></h4>
-                        <p class="text-xs text-[#81766D] font-normal leading-relaxed" x-text="interpretations[bhagyank]?.desc"></p>
+                        <span class="block text-xs font-semibold text-[#0B3D2E]" x-text="interpretations[bhagyank]?.planet"></span>
+                        <h4 class="font-serif-luxury text-base font-bold text-[#0B3D2E]" x-text="interpretations[bhagyank]?.title"></h4>
+                        <p class="text-xs text-[#60736B] font-normal leading-relaxed" x-text="interpretations[bhagyank]?.desc"></p>
                     </div>
                 </div>
 
                 <!-- 03. NAME NUMBER CARD -->
-                <div class="bg-[#EDE3D4] border border-[#D8C6A8] rounded-xl p-6 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between border-b border-[#D8C6A8]/60 pb-3">
+                <div class="bg-[#E8F1EC] border border-[#C8D8CF] rounded-xl p-6 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-[#D8CDBD]/60 pb-3">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-[#C49A45]">NAME NUMBER</span>
-                        <span class="text-2xl font-bold font-serif-luxury text-[#29211F]" x-text="nameNumber"></span>
+                        <span class="text-2xl font-bold font-serif-luxury text-[#0B3D2E]" x-text="nameNumber"></span>
                     </div>
                     <div class="space-y-2">
-                        <span class="block text-xs font-semibold text-[#541F1D]" x-text="interpretations[nameNumber]?.planet"></span>
-                        <h4 class="font-serif-luxury text-base font-bold text-[#29211F]" x-text="interpretations[nameNumber]?.title"></h4>
-                        <p class="text-xs text-[#81766D] font-normal leading-relaxed" x-text="interpretations[nameNumber]?.desc"></p>
+                        <span class="block text-xs font-semibold text-[#0B3D2E]" x-text="interpretations[nameNumber]?.planet"></span>
+                        <h4 class="font-serif-luxury text-base font-bold text-[#0B3D2E]" x-text="interpretations[nameNumber]?.title"></h4>
+                        <p class="text-xs text-[#60736B] font-normal leading-relaxed" x-text="interpretations[nameNumber]?.desc"></p>
                     </div>
                 </div>
             </div>
 
             <!-- ARITHMETIC STEPS BREAKDOWN CARD -->
-            <div class="bg-[#351211] text-[#F7F0E3] rounded-xl p-6 border border-[#C49A45]/30 space-y-3">
+            <div class="bg-[#06281F] text-[#FFFFFF] rounded-xl p-6 border border-[#145A43] space-y-3">
                 <h4 class="font-serif-luxury text-lg font-bold text-[#C49A45]">Calculation Methodology & Arithmetic Steps</h4>
-                <div class="space-y-2 text-xs text-[#EDE3D4] font-mono leading-relaxed">
+                <div class="space-y-2 text-xs text-[#E8F1EC] font-mono leading-relaxed">
                     <p><strong class="text-[#C49A45]">Mulank Calculation:</strong> <span x-text="mulankBreakdown"></span></p>
                     <p><strong class="text-[#C49A45]">Bhagyank Calculation:</strong> <span x-text="bhagyankBreakdown"></span></p>
                     <p><strong class="text-[#C49A45]">Name Calculation:</strong> <span x-text="nameBreakdown"></span></p>
                 </div>
-                <p class="text-[11px] text-[#C49A45] italic pt-2 border-t border-[#C49A45]/20">
+                <p class="text-[11px] text-[#C49A45] italic pt-2 border-t border-[#145A43]">
                     Methodology: Traditional Pythagorean letter values (A=1, B=2, C=3...) combined with Sidereal birth-day digit reduction.
                 </p>
             </div>
 
             <!-- DISCLAIMER -->
-            <div class="p-4 bg-[#F7F0E3] border border-[#D8C6A8] rounded-lg text-xs text-[#81766D] leading-relaxed">
-                <strong class="text-[#29211F] block font-semibold mb-0.5">Traditional Numerology Notice</strong>
+            <div class="p-4 bg-[#E8F1EC] border border-[#C8D8CF] rounded-lg text-xs text-[#60736B] leading-relaxed">
+                <strong class="text-[#0B3D2E] block font-semibold mb-0.5">Traditional Numerology Notice</strong>
                 Numerical interpretations are presented as traditional symbolic insights based on classical numerology methods. They are intended for self-reflection and guidance rather than scientific assertion.
             </div>
         </div>

@@ -148,7 +148,28 @@ class AccountController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'phone' => ['required', 'string', 'max:20'],
+            'whatsapp' => ['nullable', 'string', 'max:20'],
+            'birth_date' => ['nullable', 'date'],
+            'birth_time' => [
+                'nullable',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if (!empty($value) && strtotime(trim($value)) === false) {
+                        $fail('The birth time format is invalid.');
+                    }
+                },
+            ],
+            'birth_place' => ['nullable', 'string', 'max:255'],
+            'gender' => ['nullable', 'string', 'in:Male,Female,Other'],
+            'address' => ['nullable', 'string', 'max:1000'],
         ]);
+
+        if (!empty($validated['birth_time'])) {
+            $timestamp = strtotime(trim($validated['birth_time']));
+            if ($timestamp !== false) {
+                $validated['birth_time'] = date('H:i:s', $timestamp);
+            }
+        }
 
         $user->update($validated);
 

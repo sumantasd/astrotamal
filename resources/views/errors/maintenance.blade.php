@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-[#351211] text-[#F7F0E3] font-sans antialiased min-h-screen flex items-center justify-center p-4">
+<body class="bg-[#06281F] text-[#F7F0E3] font-sans antialiased min-h-screen flex items-center justify-center p-4">
 
-    <div class="max-w-xl w-full bg-[#541F1D] border border-[#C49A45]/40 rounded-3xl p-8 sm:p-12 shadow-2xl text-center space-y-6 relative overflow-hidden">
+    <div class="max-w-xl w-full bg-[#0B3D2E] border border-[#C49A45]/40 rounded-3xl p-8 sm:p-12 shadow-2xl text-center space-y-6 relative overflow-hidden">
         
         <!-- Subtle Glow -->
         <div class="absolute -top-24 -left-24 w-48 h-48 bg-[#C49A45]/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -20,7 +20,7 @@
 
         <!-- Logo / Icon -->
         <div class="flex justify-center">
-            <div class="w-20 h-20 rounded-full bg-[#351211] border-2 border-[#C49A45] p-3 flex items-center justify-center shadow-lg">
+            <div class="w-20 h-20 rounded-full bg-[#06281F] border-2 border-[#C49A45] p-3 flex items-center justify-center shadow-lg">
                 <img src="{{ asset(\App\Models\SiteSetting::get('site_logo', 'images/ganesha-logo.png')) }}" 
                      alt="Logo" 
                      class="max-h-full max-w-full object-contain">
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Message -->
-        <p class="text-xs sm:text-sm text-[#D8C6A8]/90 leading-relaxed max-w-md mx-auto">
+        <p class="text-xs sm:text-sm text-[#D8CDBD]/90 leading-relaxed max-w-md mx-auto">
             {{ \App\Models\SiteSetting::get('site_name', 'Ganesha Astro Consultancy') }} is currently undergoing brief scheduled system updates to enhance your experience. We appreciate your patience!
         </p>
 
@@ -49,19 +49,19 @@
                 $cleanWhatsapp = preg_replace('/[^0-9]/', '', $whatsapp);
             @endphp
             <a href="tel:{{ $cleanPhone }}" 
-               class="w-full sm:w-auto px-6 py-3 rounded-full bg-[#C49A45] hover:bg-[#B38934] text-[#351211] text-xs font-bold transition-all shadow-md">
+               class="w-full sm:w-auto px-6 py-3 rounded-full bg-[#145A43] hover:bg-[#06281F] text-white text-xs font-bold transition-all shadow-md border border-[#C49A45]/40">
                 📞 Call {{ $phone }}
             </a>
             <a href="https://wa.me/91{{ $cleanWhatsapp }}" 
                target="_blank" 
                rel="noopener noreferrer" 
-               class="w-full sm:w-auto px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-md">
+               class="w-full sm:w-auto px-6 py-3 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-all shadow-md">
                 💬 WhatsApp Consultation
             </a>
         </div>
 
         <!-- Admin Access Link -->
-        <div class="pt-6 border-t border-[#C49A45]/20 text-[11px] text-[#D8C6A8]/60">
+        <div class="pt-6 border-t border-[#C49A45]/20 text-[11px] text-[#D8CDBD]/60">
             Administrator? <a href="{{ route('admin.login') }}" class="text-[#C49A45] hover:underline font-semibold">Sign in to Admin Panel</a>
         </div>
 
