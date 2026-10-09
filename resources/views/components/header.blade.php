@@ -186,10 +186,10 @@
             @if ($mobileHamburgerEnabled)
                 <button @click.stop="mobileOpen = !mobileOpen" 
                         type="button"
-                        class="w-9.5 h-9.5 sm:w-10.5 sm:h-10.5 rounded-full bg-white border border-[#BFD8C9] flex items-center justify-center text-[#0B3D2E] shadow-sm hover:bg-[#E8F1EC] focus:outline-none transition-all flex-shrink-0 animate-menu-pulse" 
+                        class="w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] rounded-full bg-white border border-[#BFD8C9] flex items-center justify-center text-[#0B3D2E] shadow-sm hover:bg-[#E8F1EC] focus:outline-none transition-all flex-shrink-0 animate-menu-pulse" 
                         :aria-expanded="mobileOpen ? 'true' : 'false'"
                         aria-label="Toggle Navigation Menu">
-                    <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-[24px] h-[24px] sm:w-[26px] sm:h-[26px] text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path x-show="!mobileOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/>
                         <path x-show="mobileOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
@@ -200,8 +200,8 @@
             <a href="{{ $logoUrl }}" class="group flex items-center transition-opacity hover:opacity-95 py-0.5 flex-shrink min-w-0">
                 <img src="{{ asset($headerLogo) }}" 
                      alt="তমাল চক্রবর্তী — Ganesha Astro Consultancy" 
-                     style="max-width: {{ $mobileLogoWidth }}px; max-height: {{ $mobileLogoHeight }}px;"
-                     class="h-8.5 xs:h-9.5 sm:h-11 w-auto object-contain max-w-full" />
+                     style="max-width: max({{ $mobileLogoWidth }}px, 220px); max-height: max({{ $mobileLogoHeight }}px, 46px);"
+                     class="h-[34px] xs:h-[38px] sm:h-[44px] w-auto object-contain max-w-full" />
             </a>
 
             <!-- 3. Quick Book Button (Pill-Shaped with Calendar Icon & Glowing Gold Accent) -->
@@ -221,9 +221,9 @@
             <!-- 4. Account Button (Circular White Button with Larger Green User Icon) -->
             @if ($mobileAccountVisible && $accountEnabled)
                 <a href="{{ $accountUrl }}" 
-                   class="w-9.5 h-9.5 sm:w-10.5 sm:h-10.5 rounded-full bg-white border border-[#BFD8C9] flex items-center justify-center text-[#0B3D2E] shadow-sm hover:bg-[#E8F1EC] transition-all flex-shrink-0"
+                   class="w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] rounded-full bg-white border border-[#BFD8C9] flex items-center justify-center text-[#0B3D2E] shadow-sm hover:bg-[#E8F1EC] transition-all flex-shrink-0"
                    aria-label="Account">
-                    <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-[24px] h-[24px] sm:w-[26px] sm:h-[26px] text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
                 </a>
