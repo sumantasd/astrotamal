@@ -171,7 +171,14 @@ class AccountController extends Controller
             }
         }
 
-        $user->update($validated);
+        $updateData = [];
+        foreach ($validated as $key => $value) {
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', $key)) {
+                $updateData[$key] = $value;
+            }
+        }
+
+        $user->update($updateData);
 
         return redirect()->route('account.profile')->with('status', 'Profile details updated successfully.');
     }

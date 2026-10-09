@@ -33,8 +33,8 @@
 
     // Mobile
     $mobileHeaderEnabled = \App\Models\SiteSetting::get('mobile_header_enabled', '1') == '1';
-    $mobileLogoWidth = \App\Models\SiteSetting::get('mobile_logo_width', '170');
-    $mobileLogoHeight = \App\Models\SiteSetting::get('mobile_logo_height', '36');
+    $mobileLogoWidth = \App\Models\SiteSetting::get('mobile_logo_width', '220');
+    $mobileLogoHeight = \App\Models\SiteSetting::get('mobile_logo_height', '46');
     $mobileHamburgerEnabled = \App\Models\SiteSetting::get('mobile_hamburger_enabled', '1') == '1';
     $mobileMenuBg = '#C3E8D2';
     $mobileMenuTextColor = '#0B3D2E';
@@ -143,43 +143,91 @@
 
     <!-- MOBILE HEADER CONTAINER (screens below lg) -->
     @if ($mobileHeaderEnabled)
-        <div class="lg:hidden flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 min-h-[56px] sm:min-h-[66px]">
+        <style>
+            @keyframes quickBookGlowPulse {
+                0%, 100% {
+                    box-shadow: 0 0 6px rgba(255, 215, 0, 0.6), 0 0 14px rgba(255, 215, 0, 0.4), inset 0 0 3px rgba(255, 215, 0, 0.3);
+                    border-color: #FFD700;
+                }
+                50% {
+                    box-shadow: 0 0 14px rgba(255, 215, 0, 0.95), 0 0 24px rgba(255, 215, 0, 0.75), inset 0 0 6px rgba(255, 215, 0, 0.6);
+                    border-color: #FFF2A1;
+                }
+            }
+
+            @keyframes menuButtonPulse {
+                0%, 100% {
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(11, 61, 46, 0.15);
+                }
+                50% {
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12), 0 0 0 3px rgba(11, 61, 46, 0.25);
+                }
+            }
+
+            .animate-quick-book-glow {
+                animation: quickBookGlowPulse 2.4s infinite ease-in-out;
+            }
+
+            .animate-menu-pulse {
+                animation: menuButtonPulse 3s infinite ease-in-out;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .animate-quick-book-glow,
+                .animate-menu-pulse {
+                    animation: none !important;
+                }
+            }
+        </style>
+
+        <div class="lg:hidden flex items-center justify-between w-full max-w-7xl mx-auto px-2 sm:px-4 py-1.5 min-h-[58px] sm:min-h-[66px] gap-1 sm:gap-2">
             
-            <!-- Left: Logo -->
-            <a href="{{ $logoUrl }}" class="group flex items-center transition-opacity hover:opacity-95 py-0.5">
+            <!-- 1. Menu Button (Circular White Button with Larger Green Hamburger Icon & Pulse) -->
+            @if ($mobileHamburgerEnabled)
+                <button @click.stop="mobileOpen = !mobileOpen" 
+                        type="button"
+                        class="w-9.5 h-9.5 sm:w-10.5 sm:h-10.5 rounded-full bg-white border border-[#BFD8C9] flex items-center justify-center text-[#0B3D2E] shadow-sm hover:bg-[#E8F1EC] focus:outline-none transition-all flex-shrink-0 animate-menu-pulse" 
+                        :aria-expanded="mobileOpen ? 'true' : 'false'"
+                        aria-label="Toggle Navigation Menu">
+                    <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path x-show="!mobileOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/>
+                        <path x-show="mobileOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            @endif
+
+            <!-- 2. Logo (Increased Size & Prominence) -->
+            <a href="{{ $logoUrl }}" class="group flex items-center transition-opacity hover:opacity-95 py-0.5 flex-shrink min-w-0">
                 <img src="{{ asset($headerLogo) }}" 
                      alt="তমাল চক্রবর্তী — Ganesha Astro Consultancy" 
                      style="max-width: {{ $mobileLogoWidth }}px; max-height: {{ $mobileLogoHeight }}px;"
-                     class="h-8 xs:h-9 sm:h-10 w-auto object-contain" />
+                     class="h-8.5 xs:h-9.5 sm:h-11 w-auto object-contain max-w-full" />
             </a>
 
-            <!-- Right: Account Button/Icon & Hamburger Toggle -->
-            <div class="flex items-center space-x-2 xs:space-x-3">
-                @if ($mobileAccountVisible && $accountEnabled)
-                    <a href="{{ $accountUrl }}" 
-                       class="px-2.5 py-1.5 rounded-lg bg-[#FFFFFF] border border-[#BFD8C9] text-[#0B3D2E] flex items-center space-x-1 hover:bg-[#E8F1EC] transition-all text-xs font-semibold shadow-xs"
-                       aria-label="Account">
-                        <svg class="w-4 h-4 text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                        <span class="hidden xs:inline">{{ $accountLabel }}</span>
-                    </a>
-                @endif
+            <!-- 3. Quick Book Button (Pill-Shaped with Calendar Icon & Glowing Gold Accent) -->
+            @if ($mobileBookingVisible && $bookingEnabled)
+                <a href="{{ $bookingUrl }}" 
+                   class="relative inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2.5 xs:px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0B3D2E] text-white font-bold text-[11px] xs:text-xs sm:text-sm border-2 border-[#FFD700] shadow-md transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] whitespace-nowrap flex-shrink-0 animate-quick-book-glow">
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Quick Book</span>
+                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFD700] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            @endif
 
-                @if ($mobileHamburgerEnabled)
-                    <!-- Hamburger Button -->
-                    <button @click.stop="mobileOpen = !mobileOpen" 
-                            type="button"
-                            class="w-9 h-9 xs:w-10 xs:h-10 rounded-lg bg-[#FFFFFF] border border-[#BFD8C9] flex items-center justify-center text-[#0B3D2E] shadow-xs hover:bg-[#E8F1EC] focus:outline-none transition-all" 
-                            :aria-expanded="mobileOpen ? 'true' : 'false'"
-                            aria-label="Toggle Navigation Menu">
-                        <svg class="w-5 h-5 text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path x-show="!mobileOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                            <path x-show="mobileOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                @endif
-            </div>
+            <!-- 4. Account Button (Circular White Button with Larger Green User Icon) -->
+            @if ($mobileAccountVisible && $accountEnabled)
+                <a href="{{ $accountUrl }}" 
+                   class="w-9.5 h-9.5 sm:w-10.5 sm:h-10.5 rounded-full bg-white border border-[#BFD8C9] flex items-center justify-center text-[#0B3D2E] shadow-sm hover:bg-[#E8F1EC] transition-all flex-shrink-0"
+                   aria-label="Account">
+                    <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-[#0B3D2E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                </a>
+            @endif
 
         </div>
 

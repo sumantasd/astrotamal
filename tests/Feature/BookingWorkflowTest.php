@@ -15,6 +15,12 @@ class BookingWorkflowTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Carbon::setTestNow('2026-10-05 10:00:00');
+    }
+
     /** @test */
     public function test_customer_submits_booking_form_creates_pending_payment_booking()
     {
@@ -52,7 +58,7 @@ class BookingWorkflowTest extends TestCase
             'birth_date' => '1992-08-20',
             'consultation_type' => 'normal',
             'preferred_date' => Carbon::now('Asia/Kolkata')->addDays(7)->format('Y-m-d'),
-            'preferred_time' => '4:25 PM - 4:45 PM',
+            'preferred_time' => '5:40 PM - 6:00 PM',
             'terms_consent' => '1',
         ]);
 

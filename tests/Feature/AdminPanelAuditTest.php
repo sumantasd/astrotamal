@@ -29,6 +29,7 @@ class AdminPanelAuditTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        Carbon::setTestNow('2026-10-05 10:00:00');
 
         $this->adminUser = User::factory()->create([
             'is_admin' => true,

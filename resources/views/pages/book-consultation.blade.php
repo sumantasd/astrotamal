@@ -127,7 +127,7 @@
                         </svg>
                         <div class="space-y-1.5 leading-relaxed font-medium">
                             <p>Appointments are conducted via 1-on-1 Audio call. All birth details and personal discussions remain 100% strictly private & confidential.</p>
-                            <p>This Payment Only For Single Time Consultation & No Retain Documents Provided.</p>
+                            <p>This Payment Only For Single Time Consultation & No Written Documents Provided.</p>
                         </div>
                     </div>
 
@@ -301,7 +301,7 @@
                                required 
                                oninput="validateForm()"
                                value="{{ auth()->check() ? auth()->user()->phone : old('phone') }}"
-                               placeholder="e.g. 96476 80707" 
+                               placeholder="9876543210" 
                                class="w-full bg-[#FFFFFF] border border-[#C8D8CF] rounded-xl px-4 py-3 text-[#17211D] placeholder-[#60736B]/60 focus:outline-none focus:border-[#145A43]">
                     </div>
 
@@ -311,7 +311,7 @@
                         <input type="tel" 
                                name="whatsapp" 
                                value="{{ auth()->check() ? (auth()->user()->whatsapp ?? auth()->user()->phone) : old('whatsapp') }}"
-                               placeholder="e.g. 96476 80707" 
+                               placeholder="9876543210" 
                                class="w-full bg-[#FFFFFF] border border-[#C8D8CF] rounded-xl px-4 py-3 text-[#17211D] placeholder-[#60736B]/60 focus:outline-none focus:border-[#145A43]">
                     </div>
 
@@ -321,7 +321,7 @@
                         <input type="email" 
                                name="email" 
                                value="{{ auth()->check() ? auth()->user()->email : old('email') }}"
-                               placeholder="e.g. ganesha4astro@gmail.com" 
+                               placeholder="yourmail@mail.com" 
                                class="w-full bg-[#FFFFFF] border border-[#C8D8CF] rounded-xl px-4 py-3 text-[#17211D] placeholder-[#60736B]/60 focus:outline-none focus:border-[#145A43]">
                     </div>
 

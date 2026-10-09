@@ -145,18 +145,29 @@ class PageController extends Controller
                 ]);
             }
 
-            $user = \App\Models\User::create([
+            $userData = [
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],
-                'whatsapp' => $validated['whatsapp'] ?? null,
-                'birth_date' => $validated['birth_date'] ?? null,
-                'birth_time' => !empty($validated['birth_time']) && strtotime(trim($validated['birth_time'])) !== false ? date('H:i:s', strtotime(trim($validated['birth_time']))) : null,
-                'birth_place' => $validated['birth_place'] ?? null,
                 'password' => \Illuminate\Support\Facades\Hash::make($request->password),
                 'is_admin' => false,
                 'is_active' => true,
-            ]);
+            ];
+
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'whatsapp')) {
+                $userData['whatsapp'] = $validated['whatsapp'] ?? null;
+            }
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'birth_date')) {
+                $userData['birth_date'] = $validated['birth_date'] ?? null;
+            }
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'birth_time')) {
+                $userData['birth_time'] = !empty($validated['birth_time']) && strtotime(trim($validated['birth_time'])) !== false ? date('H:i:s', strtotime(trim($validated['birth_time']))) : null;
+            }
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'birth_place')) {
+                $userData['birth_place'] = $validated['birth_place'] ?? null;
+            }
+
+            $user = \App\Models\User::create($userData);
 
             BookingService::sendWelcomeEmail($user);
 
@@ -168,16 +179,16 @@ class PageController extends Controller
         } elseif (auth()->check()) {
             $authUser = auth()->user();
             $profileUpdates = [];
-            if (empty($authUser->birth_date) && !empty($validated['birth_date'])) {
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'birth_date') && empty($authUser->birth_date) && !empty($validated['birth_date'])) {
                 $profileUpdates['birth_date'] = $validated['birth_date'];
             }
-            if (empty($authUser->birth_time) && !empty($validated['birth_time'])) {
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'birth_time') && empty($authUser->birth_time) && !empty($validated['birth_time'])) {
                 $profileUpdates['birth_time'] = !empty($validated['birth_time']) && strtotime(trim($validated['birth_time'])) !== false ? date('H:i:s', strtotime(trim($validated['birth_time']))) : null;
             }
-            if (empty($authUser->birth_place) && !empty($validated['birth_place'])) {
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'birth_place') && empty($authUser->birth_place) && !empty($validated['birth_place'])) {
                 $profileUpdates['birth_place'] = $validated['birth_place'];
             }
-            if (empty($authUser->whatsapp) && !empty($validated['whatsapp'])) {
+            if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'whatsapp') && empty($authUser->whatsapp) && !empty($validated['whatsapp'])) {
                 $profileUpdates['whatsapp'] = $validated['whatsapp'];
             }
             if (!empty($profileUpdates)) {
